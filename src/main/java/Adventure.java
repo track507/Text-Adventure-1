@@ -192,13 +192,22 @@ public class Adventure {
                 System.out.println("Try the ancient key?");
                 command = console.readLine();
                 if (command.equals("yes")) {
-                    System.out.println("The door opens and you find yourself in a dark room.");
-                    //darkRoom(console);
+                    darkRoom(console);
                 }
             } else {
                 System.out.println("You don't have the key. You can't open the door.");
                 stairCaseIntoDarkness(console);
             }
+        }
+    }
+
+    public static void darkRoom(Console console) {
+        System.out.println("The door opens and you find yourself in a dark room.");
+        System.out.println("The torch dimly lights the room. You find a medkit and some food in the room.");
+        System.out.println("Do you use the medkit or eat the food? (use/food/back)");
+        String command = console.readLine();
+
+        while(!command.equals("back")) {
         }
     }
 
