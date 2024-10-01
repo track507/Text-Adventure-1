@@ -49,7 +49,7 @@ public class Player {
 
     //Returns a string representation of the player's inventory.
     public String showInventory() {
-        return "Your inventory: " + inventory.toString();
+        return "Your inventory: " + inventory.toString() + "\nTo use an item, type '<item>'.\n";
     }
 
     //Returns a string representation of the Player object, including the inventory.
