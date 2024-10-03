@@ -13,3 +13,7 @@ In this labyrinth, what’s my name?
 What am I?"
 
 and the answer to the puzzle would be: "a twisty little passages all alike."
+
+
+user testing:
+when you type explore you can never go back
