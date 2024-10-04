@@ -333,6 +333,8 @@ public class Adventure {
 
         while(true) {
             String[] parts = parseCommand(command);
+            player.addItem("medkit");
+            player.addItem("food");
             switch(parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
