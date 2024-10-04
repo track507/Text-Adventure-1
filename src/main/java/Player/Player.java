@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Player {
     private List<String> inventory;
+    private int health = 100;
+    private int hunger = 100;
 
     public Player() {
         inventory = new ArrayList<>();
@@ -11,17 +13,40 @@ public class Player {
 
     //Adds an item to the player's inventory.
     public void addItem(String item) {
-        inventory.add(item);
-        System.out.println("You have picked up: " + item);
+        inventory.add(item); 
+        System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
     }
 
-    //Removes an item from the player's inventory.
-    public boolean removeItem(String item) {
-        if (inventory.remove(item)) {
-            System.out.println("You have removed: " + item);
+    public void parseItem(String item) {
+        switch (item) {
+            case "medkit":
+                health = Math.min(health + 50, 100);
+                System.out.println("\033[3;90mYou have used a medkit. Your health is now: " + health + "\033[0m");
+                break;
+            case "ancient key":
+                break;
+            case "food":
+                hunger = Math.min(hunger + 20, 100);
+                System.out.println("\033[3;90mYou have eaten some food. Your hunger is now: " + hunger + "\033[0m");
+                break;
+            default:
+                System.out.println("\033[3;90mThat item does not exist. Please try again.\033[0m");
+                break;
+        }
+    }
+
+    //Uses an item from the player's inventory.
+    public boolean useItem(String item) {
+        if (hasItem(item)) {
+            // Create a method that parses the item and uses it.
+            parseItem(item);
+            inventory.remove(item);
             return true;
-        } else {
+        } else if(!hasItem(item)) {
             System.out.println("Item not found in inventory.");
+            return false;
+        } else {
+            System.out.println("Error Occurred.");
             return false;
         }
     }
@@ -47,9 +72,16 @@ public class Player {
         return inventory.size();
     }
 
-    //Returns a string representation of the player's inventory.
+    // Returns a string representation of the player's inventory.
     public String showInventory() {
-        return "Your inventory: " + inventory.toString() + "\nTo use an item, type '<item>'.\n";
+        if (inventory.isEmpty()) {
+            return "\033[3;90mYour inventory is empty.\033[0m";
+        }
+        
+        // Join the inventory items with ", " and avoid extra space at the end
+        String formattedInventory = String.join(", ", inventory);
+        
+        return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
     }
 
     //Returns a string representation of the Player object, including the inventory.
