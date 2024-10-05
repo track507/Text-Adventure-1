@@ -1,9 +1,12 @@
 package Player;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     private List<String> inventory;
+    private Map<String, String> locations = new HashMap<>();
     private int health = 100;
     private int hunger = 100;
 
@@ -82,6 +85,10 @@ public class Player {
         String formattedInventory = String.join(", ", inventory);
         
         return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
+    }
+
+    public void showMap() {
+
     }
 
     //Returns a string representation of the Player object, including the inventory.

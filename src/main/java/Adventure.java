@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Scanner;
 import Player.Player;
 /**
@@ -195,6 +194,7 @@ public class Adventure {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -253,9 +253,14 @@ public class Adventure {
                     ironDoor(scanner);
                     break;
                 case "search":
-                    System.out.println("You search the dark room and find a small key. You pocket it for later use.");
-                    System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
-                    player.addItem("Ancient Key");
+                    if(!player.hasItem("Ancient Key")) {
+                        System.out.println("You search the dark room and find a small key. You pocket it for later use.");
+                        System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        player.addItem("Ancient Key");
+                    }
+                    else {
+                        System.out.println("You've already searched this room. You can't find anything else. (pull/back)");
+                    }
                     command = scanner.nextLine();
                     break;
                 case "back":
@@ -329,12 +334,12 @@ public class Adventure {
         System.out.println("\nThe door opens and you find yourself in a dark room.");
         System.out.println("The torch dimly lights the room. You find a medkit and some food.");
         System.out.println("Where do you want to go now? (back)");
+        player.addItem("medkit");
+        player.addItem("food");
         String command = scanner.nextLine();
 
         while(true) {
             String[] parts = parseCommand(command);
-            player.addItem("medkit");
-            player.addItem("food");
             switch(parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
