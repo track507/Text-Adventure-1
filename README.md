@@ -2,7 +2,7 @@ Strengths:
 
 Grant: I am good at organizational code, loops, and creativity. Outside of coding, I excel at people skills, sports, and having fun. 
 
-Terrance: Problem-solving and thinking. I'm good with hardware repairs and technical knowledge about issues.
+Terrence: Problem-solving and thinking. I'm good with hardware repairs and technical knowledge about issues.
 
 Chibuikem: I am good at coming up with ideas and
 
