@@ -14,7 +14,10 @@ What am I?"
 
 and the answer to the puzzle would be: "a twisty little passages all alike."
 
+//Errors found
 
-user testing:
+user testing1:
 when you type explore you can never go back
+
+user testing2:
 
