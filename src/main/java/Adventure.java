@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Scanner;
 import Player.Player;
 
@@ -201,6 +200,7 @@ public class Adventure {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -340,6 +340,8 @@ public class Adventure {
         System.out.println("\nThe door opens and you find yourself in a dark room.");
         System.out.println("The torch dimly lights the room. You find a medkit and some food.");
         System.out.println("Where do you want to go now? (back)");
+        player.addItem("medkit");
+        player.addItem("food");
         String command = scanner.nextLine();
 
         while (true) {
