@@ -401,8 +401,8 @@ public class Adventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out
-                .println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
+        System.out.println(
+                "\nAfter several days of walking you come across a sign that says 'Welcome to Diddy's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -432,8 +432,10 @@ public class Adventure {
         }
     }
 
-    // TODO: write in how to get the sword from the tomb stone after examining
-    // TODO: complete the scenario for when you turn to run away from the creatures.
+    // TODO: chibuikem write in how to get the sword from the tomb stone after
+    // examining
+    // TODO: chibuikem complete the scenario for when you turn to run away from the
+    // creatures.
     public static void exploreForest(Scanner scanner) {
         System.out.println("You venture deeper into the forest, the trees closing in around you.");
         System.out.println(
@@ -451,17 +453,26 @@ public class Adventure {
                     command = scanner.nextLine();
                     break;
                 case "examine":
-
-                    System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-                    System.out.println(
-                            "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
-                    System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
+                    // still trying to figure this part out.
+                    // describeScene();
                     break;
                 case "run":
+                    // attemptToRun();
                     System.out.println("You turn and sprint back the way you came, the creatures close behind you.");
                     break;// will add more to this later
+
             }
+
         }
 
+    }
+
+    private void describeScene() {
+        System.out.println("You look round and find a rusted old sword mounted upon a gravestone in a distance");
+        System.out.println("Do you (draw sword and fight/ hide)");
+        System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
+        System.out.println(
+                "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+        System.out.println("Do you fight or run? (fight/run)");
     }
 }
