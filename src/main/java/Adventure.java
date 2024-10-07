@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import Player.Player;
-
 /**
  * Adventure
  * Be more welcoming
@@ -45,8 +44,7 @@ public class Adventure {
         startTime = System.currentTimeMillis();
 
         System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Grant, and Chibuikem.");
-        System.out.println(
-                "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
+        System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
         System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
         String command = scanner.nextLine();
@@ -110,8 +108,7 @@ public class Adventure {
     // Left path scenario
     public static void leftPath(Scanner scanner) {
         System.out.println("\nYou take the left path and find yourself in a vast underground riverbank.");
-        System.out.println(
-                "A boat is tied to the shore. Do you take the boat or explore the cave further on foot? (boat/foot/back)");
+        System.out.println("A boat is tied to the shore. Do you take the boat or explore the cave further on foot? (boat/foot/back)");
 
         String command = scanner.nextLine();
         while (true) {
@@ -172,11 +169,9 @@ public class Adventure {
     }
 
     public static void hiddenTemple(Scanner scanner) {
-        System.out.println(
-                "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.");
+        System.out.println("\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.");
         System.out.println("You find yourself in an ancient temple. Strange symbols cover the walls.");
-        System.out
-                .println("Do you want to decipher the symbols or search the temple for items? (decipher/search/back)");
+        System.out.println("Do you want to decipher the symbols or search the temple for items? (decipher/search/back)");
 
         String command = scanner.nextLine();
         while (true) {
@@ -190,8 +185,7 @@ public class Adventure {
                     hiddenPassageway(scanner);
                     break;
                 case "search":
-                    System.out.println(
-                            "You search the temple and find a powerful artifact, but the ceiling starts to collapse. You barely escape!");
+                    System.out.println("You search the temple and find a powerful artifact, but the ceiling starts to collapse. You barely escape!");
                     // collapsedTemple(scanner);
                     break;
                 case "back":
@@ -211,8 +205,7 @@ public class Adventure {
     public static void hiddenPassageway(Scanner scanner) {
         System.out.println("\nYou decipher the symbols and unlock a hidden passageway.");
         System.out.println("The air is cool, and the walls seem to close in around you.");
-        System.out.println(
-                "To your left, a narrow staircase spirals downward into the darkness, while to your right, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.");
+        System.out.println("To your left, a narrow staircase spirals downward into the darkness, while to your right, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.");
         System.out.println("Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)");
 
         String command = scanner.nextLine();
@@ -245,8 +238,7 @@ public class Adventure {
     public static void stairCaseIntoDarkness(Scanner scanner) {
         System.out.println("\nYou descend the spiraling staircase, the air growing colder with each step.");
         System.out.println("The faint light above disappears, and you find yourself in total darkness.");
-        System.out.println(
-                "You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.");
+        System.out.println("You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.");
         System.out.println("Do you pull the lever or keep searching in the dark? (pull/search/back)");
 
         String command = scanner.nextLine();
@@ -261,10 +253,14 @@ public class Adventure {
                     ironDoor(scanner);
                     break;
                 case "search":
-                    System.out.println("You search the dark room and find a small key. You pocket it for later use.");
-                    System.out.println(
-                            "You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
-                    player.addItem("Ancient Key");
+                    if (!player.hasItem("Ancient Key")) {
+                        System.out.println("You search the dark room and find a small key. You pocket it for later use.");
+                        System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        player.addItem("Ancient Key");
+                    }
+                    else {
+                        System.out.println("You've already searched this room. You can't find anything else. (pull/back)");
+                    }
                     command = scanner.nextLine();
                     break;
                 case "back":
@@ -282,10 +278,8 @@ public class Adventure {
     }
 
     public static void ironDoor(Scanner scanner) {
-        System.out.println(
-                "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.");
-        System.out.println(
-                "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.");
+        System.out.println("\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.");
+        System.out.println("Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.");
         System.out.println("It seems you need a special key to open this door.");
         String command;
         while (true) {
@@ -346,8 +340,6 @@ public class Adventure {
 
         while (true) {
             String[] parts = parseCommand(command);
-            player.addItem("medkit");
-            player.addItem("food");
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
@@ -368,8 +360,7 @@ public class Adventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        System.out.println(
-                "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
+        System.out.println("\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
         System.out.println("You see a broken elevator that descends further underground and a ladder leading upward.");
         System.out.println("Do you take the elevator or the ladder? (elevator/ladder)");
 
@@ -401,8 +392,7 @@ public class Adventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out
-                .println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
+        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -436,10 +426,8 @@ public class Adventure {
     // TODO: complete the scenario for when you turn to run away from the creatures.
     public static void exploreForest(Scanner scanner) {
         System.out.println("You venture deeper into the forest, the trees closing in around you.");
-        System.out.println(
-                "As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
-        System.out.println(
-                "Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
+        System.out.println("As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
+        System.out.println("Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
         System.out.println("Do you examine your surrounding or run? (examine/run)");
 
         String command = scanner.nextLine();
@@ -453,8 +441,7 @@ public class Adventure {
                 case "examine":
 
                     System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-                    System.out.println(
-                            "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+                    System.out.println("Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
                     System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
                     break;
                 case "run":
