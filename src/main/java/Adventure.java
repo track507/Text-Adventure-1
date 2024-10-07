@@ -326,16 +326,19 @@ public class Adventure {
         String command;
         while (true) {
             if (player.hasItem("Ancient Key")) {
-                System.out.println("\n\033[3;90mTry the ancient key? (yes/no)\033[0m");
+                System.out.println("\n\033[3;90mTry the ancient key? (yes/no/back)\033[0m");
                 command = scanner.nextLine();
                 String[] parts = parseCommand(command);
                 switch (parts[0]) {
+                    case "back":
+                        stairCaseIntoDarkness(scanner);
+                        break;
                     case "yes":
                         darkRoom(scanner);
                         break;
                     case "no":
                         System.out.println("You decide not to use the key.");
-                        command = scanner.nextLine();
+                        ironDoor(scanner);
                         break;
                     case "use":
                         player.useItem(parts[1]);
