@@ -261,10 +261,16 @@ public class Adventure {
                     ironDoor(scanner);
                     break;
                 case "search":
-                    System.out.println("You search the dark room and find a small key. You pocket it for later use.");
-                    System.out.println(
-                            "You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
-                    player.addItem("Ancient Key");
+                    if (!player.hasItem("Ancient Key")) {
+                        System.out
+                                .println("You search the dark room and find a small key. You pocket it for later use.");
+                        System.out.println(
+                                "You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        player.addItem("Ancient Key");
+                    } else {
+                        System.out.println(
+                                "You've already searched this room. You can't find anything else. (pull/back)");
+                    }
                     command = scanner.nextLine();
                     break;
                 case "back":
@@ -346,8 +352,6 @@ public class Adventure {
 
         while (true) {
             String[] parts = parseCommand(command);
-            player.addItem("medkit");
-            player.addItem("food");
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
@@ -401,8 +405,8 @@ public class Adventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out.println(
-                "\nAfter several days of walking you come across a sign that says 'Welcome to Diddy's realm'.");
+        System.out
+                .println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -453,8 +457,11 @@ public class Adventure {
                     command = scanner.nextLine();
                     break;
                 case "examine":
-                    // still trying to figure this part out.
-                    // describeScene();
+
+                    System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
+                    System.out.println(
+                            "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+                    System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
                     break;
                 case "run":
                     // attemptToRun();
@@ -467,12 +474,4 @@ public class Adventure {
 
     }
 
-    private void describeScene() {
-        System.out.println("You look round and find a rusted old sword mounted upon a gravestone in a distance");
-        System.out.println("Do you (draw sword and fight/ hide)");
-        System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-        System.out.println(
-                "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
-        System.out.println("Do you fight or run? (fight/run)");
-    }
 }
