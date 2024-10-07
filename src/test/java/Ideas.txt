@@ -18,4 +18,15 @@ and the answer to the puzzle would be: "a twisty little passages all alike."
 from chibuikem
 I am still making the scenarion for going down the straight path
 
+describeScene();
+
+ public static void describeScene() {
+        System.out.println("You look round and find a rusted old sword mounted upon a gravestone in a distance");
+        System.out.println("Do you (draw sword and fight/ hide)");
+        System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
+        System.out.println(
+                "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+        System.out.println("Do you fight or run? (fight/run)");
+    }
+
 
