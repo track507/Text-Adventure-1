@@ -11,13 +11,13 @@ We are excited for you to play our game. Please let us know what you think!
 
 ## Valid Commands
 
-### `use <item>`
+`use <item>`
 - Consumes the specified item (if you have it) and applies its effects.
 
-### `inventory`
+`inventory`
 - Displays your current inventory. If you have more than one of an item, the quantity will be shown.
 
-### `back`
+`back`
 - Takes you to the previous room.
 
 ## Work In Progress (WIP)
