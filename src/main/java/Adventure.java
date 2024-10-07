@@ -433,8 +433,7 @@ public class Adventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out
-                .println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
+        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -492,11 +491,7 @@ public class Adventure {
                     // attemptToRun();
                     System.out.println("You turn and sprint back the way you came, the creatures close behind you.");
                     break;// will add more to this later
-
             }
-
         }
-
     }
-
 }
