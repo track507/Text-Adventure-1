@@ -9,8 +9,10 @@ We are excited for you to play our game, please let us know what you think!
 ## Valid Commands
 *use <item>*
  - If you have the item, it will consume said item and apply its effects if any.
+
 *inventory*
  - Shows your current inventory. If you have more than of an item, it'll also display your quantity.
+
 *back*
  - Goes to the previous room.
 
