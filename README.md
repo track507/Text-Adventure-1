@@ -1,23 +1,32 @@
-# Welcome to Acrius!
+# Welcome to **Acrius**
 
 ## About Our Game
-**Acrius** is a fantasy text adventure full of surprises and wonderful sights, can you find them all?
-Our game has a simple User Interface where all you have to do to explore the world and find it's hidden secrets. You can type the direction you want to go in, explore caves, and encounter dangers.
-If you accidentally type the wrong command, no worries! You'll always get another chance, unless of course you don't.
-We are excited for you to play our game, please let us know what you think!
+**Acrius** is a fantasy text adventure filled with surprises and wonderful sights. Can you uncover them all?
+
+Explore our world by simply typing in the direction you want to go, and uncover hidden secrets along the way. You can explore caves, encounter dangers, and interact with objects.
+
+If you happen to type the wrong command—no worries! You'll always have another chance... unless you don't.
+
+We are excited for you to play our game. Please let us know what you think!
+
+---
 
 ## Valid Commands
-`use <item>`
+
+### `use <item>`
 - Consumes the specified item (if you have it) and applies its effects.
 
-`inventory`
+### `inventory`
 - Displays your current inventory. If you have more than one of an item, the quantity will be shown.
 
-`back`
+### `back`
 - Takes you to the previous room.
 
-## WIP
-- Adding more rooms
-- Create a way to record a map
-- Create a way for player to fight
-- Modify inventory to display quantity and format correctly
+---
+
+## Work In Progress (WIP)
+
+- **Adding more rooms**
+- **Creating a way to record a map**
+- **Developing a combat system**
+- **Modifying inventory to display item quantities and correct formatting**
