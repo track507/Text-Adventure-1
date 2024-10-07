@@ -360,8 +360,7 @@ public class Adventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        System.out.println(
-                "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
+        System.out.println("\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
         System.out.println("You see a broken elevator that descends further underground and a ladder leading upward.");
         System.out.println("Do you take the elevator or the ladder? (elevator/ladder)");
 
