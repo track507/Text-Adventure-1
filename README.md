@@ -9,8 +9,6 @@ If you happen to type the wrong command—no worries! You'll always have another
 
 We are excited for you to play our game. Please let us know what you think!
 
----
-
 ## Valid Commands
 
 ### `use <item>`
@@ -21,8 +19,6 @@ We are excited for you to play our game. Please let us know what you think!
 
 ### `back`
 - Takes you to the previous room.
-
----
 
 ## Work In Progress (WIP)
 
