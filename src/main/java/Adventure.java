@@ -122,10 +122,51 @@ public class Adventure {
                     boatRide(scanner);
                     break;
                 case "foot":
-                    // exploreCave(scanner);
+                    exploreCave(scanner);
                     break;
                 case "back":
                     startAdventure(scanner);
+                    break;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                default:
+                    System.out.println("Invalid command. Please try again.");
+                    command = scanner.nextLine();
+            }
+        }
+    }
+
+    public static void exploreCave(Scanner scanner) {
+        System.out.println("\nYou chose to explore the cave further on foot. You make your way deeper into the cave.");
+        System.out.println("You find three skeletons with their bags and backpacks on the ground.");
+        System.out.println("Do you want to search the skeletons or go back? (search/back)");
+
+        boolean hasSearched = false;
+
+        String command = scanner.nextLine();
+        while (true) {
+            String[] parts = parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    command = scanner.nextLine();
+                    break;
+                case "search":
+                    if(!hasSearched) {
+                        System.out.println("You find an iron sword, a buckler, and a health potion. You pocket them for later use.");
+                        player.addItem("iron sword");
+                        player.addItem("buckler");
+                        player.addItem("health potion");
+                        hasSearched = true;
+                    }
+                    else { 
+                        System.out.println("You've already searched this room. You can't find anything else.");
+                    }
+                    command = scanner.nextLine();
+                    break;
+                case "back":
+                    leftPath(scanner);
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
