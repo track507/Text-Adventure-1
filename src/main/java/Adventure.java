@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import Player.Player;
 /**
  * Adventure
@@ -43,7 +44,7 @@ public class Adventure {
         Scanner scanner = new Scanner(System.in);
         startTime = System.currentTimeMillis();
 
-        System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Grant, and Chibuikem.");
+        System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
         System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
         System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
