@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import Player.Player;
-
 public class AdventureTest {
     private Player player;
 
