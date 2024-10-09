@@ -51,7 +51,7 @@ public class StartAdventure {
                     startAdventure(scanner);
                     break;
                 case "exit":
-                    System.out.println("You decide not to venture forward. The game ends here.");
+                    System.out.println("Oh well, you decide not to venture forward. The game ends here.");
                     System.exit(0);
                 case "inventory":
                     System.out.println(player.showInventory());
@@ -185,7 +185,7 @@ public class StartAdventure {
 
                     System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
                     System.out.println(
-                            "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+                            "Out of the darkness, a pack of feral creatures emerges, their red glowing eyes fixed on you.");
                     System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
                     break;
                 case "run":
