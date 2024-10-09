@@ -11,9 +11,9 @@ public class Player {
     private int hunger = 100;
 
     // booleans for certain rooms
-    boolean hasSearchedCave = false;
-    boolean hasSearchedHiddenTemple = false;
-
+    public boolean hasSearchedCave = false;
+    public boolean hasSearchedHiddenTemple = false;
+    public boolean hasSearchedStairCaseIntoDarkness = false;
 
     public Player() {
         inventory = new ArrayList<>();
@@ -92,9 +92,9 @@ public class Player {
         return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
     }
 
-    public void showMap() {
+    // public void showMap() {
 
-    }
+    // }
 
     //Returns a string representation of the Player object, including the inventory.
     @Override
