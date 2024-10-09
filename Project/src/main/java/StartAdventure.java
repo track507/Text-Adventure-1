@@ -34,8 +34,7 @@ public class StartAdventure {
         startTime = System.currentTimeMillis();
 
         System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
-        System.out.println(
-                "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
+        System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
         System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
         String command = scanner.nextLine();
@@ -98,8 +97,7 @@ public class StartAdventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        System.out.println(
-                "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
+        System.out.println("\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
         System.out.println("You see a broken elevator that descends further underground and a ladder leading upward.");
         System.out.println("Do you take the elevator or the ladder? (elevator/ladder)");
 
