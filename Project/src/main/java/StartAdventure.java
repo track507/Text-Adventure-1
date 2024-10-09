@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * Adventure
  * Be more welcoming
@@ -33,7 +34,8 @@ public class StartAdventure {
         startTime = System.currentTimeMillis();
 
         System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
-        System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
+        System.out.println(
+                "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
         System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
         String command = scanner.nextLine();
@@ -96,7 +98,8 @@ public class StartAdventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        System.out.println("\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
+        System.out.println(
+                "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
         System.out.println("You see a broken elevator that descends further underground and a ladder leading upward.");
         System.out.println("Do you take the elevator or the ladder? (elevator/ladder)");
 
@@ -128,7 +131,7 @@ public class StartAdventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
+        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Diddy's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -164,8 +167,10 @@ public class StartAdventure {
     // creatures.
     public static void exploreForest(Scanner scanner) {
         System.out.println("You venture deeper into the forest, the trees closing in around you.");
-        System.out.println("As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
-        System.out.println("Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
+        System.out.println(
+                "As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
+        System.out.println(
+                "Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
         System.out.println("Do you examine your surrounding or run? (examine/run)");
 
         String command = scanner.nextLine();
@@ -179,7 +184,8 @@ public class StartAdventure {
                 case "examine":
 
                     System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-                    System.out.println("Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
+                    System.out.println(
+                            "Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
                     System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
                     break;
                 case "run":
