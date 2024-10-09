@@ -1,7 +1,8 @@
-import java.util.Map;
-import java.util.HashMap;
+// package Player would fix some issues
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Player {
     private List<String> inventory;
