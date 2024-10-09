@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import Player.Player;
+import Player.Player; // package Player might work in Player.java
 
 public class AdventureTest {
     private Player player;
