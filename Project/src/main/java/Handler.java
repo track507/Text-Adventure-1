@@ -4,7 +4,7 @@ public class Handler {
     private static final String s = "\033";
 
     // ANSI escape sequences for text formatting
-    private static final String r = "[0m";   // Reset
+    private static final String r = "\033[0m";   // Reset
     private static final String b = "[1m";   // Bold
     private static final String d = "[2m";   // Dim
     private static final String i = "[3m";   // Italic
@@ -22,6 +22,7 @@ public class Handler {
     private static final String magenta = "[35m"; // Magenta
     private static final String cyan = "[36m"; // Cyan
     private static final String white = "[37m"; // White
+    private static final String darkGrey = "[90m"; // Dark Grey (Bright Black)
 
     // ANSI escape sequences for background colors
     private static final String blk_bg = "[40m"; // Black Background
@@ -45,7 +46,7 @@ public class Handler {
 
     public static String applyStyle(String string, String... styles) {
         StringBuilder styledString = new StringBuilder();
-
+        styledString.append("");
         styledString.append(s);
 
         // Apply styles based on the input arguments
@@ -98,6 +99,9 @@ public class Handler {
                     break;
                 case "white": // Text Color - White
                     styledString.append(white);
+                    break;
+                case "darkgrey": // Dark Grey (Bright Black)
+                    styledString.append(darkGrey);
                     break;
                 case "blk_bg": // Background Color - Black
                     styledString.append(blk_bg);
