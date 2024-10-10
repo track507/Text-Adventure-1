@@ -22,7 +22,7 @@ We are excited for you to play our game. Please let us know what you think!
 
 ## Work In Progress (WIP)
 
-- **Implement Lanterna for advanced terminal features such as multi-window and screen management, moving and getting cursor position, private mode, key stroke handling, and more.**
+- **Fix applyStyle method**
 - **Adding more rooms**
 - **Creating a way to record a map**
 - **Developing a combat system**
