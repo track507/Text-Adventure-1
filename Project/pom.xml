@@ -28,19 +28,6 @@
         <version>4.13.2</version>
         <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.googlecode.lanterna/lanterna -->
-    <dependency>
-        <groupId>com.googlecode.lanterna</groupId>
-        <artifactId>lanterna</artifactId>
-        <version>3.1.2</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.jline/jline -->
-    <dependency>
-        <groupId>org.jline</groupId>
-        <artifactId>jline</artifactId>
-        <version>3.27.0</version>
-    </dependency>
-
     <!-- ! This is for Junit 5. 
     <dependency>
         <groupId>org.junit.jupiter</groupId>
