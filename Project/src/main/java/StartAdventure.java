@@ -171,28 +171,60 @@ public class StartAdventure {
                 "As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
         System.out.println(
                 "Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
-        System.out.println("Do you examine your surrounding or run? (examine/run)");
+        System.out.println("Do you examine your surroundings or run? (examine/run)");
 
         String command = scanner.nextLine();
         while (true) {
             String[] parts = Handler.parseCommand(command);
+
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "examine":
-
-                    System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-                    System.out.println(
-                            "Out of the darkness, a pack of feral creatures emerges, their red glowing eyes fixed on you.");
-                    System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
+                    handleExamine(scanner); // Moved this logic into a helper method
                     break;
                 case "run":
-                    // attemptToRun();
-                    System.out.println("You turn and sprint back the way you came, the creatures close behind you.");
-                    break;// will add more to this later
+                    attemptToRun();
+                    break;
+                default:
+                    System.out.println("Invalid command. Please try again.");
             }
+            command = scanner.nextLine(); // Allow player to input new commands
         }
     }
+
+    // Helper method for handling the "examine" option
+    private static void handleExamine(Scanner scanner) {
+        System.out.println("You draw the weapon from the gravestone and prepare to face the unknown.");
+        System.out.println(
+                "Out of the darkness, a pack of feral creatures emerges, their red glowing eyes fixed on you.");
+        System.out.println("Do you fight or run? (fight/run)");
+
+        String action = scanner.nextLine();
+        switch (action) {
+            case "fight":
+                startFight(); // Call to a fight logic handler
+                break;
+            case "run":
+                attemptToRun();
+                break;
+            default:
+                System.out.println("Invalid choice. Do you fight or run?");
+                handleExamine(scanner); // Recurse until a valid choice is made
+        }
+    }
+
+    // Method to handle the fight scenario
+    private static void startFight() {
+        System.out.println("You stand your ground, ready to fight!");
+        // Fight logic can be implemented here, such as health, attack, etc.
+    }
+
+    // Method to handle running away
+    private static void attemptToRun() {
+        System.out.println("You turn and sprint back the way you came, the creatures close behind you.");
+        // Running away logic can be expanded here (chance of escape, etc.)
+    }
+
 }
