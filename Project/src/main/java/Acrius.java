@@ -305,6 +305,7 @@ public class Acrius {
             "The torch dimly lights the room. You find a medkit and some food.",
             "Where do you want to go now? (back)"
         };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
         player.addItem("medkit");
         player.addItem("food");
         String command = scanner.nextLine();
