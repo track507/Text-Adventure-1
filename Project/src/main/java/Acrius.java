@@ -141,7 +141,7 @@ public class Acrius {
                     break;
                 case "back":
                     if(player.hasSearchedHiddenTemple) { 
-                        System.out.println("n\033[3;90mYou can't go back. The debris is blocking your path...\033[0m");
+                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...", "i", "darkGrey"));
                         break; //can no longer go back
                     }
                     boatRide(scanner);
