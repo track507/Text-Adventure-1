@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class TextEngine {
 
     public static void pt(String text, int delay) {
@@ -18,5 +20,17 @@ public class TextEngine {
     public static void pt(String text) {
         // default delay of 25ms.
         pt(text, 25);
+    }
+
+    public static void pt(String[] text) {
+        for (String line : text) {
+            pt(line); // Call the pt method that takes a single String
+        }
+    }
+
+    public static void pt(List<String> text) {
+        for (String line : text) {
+            pt(line); // Call the pt method that takes a single String
+        }
     }
 }
