@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /**
  * Adventure
  * Be more welcoming
@@ -33,19 +32,9 @@ public class StartAdventure {
         Scanner scanner = new Scanner(System.in);
         startTime = System.currentTimeMillis();
 
-        String[] text = {
-            "Welcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.",
-            "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.",
-            "Do you want to proceed or go back? (proceed/exit)"
-        };
-        TextEngine.pt(Handler.applyStyle(text[0], "b", "magenta"));
-        for (int i = 1; i < text.length; i++) {
-            TextEngine.pt(Handler.applyStyle(text[i], "i"));
-        }
-        
-        // System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
-        // System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
-        // System.out.println("Do you want to proceed or go back? (proceed/exit)");
+        System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
+        System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
+        System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
         String command = scanner.nextLine();
         while (true) {
@@ -60,7 +49,7 @@ public class StartAdventure {
                     startAdventure(scanner);
                     break;
                 case "exit":
-                    System.out.println("Oh well, you decide not to venture forward. The game ends here.");
+                    System.out.println("You decide not to venture forward. The game ends here.");
                     System.exit(0);
                 case "inventory":
                     System.out.println(player.showInventory());
@@ -139,7 +128,7 @@ public class StartAdventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Diddy's realm'.");
+        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
@@ -175,10 +164,8 @@ public class StartAdventure {
     // creatures.
     public static void exploreForest(Scanner scanner) {
         System.out.println("You venture deeper into the forest, the trees closing in around you.");
-        System.out.println(
-                "As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
-        System.out.println(
-                "Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
+        System.out.println("As you move, the air becomes thick with mist, and the ground beneath your feet feels strangely soft.");
+        System.out.println("Suddenly, a low growl echoes through the trees, and shadowy figures move between the branches.");
         System.out.println("Do you examine your surrounding or run? (examine/run)");
 
         String command = scanner.nextLine();
@@ -190,11 +177,20 @@ public class StartAdventure {
                     command = scanner.nextLine();
                     break;
                 case "examine":
-
                     System.out.println("You draw the weapon from the gravestone and prepare to face the unkown.");
-                    System.out.println(
-                            "Out of the darkness, a pack of feral creatures emerges, their red glowing eyes fixed on you.");
+                    System.out.println("Out of the darkness, a pack of feral creatures emerges, their glowing eyes fixed on you.");
                     System.out.println("Do you fight or run? (fight/run)");// still trying to figure this part out.
+                    break;
+                case "fight":
+                    System.out.println("You look around trying to find something to fight with, do you continue to look, or search your inventory (inventory/search)");
+                    break; // we should add so if the sword is here then you can kill the,
+                case "search":
+                    System.out.println("You look frantically around but the only thing you can find to arm yourself with is a stick.");
+                    System.out.println("Do you pick it up or run (pickup/run)");
+                    break;
+                case "pickup":
+                    System.out.println("Your reach down and try to pick up the stick, but as you fumble with it dark creatures maul you from behind.");
+                    System.out.println("You have died"); // end thing here
                     break;
                 case "run":
                     // attemptToRun();
