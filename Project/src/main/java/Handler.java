@@ -5,34 +5,34 @@ public class Handler {
 
     // ANSI escape sequences for text formatting
     private static final String r = "\033[0m";   // Reset
-    private static final String b = "[1m";   // Bold
-    private static final String d = "[2m";   // Dim
-    private static final String i = "[3m";   // Italic
-    private static final String u = "[4m";   // Underline
-    private static final String bl = "[5m";  // Blink
-    private static final String rev = "[7m"; // Reverse
-    private static final String h = "[8m";   // Hidden
+    private static final String b = "\033[1m";   // Bold
+    private static final String d = "\033[2m";   // Dim
+    private static final String i = "\033[3m";   // Italic
+    private static final String u = "\033[4m";   // Underline
+    private static final String bl = "\033[5m";  // Blink
+    private static final String rev = "\033[7m"; // Reverse
+    private static final String h = "\033[8m";   // Hidden
 
     // ANSI escape sequences for text colors
-    private static final String blk = "[30m"; // Black
-    private static final String red = "[31m"; // Red
-    private static final String green = "[32m"; // Green
-    private static final String yellow = "[33m"; // Yellow
-    private static final String blue = "[34m"; // Blue
-    private static final String magenta = "[35m"; // Magenta
-    private static final String cyan = "[36m"; // Cyan
-    private static final String white = "[37m"; // White
-    private static final String darkGrey = "[90m"; // Dark Grey (Bright Black)
+    private static final String blk = "\033[30m"; // Black
+    private static final String red = "\033[31m"; // Red
+    private static final String green = "\033[32m"; // Green
+    private static final String yellow = "\033[33m"; // Yellow
+    private static final String blue = "\033[34m"; // Blue
+    private static final String magenta = "\033[35m"; // Magenta
+    private static final String cyan = "\033[36m"; // Cyan
+    private static final String white = "\033[37m"; // White
+    private static final String darkGrey = "\033[90m"; // Dark Grey (Bright Black)
 
     // ANSI escape sequences for background colors
-    private static final String blk_bg = "[40m"; // Black Background
-    private static final String red_bg = "[41m"; // Red Background
-    private static final String green_bg = "[42m"; // Green Background
-    private static final String yellow_bg = "[43m"; // Yellow Background
-    private static final String blue_bg = "[44m"; // Blue Background
-    private static final String magenta_bg = "[45m"; // Magenta Background
-    private static final String cyan_bg = "[46m"; // Cyan Background
-    private static final String white_bg = "[47m"; // White Background
+    private static final String blk_bg = "\033[40m"; // Black Background
+    private static final String red_bg = "\033[41m"; // Red Background
+    private static final String green_bg = "\033[42m"; // Green Background
+    private static final String yellow_bg = "\033[43m"; // Yellow Background
+    private static final String blue_bg = "\033[44m"; // Blue Background
+    private static final String magenta_bg = "\033[45m"; // Magenta Background
+    private static final String cyan_bg = "\033[46m"; // Cyan Background
+    private static final String white_bg = "\033[47m"; // White Background
 
     public static String[] parseCommand(String string) {
         // Split the string into an array of two elements
@@ -46,8 +46,6 @@ public class Handler {
 
     public static String applyStyle(String string, String... styles) {
         StringBuilder styledString = new StringBuilder();
-        styledString.append("");
-        styledString.append(s);
 
         // Apply styles based on the input arguments
         for (String style : styles) {

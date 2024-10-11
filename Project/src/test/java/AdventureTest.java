@@ -15,42 +15,37 @@ public class AdventureTest {
 
     @Test
     public void testAddItem() {
-        // Test that the player can add an item to their inventory
         player.addItem("Mysterious Stone");
-        assertEquals("Inventory should contain 1 item.", 1, player.getInventorySize());
-        assertTrue("Inventory should contain 'Mysterious Stone'.", player.getInventory().contains("Mysterious Stone"));
+        assertEquals(1, player.getInventorySize());
+        assertTrue(player.getInventory().contains("Mysterious Stone"));
     }
 
     @Test
     public void testRemoveItem() {
-        // Test that the player can remove an item from their inventory
         player.addItem("Healing Potion");
-        assertTrue("Item should be removed successfully.", player.useItem("Healing Potion"));
-        assertFalse("Inventory should not contain 'Healing Potion'.", player.getInventory().contains("Healing Potion"));
-        assertEquals("Inventory should be empty.", 0, player.getInventorySize());
+        assertTrue(player.useItem("Healing Potion"));
+        assertFalse(player.getInventory().contains("Healing Potion"));
+        assertEquals(0, player.getInventorySize());
     }
 
     @Test
     public void testRemoveNonExistentItem() {
-        // attempt to remove an item that doesn't exist in the inventory
         player.addItem("Shield");
-        assertFalse("Item should not have been removed.", player.useItem("Sword")); // Sword was never added
-        assertEquals("Inventory should still contain 1 item.", 1, player.getInventorySize());
+        assertFalse(player.useItem("Sword")); // Sword was never added
+        assertEquals(1, player.getInventorySize());
     }
 
     @Test
     public void testClearInventory() {
-        // add an item to the inventory and clear it
         player.addItem("Mysterious Stone");
-        assertEquals("Inventory should contain 1 item.", 1, player.getInventorySize());
-        assertTrue("Inventory should contain 'Mysterious Stone'.", player.getInventory().contains("Mysterious Stone"));
+        assertEquals(1, player.getInventorySize());
+        assertTrue(player.getInventory().contains("Mysterious Stone"));
         player.clearInventory();
-        assertEquals("Inventory should be empty after clearing.", 0, player.getInventorySize());
+        assertEquals(0, player.getInventorySize());
     }
 
     @Test
     public void testShowInventory() {
-        // add an item to the inventory and check its string representation
         player.addItem("Healing Potion");
         assertEquals(1, player.getInventorySize());
         assertTrue(player.getInventory().contains("Healing Potion"));
@@ -60,7 +55,6 @@ public class AdventureTest {
 
     @Test
     public void testAddDuplicateItem() {
-        // add a duplicate item to the inventory, it's size should be 2
         player.addItem("Mysterious Stone");
         player.addItem("Mysterious Stone");
         assertEquals(2, player.getInventorySize());
@@ -68,32 +62,118 @@ public class AdventureTest {
 
     @Test
     public void testRemoveFromEmptyInventory() {
-        // attempt to remove an item from an empty inventory
         assertFalse(player.useItem("Shield"));
-        assertEquals( 0, player.getInventorySize());
+        assertEquals(0, player.getInventorySize());
     }
 
     @Test
     public void testAddSpecialCharacterItem() {
-        // add a special character item to the inventory
         player.addItem("Special@Item!");
         assertTrue(player.getInventory().contains("Special@Item!"));
     }
 
     @Test
     public void testAddEmptyStringItem() {
-        // add an empty string item to the inventory
         player.addItem("");
         assertTrue(player.getInventory().contains(""));
     }
 
     @Test
     public void testMultipleAddRemove() {
-        // add multiple items to the inventory and remove one of them
         player.addItem("Item1");
         player.addItem("Item2");
         assertEquals(2, player.getInventorySize());
         player.useItem("Item1");
         assertEquals(1, player.getInventorySize());
     }
+
+    @Test
+    public void testApplyBoldStyle() {
+        String result = Handler.applyStyle("Bold Text", "b");
+        assertEquals("\033[1mBold Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyItalicStyle() {
+        String result = Handler.applyStyle("Italic Text", "i");
+        assertEquals("\033[3mItalic Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyUnderlineStyle() {
+        String result = Handler.applyStyle("Underline Text", "u");
+        assertEquals("\033[4mUnderline Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyRedColor() {
+        String result = Handler.applyStyle("Red Text", "red");
+        assertEquals("\033[31mRed Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyBlueColor() {
+        String result = Handler.applyStyle("Blue Text", "blue");
+        assertEquals("\033[34mBlue Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyGreenBackground() {
+        String result = Handler.applyStyle("Green Background", "green_bg");
+        assertEquals("\033[42mGreen Background\033[0m", result);
+    }
+
+    @Test
+    public void testApplyBoldUnderline() {
+        String result = Handler.applyStyle("Bold and Underline", "b,u");
+        assertEquals("\033[1m\033[4mBold and Underline\033[0m", result);
+    }
+
+    @Test
+    public void testApplyItalicRed() {
+        String result = Handler.applyStyle("Italic and Red", "i,red");
+        assertEquals("\033[3m\033[31mItalic and Red\033[0m", result);
+    }
+
+    @Test
+    public void testApplyDimGreen() {
+        String result = Handler.applyStyle("Dim and Green", "d,green");
+        assertEquals("\033[2m\033[32mDim and Green\033[0m", result);
+    }
+
+    @Test
+    public void testApplyReverseRedBackground() {
+        String result = Handler.applyStyle("Reverse and Red Background", "rev,red_bg");
+        assertEquals("\033[7m\033[41mReverse and Red Background\033[0m", result);
+    }
+
+    @Test
+    public void testApplyHiddenYellow() {
+        String result = Handler.applyStyle("Hidden and Yellow", "h,yellow");
+        assertEquals("\033[8m\033[33mHidden and Yellow\033[0m", result);
+    }
+
+    @Test
+    public void testApplyBoldItalicBlue() {
+        String result = Handler.applyStyle("Bold, Italic, and Blue", "b,i,blue");
+        assertEquals("\033[1m\033[3m\033[34mBold, Italic, and Blue\033[0m", result);
+    }
+
+    @Test
+    public void testApplyRedBackgroundWhiteText() {
+        String result = Handler.applyStyle("Red Background and White Text", "red_bg,white");
+        assertEquals("\033[41m\033[37mRed Background and White Text\033[0m", result);
+    }
+
+    @Test
+    public void testApplyDarkGreyItalic() {
+        String result = Handler.applyStyle("Dark Grey and Italic", "darkgrey,i");
+        assertEquals("\033[90m\033[3mDark Grey and Italic\033[0m", result);
+    }
+
+    @Test
+    public void testApplyMultipleStyles() {
+        String result = Handler.applyStyle("Bold, Underline, Red, and Blue Background", "b,u,red,blue_bg");
+        assertEquals("\033[1m\033[4m\033[31m\033[44mBold, Underline, Red, and Blue Background\033[0m", result);
+    }    
 }
