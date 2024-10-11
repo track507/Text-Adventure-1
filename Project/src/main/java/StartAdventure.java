@@ -35,9 +35,9 @@ public class StartAdventure {
         startTime = System.currentTimeMillis();
 
         String[] text = {
-                "Welcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.",
-                "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.",
-                "Do you want to proceed or go back? (proceed/exit)"
+            "Welcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.",
+            "You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.",
+            "Do you want to proceed or go back? (proceed/exit)"
         };
         TextEngine.pt(Handler.applyStyle(text[0], "b", "magenta"));
         for (int i = 1; i < text.length; i++) {
