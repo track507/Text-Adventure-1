@@ -61,7 +61,6 @@ public class GameMap {
     }
 }
 
-
 class Room {
     private String description;
     private Room north;
