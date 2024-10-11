@@ -1,16 +1,24 @@
-Glossary:
+Glossary
 
 | Term              | Definition                                                                                                                              |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | Text-Based Adventure | A game with a text-based user interface that takes commands from the user and outputs different results.                               |
-| Commands           | The input that the user gives to the console, there should be different results based on various commands.                              |
-| Setting            | This has to do with where/when the adventure is set. It will set the tone and feel for the rest of the adventure.                       |
-| Obstacles          | Things in the setting that the user has to overcome through commands. This could include puzzles which are...                           |
-| Puzzles            | Problems that the user has to overcome, either with objects or information that can be found in other parts of the game.                |
-| Interactive        | Allows for the user to have an impact on the environment. This could include picking something up, breaking something, or moving something. |
-| Command Line       | The interface in a text adventure where players type their commands. This is the main way players interact with the game, by typing commands like "go north" or "open door." |
-| Parser             | A program or tool in text adventures that interprets the player's input (commands) and translates it into actions within the game.      |
-| NPC                | A "Non-Player-Character." These are "people" in the game that have a set number of responses from the computer, not the player.         |
-| Event Trigger      | An action or condition in the game that, when met, triggers a specific event or outcome.                                                |
-
-  
+| Commands           | The input that the user gives to the console, resulting in different outcomes based on various commands.                              |
+| Setting            | Where/when the adventure takes place, which sets the tone and feel for the game.                                                      |
+| Obstacles          | Challenges in the setting that the player must overcome, often by using commands. This may include puzzles.                           |
+| Puzzles            | Problems that the player must solve, using objects or information found within the game.                                              |
+| Interactive        | Allows the player to impact the environment, such as by picking up, breaking, or moving objects.                                      |
+| Command Line       | The primary interface where players type commands like "go north" or "open door" to interact with the game.                           |
+| Parser             | A tool that interprets player commands and translates them into actions within the game.                                              |
+| NPC                | "Non-Player Character," a character controlled by the game, often with pre-set responses to player interactions.                      |
+| Event Trigger      | A specific action or condition that, when met, triggers an event or outcome.                                                          |
+| Inventory          | A collection of items the player holds, which can be used to solve puzzles, overcome obstacles, or interact with NPCs.                |
+| Room               | A distinct location within the game, often described in detail and connected to other rooms, creating the game’s map.                 |
+| Verbs              | Action words players use in commands, such as "take," "look," "use," or "speak."                                                      |
+| Dialogue Tree      | A branching set of dialogue options, often used when interacting with NPCs, allowing for varied responses based on player choices.     |
+| Flavor Text        | Descriptive text that adds detail or atmosphere without advancing the game directly, enhancing immersion.                             |
+| Game State         | The current condition of the game, including the player’s inventory, location, progress on puzzles, and other dynamic factors.        |
+| Look Command       | A basic command (often "look" or "examine") that allows players to get a description of their surroundings, objects, or NPCs.         |
+| Progression        | The process of moving forward in the game by completing puzzles, exploring new areas, or meeting objectives.                         |
+| Endgame            | The final stages or conclusion of a text adventure, typically involving a climactic puzzle or encounter.                             |
+| Walkthrough        | A guide that provides step-by-step instructions on how to complete the game, often used when players are stuck.                       |
