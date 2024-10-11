@@ -22,6 +22,7 @@ We are excited for you to play our game. Please let us know what you think!
 
 ## Work In Progress (WIP)
 
+- **Fix applyStyle method**
 - **Adding more rooms**
 - **Creating a way to record a map**
 - **Developing a combat system**

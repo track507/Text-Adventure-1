@@ -2,11 +2,12 @@ import java.util.Scanner;
 
 public class Acrius {
     public static Player player = StartAdventure.player;
+    public static GameMap gameMap = StartAdventure.gameMap;
 
     // Left path scenario
     public static void leftPath(Scanner scanner) {
-        System.out.println("\nYou take the left path and find yourself in a vast underground riverbank.");
-        System.out.println("A boat is tied to the shore. Do you take the boat or explore the cave further on foot? (boat/foot/back)");
+        String text = "\nYou chose the west path. You see a large cave with a wide riverbank. A boat is tied to the shore.\nDo you north towards the boat or west to explore the cave further on foot? (north/west/back)";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -16,10 +17,10 @@ public class Acrius {
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "boat":
+                case "north":
                     boatRide(scanner);
                     break;
-                case "foot":
+                case "west":
                     exploreCave(scanner);
                     break;
                 case "back":
@@ -36,9 +37,12 @@ public class Acrius {
     }
 
     public static void exploreCave(Scanner scanner) {
-        System.out.println("\nYou chose to explore the cave further on foot. You make your way deeper into the cave.");
-        System.out.println("You find three skeletons with their bags and backpacks on the ground.");
-        System.out.println("Do you want to search the skeletons or go back? (search/back)");
+        String[] text = {
+            "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
+            "You find three skeletons with their bags and backpacks on the ground.",
+            "Do you want to search the skeletons or go back? (search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -75,8 +79,11 @@ public class Acrius {
     }
 
     public static void boatRide(Scanner scanner) {
-        System.out.println("\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.");
-        System.out.println("Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)");
+        String[] text = {
+            "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
+            "Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -106,9 +113,12 @@ public class Acrius {
     }
 
     public static void hiddenTemple(Scanner scanner) {
-        System.out.println("\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.");
-        System.out.println("You find yourself in an ancient temple. Strange symbols cover the walls.");
-        System.out.println("Do you want to decipher the symbols or search the temple for items? (decipher/search/back)");
+        String[] text = {
+            "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.",
+            "You find yourself in an ancient temple. Strange symbols cover the walls.",
+            "Do you want to decipher the symbols or search the temple for items? (decipher/search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -148,10 +158,13 @@ public class Acrius {
     }
 
     public static void hiddenPassageway(Scanner scanner) {
-        System.out.println("\nYou decipher the symbols and unlock a hidden passageway.");
-        System.out.println("The air is cool, and the walls seem to close in around you.");
-        System.out.println("To your left, a narrow staircase spirals downward into the darkness, while to your right, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.");
-        System.out.println("Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)");
+        String[] text = {
+            "\nYou decipher the symbols and unlock a hidden passageway.",
+            "The air is cool, and the walls seem to close in around you.",
+            "To your west, a narrow staircase spirals downward into the darkness, while to your east, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.",
+            "Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -181,10 +194,13 @@ public class Acrius {
     }
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
-        System.out.println("\nYou descend the spiraling staircase, the air growing colder with each step.");
-        System.out.println("The faint light above disappears, and you find yourself in total darkness.");
-        System.out.println("You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.");
-        System.out.println("Do you pull the lever or keep searching in the dark? (pull/search/back)");
+        String[] text = {
+            "\nYou descend the spiraling staircase, the air growing colder with each step.",
+            "The faint light above disappears, and you find yourself in total darkness.",
+            "You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.",
+            "Do you pull the lever to your north or keep searching in the dark? (pull/search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
         String command = scanner.nextLine();
         while (true) {
@@ -223,10 +239,14 @@ public class Acrius {
         }
     }
 
-    public static void ironDoor(Scanner scanner) {
-        System.out.println("\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.");
-        System.out.println("Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.");
-        System.out.println("It seems you need a special key to open this door.");
+    public static void ironDoor(Scanner scanner) {;
+        String[] text = {
+            "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.",
+            "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.",
+            "It seems you need a special key to open this door."
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
         String command;
         while (true) {
             if (player.hasItem("Ancient Key")) {
@@ -280,9 +300,11 @@ public class Acrius {
     }
 
     public static void darkRoom(Scanner scanner) {
-        System.out.println("\nThe door opens and you find yourself in a dark room.");
-        System.out.println("The torch dimly lights the room. You find a medkit and some food.");
-        System.out.println("Where do you want to go now? (back)");
+        String[] text = {
+            "\nYou open the door and find yourself in a dark room.",
+            "The torch dimly lights the room. You find a medkit and some food.",
+            "Where do you want to go now? (back)"
+        };
         player.addItem("medkit");
         player.addItem("food");
         String command = scanner.nextLine();
