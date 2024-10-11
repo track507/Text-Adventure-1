@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class StartAdventure {
     // The player
     public static Player player = new Player();
+    public static GameMap gameMap = new GameMap();
     // To track the time spent in the game
     private static long startTime;
     private static long roomEntryTime;
@@ -42,14 +43,9 @@ public class StartAdventure {
         for (int i = 1; i < text.length; i++) {
             TextEngine.pt(Handler.applyStyle(text[i], "i"));
         }
-        
-        // System.out.println("\nWelcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.");
-        // System.out.println("You find yourself in a dimly lit cavern with distant echoes. Before you lies a narrow path deeper into the unknown.");
-        // System.out.println("Do you want to proceed or go back? (proceed/exit)");
 
         String command = scanner.nextLine();
         while (true) {
-
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
@@ -74,10 +70,8 @@ public class StartAdventure {
 
     // Start the adventure
     public static void startAdventure(Scanner scanner) {
-        roomEntryTime = System.currentTimeMillis();
-        System.out.println("\nYou cautiously step forward. After a few minutes, you see an intersection.");
-        System.out.println("Do you take the left path, the right path, or continue straight? (left/right/straight)");
-
+        String text = "\nYou cautiously step forward. After a few minutes, you see an intersection.\nDo you take the west path, the east path, or continue north? (north, west, or east)";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
         while (true) {
             String[] parts = Handler.parseCommand(command);
@@ -86,13 +80,13 @@ public class StartAdventure {
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "left":
+                case "west":
                     Acrius.leftPath(scanner);
                     break;
-                case "right":
+                case "east":
                     rightPath(scanner);
                     break;
-                case "straight":
+                case "north":
                     straightPath(scanner);
                     break;
                 case "inventory":
@@ -107,10 +101,9 @@ public class StartAdventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        System.out.println("\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.");
-        System.out.println("You see a broken elevator that descends further underground and a ladder leading upward.");
-        System.out.println("Do you take the elevator or the ladder? (elevator/ladder)");
+        String text = "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.\nYou see a broken elevator that descends further underground and a ladder leading upward.\nDo you take the elevator or the ladder? (elevator/ladder)";
 
+        TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
         while (true) {
             String[] parts = Handler.parseCommand(command);
