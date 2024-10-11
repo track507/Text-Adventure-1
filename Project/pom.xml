@@ -28,6 +28,14 @@
         <version>4.13.2</version>
         <scope>test</scope>
     </dependency>
+    <!-- <dependency>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+            <mainClass>StartAdventure</mainClass>
+        </configuration>
+    </dependency> -->
     <!-- ! This is for Junit 5. 
     <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -48,6 +56,14 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.4.1</version>
+          <configuration>
+            <mainClass>StartAdventure</mainClass>
+          </configuration>
+        </plugin>
         <!-- ! These are the latest versions of each plugin according to https://mvnrepository.com/ (9-20-2024)-->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
