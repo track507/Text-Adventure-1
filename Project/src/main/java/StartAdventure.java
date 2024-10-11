@@ -69,7 +69,10 @@ public class StartAdventure {
 
     // Start the adventure
     public static void startAdventure(Scanner scanner) {
-        String text = "\nYou cautiously step forward. After a few minutes, you see an intersection.\nDo you take the west path, the east path, or continue north? (north, west, or east)";
+        String[] text = {
+            "\nYou cautiously step forward. After a few minutes, you see an intersection.",
+            "Do you take the west path, the east path, or continue north? (north, west, or east)"
+        };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
         while (true) {
@@ -100,7 +103,11 @@ public class StartAdventure {
 
     // Right path scenario
     public static void rightPath(Scanner scanner) {
-        String text = "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.\nYou see a broken elevator that descends further underground and a ladder leading upward.\nDo you take the elevator or the ladder? (elevator/ladder)";
+        String[] text = {
+            "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.", 
+            "You see a broken elevator that descends further underground and a ladder leading upward.", 
+            "Do you take the elevator or the ladder? (elevator/ladder)"
+        };
 
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
