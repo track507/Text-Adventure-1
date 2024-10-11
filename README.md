@@ -9,6 +9,10 @@ If you happen to type the wrong command—no worries! You'll always have another
 
 We are excited for you to play our game. Please let us know what you think!
 
+## IMPORTANT
+
+If you are pulling from the repo and running the project, please cd into the Project folder. This is where the all of our code is located in. mvn compile and test will not work since there is no pom.xml in the repo directory.
+
 ## Valid Commands
 
 `use <item>`
