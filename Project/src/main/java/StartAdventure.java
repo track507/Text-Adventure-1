@@ -95,8 +95,9 @@ public class StartAdventure {
                     rightPath(scanner);
                     break;
                 case "north":
+                    gameMap.addRoom("Diddy", "Straight Path", null, "Start", null, null);
                     gameMap.moveTo("north");
-                    straightPath(scanner);
+                    Diddy.straightPath(scanner);
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
