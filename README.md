@@ -26,7 +26,6 @@ If you are pulling from the repo and running the project, please cd into the Pro
 
 ## Work In Progress (WIP)
 
-- **Fix applyStyle method**
 - **Adding more rooms**
 - **Creating a way to record a map**
 - **Developing a combat system**
