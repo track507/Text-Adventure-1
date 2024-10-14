@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class StartAdventure {
     // The player
     public static Player player = new Player();
-    public static GameMap gameMap = new GameMap();
+    public static GameMap gameMap;
     // To track the time spent in the game
     private static long startTime;
     private static long roomEntryTime;
@@ -27,12 +27,13 @@ public class StartAdventure {
     }
 
     public static void main(String[] args) {
+        gameMap = new GameMap();
+        gameMap.setLocation("Start", "Start");
         startGame();
     }
 
     public static void startGame() {
         Scanner scanner = new Scanner(System.in);
-        startTime = System.currentTimeMillis();
 
         String[] text = {
             "Welcome to Acrius, the Dark Realm by Terrence, Chibuikem, and Grant.",
@@ -72,10 +73,14 @@ public class StartAdventure {
     public static void startAdventure(Scanner scanner) {
         String[] text = {
                 "\nYou cautiously step forward. After a few minutes, you see an intersection.",
-                "Do you take the west path, the east path, or continue north? (north, west, or east)"
+                "Do you take the west path, the east path, or continue north? (west, east, or north)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
+
+        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
+        gameMap.setLocation("Start", "Start");
+
         while (true) {
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
@@ -105,9 +110,9 @@ public class StartAdventure {
     // Right path scenario
     public static void rightPath(Scanner scanner) {
         String[] text = {
-                "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.",
-                "You see a broken elevator that descends further underground and a ladder leading upward.",
-                "Do you take the elevator or the ladder? (elevator/ladder)"
+            "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.",
+            "You see a broken elevator that descends further underground and a ladder leading upward.",
+            "Do you take the elevator or the ladder? (elevator/ladder)"
         };
 
         TextEngine.pt(Handler.applyStyle(text, "i"));
@@ -139,8 +144,7 @@ public class StartAdventure {
     // Straight path scenario
     // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
-        System.out
-                .println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
+        System.out.println("\nYou walk straight ahead and come across a sign that says 'Welcome to Chibuikem's realm'.");
         System.out.println("You find yourself in a dense underground forest. It's dark, but the trees seem alive");
         System.out.println("Do you explore deeper into the forest or turn back? (explore/back)");
 
