@@ -28,6 +28,7 @@ public class StartAdventure {
 
     public static void main(String[] args) {
         gameMap = new GameMap();
+        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
         gameMap.setLocation("Start", "Start");
         startGame();
     }
@@ -77,9 +78,6 @@ public class StartAdventure {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
-
-        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
-        gameMap.setLocation("Start", "Start");
 
         while (true) {
             String[] parts = Handler.parseCommand(command);
