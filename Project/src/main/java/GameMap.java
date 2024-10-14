@@ -18,6 +18,7 @@ public class GameMap {
     }
 
     public void setLocation(String world, String room) {
+        System.out.println("You are now in " + world + " - " + room);
         if (worldMaps.containsKey(world) && worldMaps.get(world).containsKey(room)) {
             currentWorld = world;
             currentRoom = room;

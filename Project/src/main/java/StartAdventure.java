@@ -28,8 +28,6 @@ public class StartAdventure {
 
     public static void main(String[] args) {
         gameMap = new GameMap();
-        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
-        gameMap.setLocation("Start", "Start");
         startGame();
     }
 
@@ -72,9 +70,16 @@ public class StartAdventure {
 
     // Start the adventure
     public static void startAdventure(Scanner scanner) {
+
+        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
+        gameMap.addRoom("Start", "Left Path", null, null, "Start", null);
+        gameMap.addRoom("Start", "Right Path", null, null, null, "Start");
+        gameMap.addRoom("Diddy", "Straight Path", null, "Start", null, null);
+        gameMap.setLocation("Start", "Start");
+
         String[] text = {
-                "\nYou cautiously step forward. After a few minutes, you see an intersection.",
-                "Do you take the west path, the east path, or continue north? (west, east, or north)"
+            "\nYou cautiously step forward. After a few minutes, you see an intersection.",
+            "Do you take the west path, the east path, or continue north? (west, east, or north)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();
@@ -95,7 +100,8 @@ public class StartAdventure {
                     rightPath(scanner);
                     break;
                 case "north":
-                    gameMap.moveTo("north");
+                    gameMap.addRoom("Diddy", "Straight Path", null,"Start", null, null);
+                    gameMap.setLocation("Diddy", "Straight Path");
                     straightPath(scanner);
                     break;
                 case "inventory":
