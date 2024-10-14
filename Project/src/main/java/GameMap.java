@@ -56,4 +56,15 @@ public class GameMap {
             }
         }
     }
+
+    public boolean moveTo(String direction) {
+        String nextRoom = getConnectedRoom(direction);
+        if (nextRoom == null || nextRoom.isEmpty()) {
+            System.out.println("There is no room in that direction.");
+            return false;
+        } else {
+            setLocation(currentWorld, nextRoom);
+            return true;
+        }
+    }
 }

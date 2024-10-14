@@ -7,7 +7,6 @@ public class Acrius {
     // Left path scenario
     public static void leftPath(Scanner scanner) {
         gameMap.addRoom("Acrius", "Left Path", "Boat", null, "Start", "Cave");
-        gameMap.setLocation("Acrius", "Left Path");
 
         String text = "\nYou chose the west path. You see a large cave with a wide riverbank. A boat is tied to the shore.\nDo you north towards the boat or west to explore the cave further on foot? (north/west/back)";
         TextEngine.pt(Handler.applyStyle(text, "i"));
@@ -21,13 +20,16 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "north":
+                    gameMap.moveTo("north");
                     boatRide(scanner);
                     break;
                 case "west":
+                    gameMap.moveTo("west");
                     exploreCave(scanner);
                     break;
                 case "back":
                 case "east":
+                    gameMap.moveTo("east");
                     StartAdventure.startAdventure(scanner);
                     break;
                 case "inventory":
@@ -41,6 +43,8 @@ public class Acrius {
     }
 
     public static void exploreCave(Scanner scanner) {
+        gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
+
         String[] text = {
             "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
             "You find three skeletons with their bags and backpacks on the ground.",

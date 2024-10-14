@@ -89,12 +89,15 @@ public class StartAdventure {
                     command = scanner.nextLine();
                     break;
                 case "west":
+                    gameMap.moveTo("west");
                     Acrius.leftPath(scanner);
                     break;
                 case "east":
+                    gameMap.moveTo("east");
                     rightPath(scanner);
                     break;
                 case "north":
+                    gameMap.moveTo("north");
                     straightPath(scanner);
                     break;
                 case "inventory":
