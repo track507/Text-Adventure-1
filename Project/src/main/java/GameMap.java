@@ -2,109 +2,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameMap {
-    private Room currentRoom;
+    private String currentWorld;
+    private String currentRoom;
+    private Map<String, Map<String, String[]>> worldMaps;
 
     public GameMap() {
-        initializeRooms();
+        worldMaps = new HashMap<>();
     }
 
-    private void initializeRooms() {
-        // Create rooms
-        Room cavern = new Room("You are in a dimly lit cavern.");
-        Room intersection = new Room("You find yourself at an intersection.");
-        Room leftPath = new Room("You are on the left path, surrounded by dense trees.");
-        Room rightPath = new Room("You are on the right path, filled with old mining equipment.");
-        Room straightPath = new Room("You are walking straight ahead in a dense forest.");
-
-        // Connect rooms
-        cavern.setNorth(intersection);
-        intersection.setSouth(cavern);
-        intersection.setEast(leftPath);
-        intersection.setWest(rightPath);
-        intersection.setNorth(straightPath);
-
-        // Set the starting room
-        currentRoom = cavern;
-    }
-
-    public void move(String direction) {
-        Room nextRoom = null;
-
-        switch (direction.toLowerCase()) {
-            case "north":
-                nextRoom = currentRoom.getNorth();
-                break;
-            case "south":
-                nextRoom = currentRoom.getSouth();
-                break;
-            case "east":
-                nextRoom = currentRoom.getEast();
-                break;
-            case "west":
-                nextRoom = currentRoom.getWest();
-                break;
-            default:
-                System.out.println("Invalid direction. Please choose north, south, east, or west.");
-                return;
+    public void addRoom(String world, String room, String north, String south, String east, String west) {
+        if (!worldMaps.containsKey(world)) {
+            worldMaps.put(world, new HashMap<>());
         }
+        worldMaps.get(world).put(room, new String[]{north, south, east, west});
+    }
 
-        if (nextRoom != null) {
-            currentRoom = nextRoom;
-            System.out.println("You move " + direction + ": " + currentRoom.getDescription());
+    public void setLocation(String world, String room) {
+        if (worldMaps.containsKey(world) && worldMaps.get(world).containsKey(room)) {
+            currentWorld = world;
+            currentRoom = room;
         } else {
-            System.out.println("You can't go that way.");
+            throw new IllegalArgumentException("Invalid world or room");
         }
     }
 
-    public Room getCurrentRoom() {
+    public String getCurrentWorld() {
+        return currentWorld;
+    }
+
+    public String getCurrentRoom() {
         return currentRoom;
     }
-}
 
-class Room {
-    private String description;
-    private Room north;
-    private Room south;
-    private Room east;
-    private Room west;
-
-    public Room(String description) {
-        this.description = description;
+    public String getConnectedRoom(String direction) {
+        String[] connections = worldMaps.get(currentWorld).get(currentRoom);
+        switch (direction.toLowerCase()) {
+            case "north": return connections[0];
+            case "south": return connections[1];
+            case "east": return connections[2];
+            case "west": return connections[3];
+            default: return null;
+        }
     }
 
-    public void setNorth(Room north) {
-        this.north = north;
-    }
-
-    public void setSouth(Room south) {
-        this.south = south;
-    }
-
-    public void setEast(Room east) {
-        this.east = east;
-    }
-
-    public void setWest(Room west) {
-        this.west = west;
-    }
-
-    public Room getNorth() {
-        return north;
-    }
-
-    public Room getSouth() {
-        return south;
-    }
-
-    public Room getEast() {
-        return east;
-    }
-
-    public Room getWest() {
-        return west;
-    }
-
-    public String getDescription() {
-        return description;
+    public void displayMap() {
+        System.out.println("Current location: " + currentWorld + " - " + currentRoom);
+        System.out.println("Connected rooms:");
+        String[] directions = {"North", "South", "East", "West"};
+        String[] connections = worldMaps.get(currentWorld).get(currentRoom);
+        for (int i = 0; i < 4; i++) {
+            if (connections[i] != null) {
+                System.out.println(directions[i] + ": " + connections[i]);
+            }
+        }
     }
 }
