@@ -100,9 +100,15 @@ public class StartAdventure {
                     rightPath(scanner);
                     break;
                 case "north":
+<<<<<<< HEAD
                     gameMap.addRoom("Diddy", "Straight Path", null,"Start", null, null);
                     gameMap.setLocation("Diddy", "Straight Path");
                     straightPath(scanner);
+=======
+                    gameMap.addRoom("Diddy", "Straight Path", null, "Start", null, null);
+                    gameMap.moveTo("north");
+                    Diddy.straightPath(scanner);
+>>>>>>> Chibuikem
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
