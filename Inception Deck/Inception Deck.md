@@ -3,7 +3,7 @@
    - This is a quick reminder about why we are here, who our customers are, and why we decided to do this project in the first place.
 
 2. **Elevator Pitch.**
-   - If we had thirty seconds and two sentences to describe our project, what would we say?
+   - [If we had thirty seconds and two sentences to describe our project, what would we say?](<../Education/Elevator Pitch>)
 
 3. **Product Box.**
    - If we were flipping through a magazine and we saw an advertisement for our product or service, what would it say, and, more importantly, would we buy it?
