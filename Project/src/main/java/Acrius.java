@@ -6,7 +6,8 @@ public class Acrius {
 
     // Left path scenario
     public static void leftPath(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Left Path", "Boat", null, "Start", "Cave");
+        gameMap.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
+        gameMap.setLocation("Acrius", "Left Path");
 
         String text = "\nYou chose the west path. You see a large cave with a wide riverbank. A boat is tied to the shore.\nDo you north towards the boat or west to explore the cave further on foot? (north/west/back)";
         TextEngine.pt(Handler.applyStyle(text, "i"));
@@ -20,11 +21,9 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "north":
-                    gameMap.moveTo("north");
                     boatRide(scanner);
                     break;
                 case "west":
-                    gameMap.moveTo("west");
                     exploreCave(scanner);
                     break;
                 case "back":
@@ -35,6 +34,9 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -44,6 +46,7 @@ public class Acrius {
 
     public static void exploreCave(Scanner scanner) {
         gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
+        gameMap.moveTo("west");
 
         String[] text = {
                 "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
@@ -62,14 +65,13 @@ public class Acrius {
                     break;
                 case "search":
                     if (!player.hasSearchedCave) {
-                        System.out.println(
-                                "You find an iron sword, a buckler, and a health potion. You pocket them for later use.");
                         player.addItem("iron sword");
                         player.addItem("buckler");
                         player.addItem("health potion");
                         player.hasSearchedCave = true;
+                        System.out.println();
                     } else {
-                        System.out.println("You've already searched this room. You can't find anything else.");
+                        System.out.println("You've already searched this room. You can't find anything else.\n");
                     }
                     command = scanner.nextLine();
                     break;
@@ -79,6 +81,9 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -87,9 +92,13 @@ public class Acrius {
     }
 
     public static void boatRide(Scanner scanner) {
+        gameMap.addRoom("Acrius", "Boat Ride", "Dark Cavern", "Left Path", null, "Hidden Temple");
+        gameMap.moveTo("north");
+        gameMap.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", null);
+        gameMap.addRoom("Acrius", "Dark Cavern", null, "Boat Ride", null, null);
         String[] text = {
                 "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
-                "Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)"
+                "Do you abandon the boat and swim west to the shore or keep going north and ride over the waterfall? (west/north/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -101,10 +110,12 @@ public class Acrius {
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "swim":
+                case "west":
+                    gameMap.moveTo("west");
                     hiddenTemple(scanner);
                     break;
-                case "ride":
+                case "north":
+                    // gameMap.moveTo("north");
                     // darkCavern(scanner);
                     break;
                 case "back":
@@ -112,6 +123,9 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -121,6 +135,8 @@ public class Acrius {
     }
 
     public static void hiddenTemple(Scanner scanner) {
+        gameMap.addRoom("Acrius", "Hidden Temple", null, null, null, "Hidden Passageway");
+        gameMap.addRoom("Acrius", "Hidden Passageway", null, null, "Hidden Temple", null);
         String[] text = {
                 "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.",
                 "You find yourself in an ancient temple. Strange symbols cover the walls.",
@@ -137,6 +153,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "decipher":
+                    gameMap.moveTo("west");
                     hiddenPassageway(scanner);
                     break;
                 case "search":
@@ -144,9 +161,11 @@ public class Acrius {
                         System.out.println(
                                 "You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
                         player.addItem("map");
+                        player.hasSearchedHiddenTemple = true;
                     } else {
                         System.out.println("You've already searched this area. You can't find anything else.");
                     }
+                    command = scanner.nextLine();
                     break;
                 case "back":
                     if (player.hasSearchedHiddenTemple) {
@@ -154,12 +173,15 @@ public class Acrius {
                                 "i", "darkGrey"));
                         break; // can no longer go back
                     }
+                    gameMap.moveTo("east");
                     boatRide(scanner);
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
-                    break;
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -195,6 +217,9 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -244,6 +269,10 @@ public class Acrius {
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
                     break;
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -285,6 +314,10 @@ public class Acrius {
                         System.out.println(player.showInventory());
                         command = scanner.nextLine();
                         break;
+                    case "map":
+                        gameMap.displayMap();
+                        command = scanner.nextLine();
+                        break;
                     default:
                         System.out.println("Invalid command. Please try again.");
                         command = scanner.nextLine();
@@ -305,8 +338,14 @@ public class Acrius {
                         System.out.println(player.showInventory());
                         command = scanner.nextLine();
                         break;
+                    case "map":
+                        gameMap.displayMap();
+                        command = scanner.nextLine();
+                        break;
                     default:
                         System.out.println("Invalid command. Please try again.");
+                        command = scanner.nextLine();
+                        break;
                 }
             }
         }
@@ -336,9 +375,11 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
+                    break;
             }
         }
     }
