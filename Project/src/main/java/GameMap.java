@@ -74,7 +74,10 @@ public class GameMap {
     }
 
     public void displayMap() {
-        if(!player.hasItem("map")) return;
+        if(!player.hasItem("map"))  {
+            System.out.println("You don't have a map.");
+            return;
+        }
         System.out.println("Current location: " + currentWorld + " - " + currentRoom);
         
         char[][] mapDisplay = mapDisplays.get(currentWorld);
@@ -115,7 +118,7 @@ public class GameMap {
         } else {
             updatePlayerPosition(direction);
             setLocation(currentWorld, nextRoom); 
-            System.out.println("You move " + direction + " to " + nextRoom + ".");
+            //System.out.println("You move " + direction + " to " + nextRoom + ".");
             return true;
         }
     }
