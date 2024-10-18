@@ -12,7 +12,6 @@ public class Diddy {
     // cyan text: you found a weapon
 
     // Straight path scenario
-    // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
         String[] text = {
                 "\nYou chose to go straight ahead. You come across a sign that says 'Welcome to Diddy's realm'.",
