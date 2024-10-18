@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Player {
     private List<String> inventory;
@@ -23,6 +24,63 @@ public class Player {
     public void addItem(String item) {
         inventory.add(item); 
         System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void takeDamage(int damage) {
+        health = Math.max(0, health - damage);
+    }
+
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    public String getHealthStatus() {
+        if (isDead()) {
+            return "You have died. Game over!";
+        } else {
+            return "Your health is now: " + health;
+        }
+    }
+
+    // Get the current hunger level.
+    public int getHunger() {
+        return hunger;
+    }
+
+    // Reduce hunger by a specific amount (simulating hunger over time).
+    public void reduceHunger(int amount) {
+        hunger = Math.max(0, hunger - amount);
+        System.out.println("Your hunger has decreased to: " + hunger);
+        if (isStarving()) {
+            takeDamage(10);  // Player takes damage when starving
+            System.out.println("You are starving and took 10 damage.");
+        }
+    }
+
+    // Increase hunger when eating food (but not beyond the max of 100).
+    public void eatFood() {
+        hunger = Math.min(hunger + 20, 100);
+        System.out.println("You ate some food. Your hunger is now: " + hunger);
+    }
+
+    // Check if the player is starving (hunger at 0).
+    public boolean isStarving() {
+        return hunger == 0;
+    }
+
+    // Get the hunger status message.
+    public String getHungerStatus() {
+        if (isStarving()) {
+            return "You are starving! Eat something before it's too late.";
+        } else if (hunger < 30) {
+            return "You are getting hungry.";
+        } else {
+            return "You are well-fed.";
+        }
     }
 
     public void parseItem(String item) {
