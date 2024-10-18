@@ -21,17 +21,25 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "north":
+                    gameMap.addRoom("Acrius", "Boat", null, null, "Left Path", null);
+                    gameMap.moveTo("north");
                     boatRide(scanner);
                     break;
                 case "west":
+                    gameMap.addRoom("Acrius", "Cave", null, null, "Left Path", null);
+                    gameMap.moveTo("west");
                     exploreCave(scanner);
                     break;
                 case "back":
                 case "east":
+                    gameMap.moveTo("east");
                     StartAdventure.startAdventure(scanner);
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -41,6 +49,9 @@ public class Acrius {
     }
 
     public static void exploreCave(Scanner scanner) {
+        gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
+        gameMap.displayMap();
+
         String[] text = {
             "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
             "You find three skeletons with their bags and backpacks on the ground.",
@@ -75,6 +86,9 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -85,7 +99,7 @@ public class Acrius {
     public static void boatRide(Scanner scanner) {
         String[] text = {
             "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
-            "Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)"
+            "Do you abandon the boat and swim west to the shore or keep going north and ride over the waterfall? (west/north/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -97,10 +111,12 @@ public class Acrius {
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "swim":
+                case "west":
+                    gameMap.addRoom("Acrius", "Hidden Temple", null, null, "Boat", null);
+                    gameMap.moveTo("west");
                     hiddenTemple(scanner);
                     break;
-                case "ride":
+                case "north":
                     // darkCavern(scanner);
                     break;
                 case "back":
@@ -108,6 +124,9 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -153,7 +172,9 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
-                    break;
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -189,6 +210,9 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -236,6 +260,10 @@ public class Acrius {
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
                     break;
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
@@ -276,6 +304,10 @@ public class Acrius {
                         System.out.println(player.showInventory());
                         command = scanner.nextLine();
                         break;
+                    case "map":
+                        gameMap.displayMap();
+                        command = scanner.nextLine();
+                        break;
                     default:
                         System.out.println("Invalid command. Please try again.");
                         command = scanner.nextLine();
@@ -296,8 +328,14 @@ public class Acrius {
                         System.out.println(player.showInventory());
                         command = scanner.nextLine();
                         break;
+                    case "map":
+                        gameMap.displayMap();
+                        command = scanner.nextLine();
+                        break;
                     default:
                         System.out.println("Invalid command. Please try again.");
+                        command = scanner.nextLine();
+                        break;
                 }
             }
         }
@@ -327,9 +365,11 @@ public class Acrius {
                 case "inventory":
                     System.out.println(player.showInventory());
                     command = scanner.nextLine();
+                    break;
                 default:
                     System.out.println("Invalid command. Please try again.");
                     command = scanner.nextLine();
+                    break;
             }
         }
     }

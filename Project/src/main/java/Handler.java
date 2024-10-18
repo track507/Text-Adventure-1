@@ -155,7 +155,6 @@ public class Handler {
             // Add the styled string to the list
             styledStrings.add(styledString);
         }
-        
         return styledStrings;
     }
 }
