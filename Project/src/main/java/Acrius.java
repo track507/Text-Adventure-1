@@ -46,9 +46,9 @@ public class Acrius {
         gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
 
         String[] text = {
-            "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
-            "You find three skeletons with their bags and backpacks on the ground.",
-            "Do you want to search the skeletons or go back? (search/back)"
+                "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
+                "You find three skeletons with their bags and backpacks on the ground.",
+                "Do you want to search the skeletons or go back? (search/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -61,14 +61,14 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "search":
-                    if(!player.hasSearchedCave) {
-                        System.out.println("You find an iron sword, a buckler, and a health potion. You pocket them for later use.");
+                    if (!player.hasSearchedCave) {
+                        System.out.println(
+                                "You find an iron sword, a buckler, and a health potion. You pocket them for later use.");
                         player.addItem("iron sword");
                         player.addItem("buckler");
                         player.addItem("health potion");
                         player.hasSearchedCave = true;
-                    }
-                    else { 
+                    } else {
                         System.out.println("You've already searched this room. You can't find anything else.");
                     }
                     command = scanner.nextLine();
@@ -88,8 +88,8 @@ public class Acrius {
 
     public static void boatRide(Scanner scanner) {
         String[] text = {
-            "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
-            "Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)"
+                "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
+                "Do you abandon the boat and swim ashore or ride over the waterfall? (swim/ride/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -122,9 +122,9 @@ public class Acrius {
 
     public static void hiddenTemple(Scanner scanner) {
         String[] text = {
-            "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.",
-            "You find yourself in an ancient temple. Strange symbols cover the walls.",
-            "Do you want to decipher the symbols or search the temple for items? (decipher/search/back)"
+                "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.",
+                "You find yourself in an ancient temple. Strange symbols cover the walls.",
+                "Do you want to decipher the symbols or search the temple for items? (decipher/search/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -140,17 +140,19 @@ public class Acrius {
                     hiddenPassageway(scanner);
                     break;
                 case "search":
-                    if(!player.hasSearchedHiddenTemple) {
-                        System.out.println("You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
+                    if (!player.hasSearchedHiddenTemple) {
+                        System.out.println(
+                                "You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
                         player.addItem("map");
                     } else {
                         System.out.println("You've already searched this area. You can't find anything else.");
                     }
                     break;
                 case "back":
-                    if(player.hasSearchedHiddenTemple) { 
-                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...", "i", "darkGrey"));
-                        break; //can no longer go back
+                    if (player.hasSearchedHiddenTemple) {
+                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...",
+                                "i", "darkGrey"));
+                        break; // can no longer go back
                     }
                     boatRide(scanner);
                     break;
@@ -167,10 +169,10 @@ public class Acrius {
 
     public static void hiddenPassageway(Scanner scanner) {
         String[] text = {
-            "\nYou decipher the symbols and unlock a hidden passageway.",
-            "The air is cool, and the walls seem to close in around you.",
-            "To your west, a narrow staircase spirals downward into the darkness, while to your east, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.",
-            "Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)"
+                "\nYou decipher the symbols and unlock a hidden passageway.",
+                "The air is cool, and the walls seem to close in around you.",
+                "To your west, a narrow staircase spirals downward into the darkness, while to your east, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.",
+                "Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -203,10 +205,10 @@ public class Acrius {
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
         String[] text = {
-            "\nYou descend the spiraling staircase, the air growing colder with each step.",
-            "The faint light above disappears, and you find yourself in total darkness.",
-            "You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.",
-            "Do you pull the lever to your north or keep searching in the dark? (pull/search/back)"
+                "\nYou descend the spiraling staircase, the air growing colder with each step.",
+                "The faint light above disappears, and you find yourself in total darkness.",
+                "You feel the stone walls, searching for some kind of clue when your hand brushes against a rusty lever.",
+                "Do you pull the lever to your north or keep searching in the dark? (pull/search/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -223,13 +225,15 @@ public class Acrius {
                     break;
                 case "search":
                     if (!player.hasSearchedStairCaseIntoDarkness) {
-                        System.out.println("You search the dark room and find a small key. You pocket it for later use.");
-                        System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        System.out
+                                .println("You search the dark room and find a small key. You pocket it for later use.");
+                        System.out.println(
+                                "You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
                         player.addItem("Ancient Key");
                         player.hasSearchedStairCaseIntoDarkness = true;
-                    }
-                    else {
-                        System.out.println("You've already searched this room. You can't find anything else. (pull/back)");
+                    } else {
+                        System.out.println(
+                                "You've already searched this room. You can't find anything else. (pull/back)");
                     }
                     command = scanner.nextLine();
                     break;
@@ -247,11 +251,12 @@ public class Acrius {
         }
     }
 
-    public static void ironDoor(Scanner scanner) {;
+    public static void ironDoor(Scanner scanner) {
+        ;
         String[] text = {
-            "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.",
-            "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.",
-            "It seems you need a special key to open this door."
+                "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.",
+                "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.",
+                "It seems you need a special key to open this door."
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -309,9 +314,9 @@ public class Acrius {
 
     public static void darkRoom(Scanner scanner) {
         String[] text = {
-            "\nYou open the door and find yourself in a dark room.",
-            "The torch dimly lights the room. You find a medkit and some food.",
-            "Where do you want to go now? (back)"
+                "\nYou open the door and find yourself in a dark room.",
+                "The torch dimly lights the room. You find a medkit and some food.",
+                "Where do you want to go now? (back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         player.addItem("medkit");

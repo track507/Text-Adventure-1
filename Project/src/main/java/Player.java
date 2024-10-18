@@ -1,3 +1,4 @@
+
 // package Player would fix some issues
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,9 +20,9 @@ public class Player {
         inventory = new ArrayList<>();
     }
 
-    //Adds an item to the player's inventory.
+    // examines an item to the player's inventory.
     public void addItem(String item) {
-        inventory.add(item); 
+        inventory.add(item);
         System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
     }
 
@@ -43,14 +44,14 @@ public class Player {
         }
     }
 
-    //Uses an item from the player's inventory.
+    // Uses an item from the player's inventory.
     public boolean useItem(String item) {
         if (hasItem(item)) {
             // Create a method that parses the item and uses it.
             parseItem(item);
             inventory.remove(item);
             return true;
-        } else if(!hasItem(item)) {
+        } else if (!hasItem(item)) {
             System.out.println("Item not found in inventory.");
             return false;
         } else {
@@ -59,23 +60,23 @@ public class Player {
         }
     }
 
-    //Checks if the player has an item in their inventory.
+    // Checks if the player has an item in their inventory.
     public boolean hasItem(String item) {
         return inventory.contains(item);
     }
 
-    //Removes all items from the inventory.
+    // Removes all items from the inventory.
     public void clearInventory() {
         inventory.clear();
         System.out.println("Your inventory has been cleared.");
     }
 
-    //Returns the list of items in the player's inventory.
+    // Returns the list of items in the player's inventory.
     public List<String> getInventory() {
         return inventory;
     }
 
-    //Gets the current size of the player's inventory.
+    // Gets the current size of the player's inventory.
     public int getInventorySize() {
         return inventory.size();
     }
@@ -85,10 +86,10 @@ public class Player {
         if (inventory.isEmpty()) {
             return "\033[3;90mYour inventory is empty.\033[0m";
         }
-        
+
         // Join the inventory items with ", " and avoid extra space at the end
         String formattedInventory = String.join(", ", inventory);
-        
+
         return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
     }
 
@@ -96,7 +97,8 @@ public class Player {
 
     // }
 
-    //Returns a string representation of the Player object, including the inventory.
+    // Returns a string representation of the Player object, including the
+    // inventory.
     @Override
     public String toString() {
         return "Player Inventory: " + inventory.toString();
