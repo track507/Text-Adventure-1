@@ -1,18 +1,23 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AdventureTest {
     private Player player;
+    private GameMap gameMap;
 
     @Before
     public void initialize() {
         player = new Player();
+        gameMap = new GameMap();
+        
+        gameMap.addRoom("Acrius", "Room1", "Room2", "Room3", "Room4", null);
+        gameMap.addRoom("Acrius", "Room2", null, "Room1", null, null);
+        gameMap.addRoom("Acrius", "Room3", "Room1", null, null, null);
+        gameMap.addRoom("Acrius", "Room4", null, "Room5", null, "Room1");
+        gameMap.addRoom("Acrius", "Room5", "Room4", null, null, null);
     }
+    
 
     @Test
     public void testAddItem() {
@@ -241,5 +246,69 @@ public class AdventureTest {
 
         player.reduceHunger(20); // Set hunger to 0
         assertEquals("You are starving! Eat something before it's too late.", player.getHungerStatus());
+    }
+
+     @Test
+    public void testSetLocation_ValidWorldAndRoom() {
+        gameMap.setLocation("Acrius", "Room1");
+        assertEquals("Acrius", gameMap.getCurrentWorld());
+        assertEquals("Room1", gameMap.getCurrentRoom());
+    }
+
+    @Test
+    public void testSetLocation_InvalidWorld() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            gameMap.setLocation("InvalidWorld", "Room1");
+        });
+    }
+
+    @Test
+    public void testSetLocation_InvalidRoom() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            gameMap.setLocation("Acrius", "InvalidRoom");
+        });
+    }
+
+    @Test
+    public void testGetConnectedRoom_ValidDirection() {
+        gameMap.setLocation("Acrius", "Room1");
+        gameMap.displayMap();
+        assertEquals("Room2", gameMap.getConnectedRoom("north"));
+        assertEquals("Room3", gameMap.getConnectedRoom("south"));
+        assertEquals("Room4", gameMap.getConnectedRoom("east"));
+        assertNull(gameMap.getConnectedRoom("west"));
+    }
+
+    @Test
+    public void testDisplayMap_NoMapItem() {
+        // Ensure the player does not have a map item
+        gameMap.setLocation("Acrius", "Room1");
+        
+        // Assert the output of displayMap method
+        assertEquals("You don't have a map.", gameMap.displayMapAsString());
+    }
+
+    @Test
+    public void testMoveTo_ValidDirection() {
+        gameMap.setLocation("Acrius", "Room1");
+        assertTrue(gameMap.moveTo("north"));
+        assertEquals("Room2", gameMap.getCurrentRoom());
+    }
+
+    @Test
+    public void testMoveTo_InvalidDirection() {
+        gameMap.setLocation("Acrius", "Room1");
+        assertFalse(gameMap.moveTo("west")); // No room in that direction
+        assertEquals("Room1", gameMap.getCurrentRoom()); // Should still be in Room1
+    }
+
+    @Test
+    public void testMoveTo_NonexistentRoom() {
+        // Manually set the current room to one that has no exit
+        gameMap.setLocation("Acrius", "Room3");
+        assertFalse(gameMap.moveTo("south")); // No room in that direction
+        assertFalse(gameMap.moveTo("east")); // No room in that direction
+        assertFalse(gameMap.moveTo("west")); // No room in that direction
+        assertEquals("Room3", gameMap.getCurrentRoom()); // Should still be in Room3
     }
 }

@@ -73,6 +73,46 @@ public class GameMap {
         return room.getConnection(direction);
     }
 
+    public String displayMapAsString() {
+        if (!player.hasItem("map")) {
+            return "You don't have a map.";
+        }
+    
+        StringBuilder output = new StringBuilder();
+        output.append("Current location: ").append(currentWorld).append(" - ").append(currentRoom).append("\n");
+    
+        char[][] mapDisplay = mapDisplays.get(currentWorld);
+        int size = mapDisplay.length;
+        Position playerPos = playerPositions.get(currentWorld);
+    
+        // Reset the map
+        for (char[] row : mapDisplay) {
+            Arrays.fill(row, ' ');
+        }
+    
+        // Set the current room and connections
+        mapDisplay[playerPos.y][playerPos.x] = 'P';
+        Room currentRoomObj = worldMaps.get(currentWorld).get(currentRoom);
+        if (currentRoomObj.north != null) mapDisplay[playerPos.y - 1][playerPos.x] = '*';
+        if (currentRoomObj.south != null) mapDisplay[playerPos.y + 1][playerPos.x] = '*';
+        if (currentRoomObj.east != null) mapDisplay[playerPos.y][playerPos.x + 1] = '*';
+        if (currentRoomObj.west != null) mapDisplay[playerPos.y][playerPos.x - 1] = '*';
+    
+        // Build the map output
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                output.append("[").append(mapDisplay[i][j]).append("]");
+            }
+            output.append("\n");
+        }
+    
+        // Print connected rooms
+        output.append("Connected rooms:\n");
+        currentRoomObj.printConnections(); // Assuming this still prints to console
+    
+        return output.toString();
+    }
+
     public void displayMap() {
         if(!player.hasItem("map"))  {
             System.out.println("You don't have a map.");
