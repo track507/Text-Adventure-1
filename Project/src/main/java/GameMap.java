@@ -16,8 +16,8 @@ public class GameMap {
 
     public void addRoom(String world, String roomName, String north, String south, String east, String west) {
         worldMaps.computeIfAbsent(world, k -> new HashMap<>())
-                 .put(roomName, new Room(roomName, north, south, east, west));
-        
+                .put(roomName, new Room(roomName, north, south, east, west));
+
         initializeMapDisplay(world);
     }
 
@@ -29,7 +29,7 @@ public class GameMap {
                 Arrays.fill(row, ' ');
             }
             mapDisplays.put(world, display);
-            
+
             int center = size / 2;
             playerPositions.put(world, new Position(center, center));
         }
@@ -37,10 +37,13 @@ public class GameMap {
 
     private int getWorldSize(String world) {
         switch (world) {
-            case "Acrius": return 9;
+            case "Acrius":
+                return 9;
             case "Diddy":
-            case "Lanky": return 7;
-            default: return 3;
+            case "Lanky":
+                return 7;
+            default:
+                return 3;
         }
     }
 
@@ -48,7 +51,7 @@ public class GameMap {
         if (worldMaps.containsKey(world) && worldMaps.get(world).containsKey(room)) {
             currentWorld = world;
             currentRoom = room;
-            //System.out.println("You are now in " + world + " - " + room);
+            // System.out.println("You are now in " + world + " - " + room);
         } else {
             throw new IllegalArgumentException("Invalid world or room");
         }
@@ -77,27 +80,31 @@ public class GameMap {
         if (!player.hasItem("map")) {
             return "You don't have a map.";
         }
-    
+
         StringBuilder output = new StringBuilder();
         output.append("Current location: ").append(currentWorld).append(" - ").append(currentRoom).append("\n");
-    
+
         char[][] mapDisplay = mapDisplays.get(currentWorld);
         int size = mapDisplay.length;
         Position playerPos = playerPositions.get(currentWorld);
-    
+
         // Reset the map
         for (char[] row : mapDisplay) {
             Arrays.fill(row, ' ');
         }
-    
+
         // Set the current room and connections
         mapDisplay[playerPos.y][playerPos.x] = 'P';
         Room currentRoomObj = worldMaps.get(currentWorld).get(currentRoom);
-        if (currentRoomObj.north != null) mapDisplay[playerPos.y - 1][playerPos.x] = '*';
-        if (currentRoomObj.south != null) mapDisplay[playerPos.y + 1][playerPos.x] = '*';
-        if (currentRoomObj.east != null) mapDisplay[playerPos.y][playerPos.x + 1] = '*';
-        if (currentRoomObj.west != null) mapDisplay[playerPos.y][playerPos.x - 1] = '*';
-    
+        if (currentRoomObj.north != null)
+            mapDisplay[playerPos.y - 1][playerPos.x] = '*';
+        if (currentRoomObj.south != null)
+            mapDisplay[playerPos.y + 1][playerPos.x] = '*';
+        if (currentRoomObj.east != null)
+            mapDisplay[playerPos.y][playerPos.x + 1] = '*';
+        if (currentRoomObj.west != null)
+            mapDisplay[playerPos.y][playerPos.x - 1] = '*';
+
         // Build the map output
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -105,21 +112,21 @@ public class GameMap {
             }
             output.append("\n");
         }
-    
+
         // Print connected rooms
         output.append("Connected rooms:\n");
         currentRoomObj.printConnections(); // Assuming this still prints to console
-    
+
         return output.toString();
     }
 
     public void displayMap() {
-        if(!player.hasItem("map"))  {
+        if (!player.hasItem("map")) {
             System.out.println("You don't have a map.");
             return;
         }
         System.out.println("Current location: " + currentWorld + " - " + currentRoom);
-        
+
         char[][] mapDisplay = mapDisplays.get(currentWorld);
         int size = mapDisplay.length;
         Position playerPos = playerPositions.get(currentWorld);
@@ -132,10 +139,14 @@ public class GameMap {
         // Set the current room and connections
         mapDisplay[playerPos.y][playerPos.x] = 'P';
         Room currentRoomObj = worldMaps.get(currentWorld).get(currentRoom);
-        if (currentRoomObj.north != null) mapDisplay[playerPos.y - 1][playerPos.x] = '*';
-        if (currentRoomObj.south != null) mapDisplay[playerPos.y + 1][playerPos.x] = '*';
-        if (currentRoomObj.east != null) mapDisplay[playerPos.y][playerPos.x + 1] = '*';
-        if (currentRoomObj.west != null) mapDisplay[playerPos.y][playerPos.x - 1] = '*';
+        if (currentRoomObj.north != null)
+            mapDisplay[playerPos.y - 1][playerPos.x] = '*';
+        if (currentRoomObj.south != null)
+            mapDisplay[playerPos.y + 1][playerPos.x] = '*';
+        if (currentRoomObj.east != null)
+            mapDisplay[playerPos.y][playerPos.x + 1] = '*';
+        if (currentRoomObj.west != null)
+            mapDisplay[playerPos.y][playerPos.x - 1] = '*';
 
         // Print the map
         for (int i = 0; i < size; i++) {
@@ -157,8 +168,8 @@ public class GameMap {
             return false;
         } else {
             updatePlayerPosition(direction);
-            setLocation(currentWorld, nextRoom); 
-            //System.out.println("You move " + direction + " to " + nextRoom + ".");
+            setLocation(currentWorld, nextRoom);
+            // System.out.println("You move " + direction + " to " + nextRoom + ".");
             return true;
         }
     }
@@ -166,10 +177,18 @@ public class GameMap {
     private void updatePlayerPosition(String direction) {
         Position pos = playerPositions.get(currentWorld);
         switch (direction.toLowerCase()) {
-            case "north": pos.y = Math.max(0, pos.y - 1); break;
-            case "south": pos.y = Math.min(mapDisplays.get(currentWorld).length - 1, pos.y + 1); break;
-            case "east": pos.x = Math.min(mapDisplays.get(currentWorld)[0].length - 1, pos.x + 1); break;
-            case "west": pos.x = Math.max(0, pos.x - 1); break;
+            case "north":
+                pos.y = Math.max(0, pos.y - 1);
+                break;
+            case "south":
+                pos.y = Math.min(mapDisplays.get(currentWorld).length - 1, pos.y + 1);
+                break;
+            case "east":
+                pos.x = Math.min(mapDisplays.get(currentWorld)[0].length - 1, pos.x + 1);
+                break;
+            case "west":
+                pos.x = Math.max(0, pos.x - 1);
+                break;
         }
     }
 
@@ -187,24 +206,34 @@ public class GameMap {
 
         String getConnection(String direction) {
             switch (direction.toLowerCase()) {
-                case "north": return north;
-                case "south": return south;
-                case "east": return east;
-                case "west": return west;
-                default: return null;
+                case "north":
+                    return north;
+                case "south":
+                    return south;
+                case "east":
+                    return east;
+                case "west":
+                    return west;
+                default:
+                    return null;
             }
         }
 
         void printConnections() {
-            if (north != null) System.out.println("North: " + north);
-            if (south != null) System.out.println("South: " + south);
-            if (east != null) System.out.println("East: " + east);
-            if (west != null) System.out.println("West: " + west);
+            if (north != null)
+                System.out.println("North: " + north);
+            if (south != null)
+                System.out.println("South: " + south);
+            if (east != null)
+                System.out.println("East: " + east);
+            if (west != null)
+                System.out.println("West: " + west);
         }
     }
 
     private static class Position {
         int x, y;
+
         Position(int x, int y) {
             this.x = x;
             this.y = y;
