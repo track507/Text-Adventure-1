@@ -10,6 +10,7 @@ Things we should add before the end
 Develop story and further Acrius ~ 30 mins
 add NPC's(?) ~ 10 mins
 add Puzzles ~ 25 mins
-est time: 1 hr 5 min
+add health/ fighting system ~ 30 mins
+est time: 1 hr 35 min
 
-Total estimated time: 1 hr 55 min
+Total estimated time: 2 hr 25 min
