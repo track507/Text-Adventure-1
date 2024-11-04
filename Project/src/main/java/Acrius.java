@@ -6,9 +6,7 @@ public class Acrius {
 
     // Left path scenario
     public static void leftPath(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
         gameMap.setLocation("Acrius", "Left Path");
-
         String text = "\nYou chose the west path. You see a large cave with a wide riverbank. A boat is tied to the shore.\nDo you north towards the boat or west to explore the cave further on foot? (north/west/back)";
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -21,9 +19,11 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "north":
+                    gameMap.moveTo("north");
                     boatRide(scanner);
                     break;
                 case "west":
+                    gameMap.moveTo("west");
                     exploreCave(scanner);
                     break;
                 case "back":
@@ -45,9 +45,6 @@ public class Acrius {
     }
 
     public static void exploreCave(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
-        gameMap.moveTo("west");
-
         String[] text = {
                 "\nYou chose to explore the cave further on foot. You make your way deeper into the cave.",
                 "You find three skeletons with their bags and backpacks on the ground.",
@@ -76,6 +73,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "back":
+                    gameMap.moveTo("east");
                     leftPath(scanner);
                     break;
                 case "inventory":
@@ -92,10 +90,6 @@ public class Acrius {
     }
 
     public static void boatRide(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Boat Ride", "Dark Cavern", "Left Path", null, "Hidden Temple");
-        gameMap.moveTo("north");
-        gameMap.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", null);
-        gameMap.addRoom("Acrius", "Dark Cavern", null, "Boat Ride", null, null);
         String[] text = {
                 "\nYou untie the boat and paddle down the eerie river. You soon encounter a waterfall.",
                 "Do you abandon the boat and swim west to the shore or keep going north and ride over the waterfall? (west/north/back)"
@@ -119,6 +113,7 @@ public class Acrius {
                     // darkCavern(scanner);
                     break;
                 case "back":
+                    gameMap.moveTo("south");
                     leftPath(scanner);
                     break;
                 case "inventory":
@@ -135,8 +130,6 @@ public class Acrius {
     }
 
     public static void hiddenTemple(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Hidden Temple", null, null, null, "Hidden Passageway");
-        gameMap.addRoom("Acrius", "Hidden Passageway", null, null, "Hidden Temple", null);
         String[] text = {
                 "\nYou swim ashore and find a small cave entrance. You venture inside, discovering ancient carvings.",
                 "You find yourself in an ancient temple. Strange symbols cover the walls.",
@@ -158,8 +151,7 @@ public class Acrius {
                     break;
                 case "search":
                     if (!player.hasSearchedHiddenTemple) {
-                        System.out.println(
-                                "You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
+                        System.out.println("You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
                         player.addItem("map");
                         player.hasSearchedHiddenTemple = true;
                     } else {
@@ -169,8 +161,7 @@ public class Acrius {
                     break;
                 case "back":
                     if (player.hasSearchedHiddenTemple) {
-                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...",
-                                "i", "darkGrey"));
+                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...", "i", "darkGrey"));
                         break; // can no longer go back
                     }
                     gameMap.moveTo("east");
@@ -207,12 +198,15 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "staircase":
+                    gameMap.moveTo("west");
                     stairCaseIntoDarkness(scanner);
                     break;
                 case "tunnel":
+                    // gameMap.moveTo("north");
                     // faintTunnel(scanner);
                     break;
                 case "back":
+                    gameMap.moveTo("east");
                     hiddenTemple(scanner);
                     break;
                 case "inventory":
@@ -246,23 +240,22 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "pull":
+                    gameMap.moveTo("west");
                     ironDoor(scanner);
                     break;
                 case "search":
                     if (!player.hasSearchedStairCaseIntoDarkness) {
-                        System.out
-                                .println("You search the dark room and find a small key. You pocket it for later use.");
-                        System.out.println(
-                                "You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        System.out.println("You search the dark room and find a small key. You pocket it for later use.");
+                        System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
                         player.addItem("Ancient Key");
                         player.hasSearchedStairCaseIntoDarkness = true;
                     } else {
-                        System.out.println(
-                                "You've already searched this room. You can't find anything else. (pull/back)");
+                        System.out.println("You've already searched this room. You can't find anything else. (pull/back)");
                     }
                     command = scanner.nextLine();
                     break;
                 case "back":
+                    gameMap.moveTo("south");
                     hiddenPassageway(scanner);
                     break;
                 case "inventory":
@@ -281,7 +274,7 @@ public class Acrius {
     }
 
     public static void ironDoor(Scanner scanner) {
-        ;
+        gameMap.addRoom("Acrius", "Iron Door", null, null, "Staircase into Darkness", null);
         String[] text = {
                 "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.",
                 "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.",
@@ -297,14 +290,17 @@ public class Acrius {
                 String[] parts = Handler.parseCommand(command);
                 switch (parts[0]) {
                     case "back":
+                        gameMap.moveTo("east");
                         stairCaseIntoDarkness(scanner);
                         break;
                     case "yes":
+                        gameMap.moveTo("west");
                         darkRoom(scanner);
                         break;
                     case "no":
                         System.out.println("You decide not to use the key.");
                         ironDoor(scanner);
+                        command = scanner.nextLine();
                         break;
                     case "use":
                         player.useItem(parts[1]);
@@ -328,6 +324,7 @@ public class Acrius {
                 String[] parts = Handler.parseCommand(command);
                 switch (parts[0]) {
                     case "back":
+                        gameMap.moveTo("east");
                         stairCaseIntoDarkness(scanner);
                         break;
                     case "use":
@@ -370,6 +367,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "back":
+                    gameMap.moveTo("east");
                     ironDoor(scanner);
                     break;
                 case "inventory":
