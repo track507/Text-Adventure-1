@@ -12,7 +12,6 @@ public class Diddy {
     // cyan text: you found a weapon
 
     // Straight path scenario
-    // Apologize chibuikem is gonna mess with this
     public static void straightPath(Scanner scanner) {
         String[] text = {
                 "\nYou chose to go straight ahead. You come across a sign that says 'Welcome to Diddy's realm'.",
@@ -48,9 +47,7 @@ public class Diddy {
         }
     }
 
-    // TODO: chibuikem write in how to get the sword from the tomb stone after
-    // examining
-    // TODO: chibuikem complete the scenario for when you turn to run away from the
+    // Explore Forest scenario
     // creatures.
     public static void exploreForest(Scanner scanner) {
         String[] text = {
@@ -125,7 +122,12 @@ public class Diddy {
                     String[] fightoptins = {
                             "\nWhispers: its about time for your survival instinct to kick in, so fight with your newly found sword young one."
                     };
-                    TextEngine.pt(Handler.applyStyle(fightoptins, "i", "d"));
+                    String[] skillsMessage = {
+                            "\nYou have the following skills:"
+                    };
+                    TextEngine.pt(Handler.applyStyle(skillsMessage, "i", "yellow"));
+                    // Display player skills
+                    System.out.println(player.getSkills().showSkills());
                     startFight();
                     break;
                 case "run":
@@ -144,6 +146,7 @@ public class Diddy {
     public static void startFight() {
         Scanner scanner = new Scanner(System.in);
         boolean fightContinues = true;
+        int attackCount = 0;
         while (fightContinues) {
             // System.out.println("What would you like to do
             // (swing/lunge/slash/thrust/block/run)");
@@ -171,7 +174,8 @@ public class Diddy {
                             "You slash again, this time cutting across the beast's flank. It howls in pain but doesn't slow down, instead becoming even more enraged."
                     };
                     TextEngine.pt(Handler.applyStyle(slashSequence, "i", "red"));
-                    slashsequence();
+                    attackCount++;
+                    // slashsequence();
                     break;
                 case "thrust":
                 case "stab":
@@ -182,7 +186,8 @@ public class Diddy {
                             "You fight valiantly, slashing and thrusting, but their numbers and speed overwhelm you."
                     };
                     TextEngine.pt(Handler.applyStyle(thrust, "i", "red"));
-                    thrustsequence();
+                    attackCount++;
+                    // thrustsequence();
                     break;
                 case "overhead":
                     String[] overhead = {
@@ -192,7 +197,8 @@ public class Diddy {
                             "You steady yourself, muscles straining, and ready your sword for another strike, but the creature is relentless."
                     };
                     TextEngine.pt(Handler.applyStyle(overhead, "i", "red"));
-                    overheadsequence();
+                    attackCount++;
+                    // overheadsequence();
                     break;
                 case "parry":
                     String[] parry = {
@@ -225,6 +231,22 @@ public class Diddy {
                 default:
                     System.out.println("Invalid action. Try again.");
             }
+            if (attackCount == 3) {
+                switch (action) {
+                    case "slash":
+                        slashsequence(); // Call the slash sequence
+                        break;
+                    case "thrust":
+                        thrustsequence(); // Call the thrust sequence
+                        break;
+                    case "overhead":
+                        overheadsequence(); // Call the overhead sequence
+                        break;
+                }
+            } else {
+                System.out.println("Invalid action. Try again.");
+            }
+            attackCount = 0; // Reset the attack count
         }
 
     }
