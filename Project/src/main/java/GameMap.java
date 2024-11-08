@@ -19,14 +19,14 @@ public class GameMap {
 
     public void initializeRooms() {
         // Left path leads to boat ride and explore cave, east goes back to start
-        gameMap.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
-        gameMap.addRoom("Acrius", "Boat Ride", "Dark Cavern", "Left Path", null, "Hidden Temple");
-        gameMap.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
-        gameMap.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
-        gameMap.addRoom("Acrius", "Hidden Passageway", "Faint Tunnel", null, "Hidden Temple", "Staircase Into Darkness");
-        gameMap.addRoom("Acrius", "Staircase Into Darkness", null, "Hidden Passageway", null, "Iron Door");
-        gameMap.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
-        gameMap.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
+        addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
+        addRoom("Acrius", "Boat Ride", "Dark Cavern", "Left Path", null, "Hidden Temple");
+        addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
+        addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
+        addRoom("Acrius", "Hidden Passageway", "Faint Tunnel", null, "Hidden Temple", "Staircase Into Darkness");
+        addRoom("Acrius", "Staircase Into Darkness", null, "Hidden Passageway", null, "Iron Door");
+        addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
+        addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
         
     }
 
