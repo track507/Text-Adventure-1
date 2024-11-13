@@ -244,7 +244,7 @@ public class Diddy {
                         break;
                 }
             } else {
-                System.out.println("Invalid action. Try again.");
+                System.out.println("you lack the strength to perform this action properly.");
             }
             attackCount = 0; // Reset the attack count
         }
