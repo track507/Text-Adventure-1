@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Player {
     private List<String> inventory;
@@ -12,13 +11,23 @@ public class Player {
     private int health = 100;
     private int hunger = 100;
 
+    // Add a Skills field to the Player class
+    private Skills skills;
+
     // booleans for certain rooms
     public boolean hasSearchedCave = false;
     public boolean hasSearchedHiddenTemple = false;
     public boolean hasSearchedStairCaseIntoDarkness = false;
 
+    // Constructor initializes inventory and skills
     public Player() {
         inventory = new ArrayList<>();
+        skills = new Skills(); // Initialize skills here
+    }
+
+    // Accessor method for skills
+    public Skills getSkills() {
+        return skills;
     }
 
     public void setHealth(int health) {
@@ -62,7 +71,7 @@ public class Player {
         hunger = Math.max(0, hunger - amount);
         System.out.println("Your hunger has decreased to: " + hunger);
         if (isStarving()) {
-            takeDamage(10);  // Player takes damage when starving
+            takeDamage(10); // Player takes damage when starving
             System.out.println("You are starving and took 10 damage.");
         }
     }
