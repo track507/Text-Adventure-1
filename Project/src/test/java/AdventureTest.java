@@ -311,4 +311,101 @@ public class AdventureTest {
         assertFalse(gameMap.moveTo("west")); // No room in that direction
         assertEquals("Room3", gameMap.getCurrentRoom()); // Should still be in Room3
     }
+    // @Test
+    // public void testAddRoomDuplicateRoom() {
+    //     gameMap.addRoom("Acrius", "Room1", null, null, null, null);
+    //     gameMap.addRoom("Acrius", "Room1", "Room2", "Room3", "Room4", "Room5");
+    //     gameMap.setLocation("Acrius", "Room1");
+        
+    //     // Accessing Room via GameMap instance
+    //     Room room = gameMap.getCurrentRoom();
+        
+    //     // Validate that the updated connections are correctly stored
+    //     assertEquals("Room2", room.getConnection("north"));
+    //     assertEquals("Room3", room.getConnection("south"));
+    //     assertEquals("Room4", room.getConnection("east"));
+    //     assertEquals("Room5", room.getConnection("west"));
+    // }
+
+    @Test
+    public void testPlayerInventoryAfterUsingItem() {
+        player.addItem("Food");
+        player.useItem("Food");
+        assertFalse(player.getInventory().contains("Food")); // Ensure the item is removed after use
+        assertEquals(0, player.getInventorySize());
+    }
+
+    @Test
+    public void testAddItemWithSpecialCharacters() {
+        player.addItem("Mysterious@Stone!");
+        assertTrue(player.getInventory().contains("Mysterious@Stone!"));
+        assertEquals(1, player.getInventorySize());
+    }
+
+    @Test
+    public void testHungerDoesNotExceedMaxWhenEating() {
+        player.reduceHunger(50); // Hunger is now 50
+        player.eatFood();        // Hunger increases by 20 to 70
+        player.eatFood();        // Hunger increases to 90
+        player.eatFood();        // Hunger increases to 100 (max)
+        player.eatFood();        // Hunger should remain at 100
+        assertEquals(100, player.getHunger());
+    }
+
+    @Test
+    public void testAddNullItemToInventory() {
+        player.addItem(null);
+        player.getInventory();
+        player.getInventorySize();
+        assertFalse(player.getInventory().contains(null)); // Should not contain null
+        assertEquals(0, player.getInventorySize());        // Inventory size should be unchanged
+    }
+
+    @Test
+    public void testMoveToInvalidDirectionDoesNotChangeLocation() {
+        gameMap.setLocation("Acrius", "Room1");
+        String initialRoom = gameMap.getCurrentRoom();
+        assertFalse(gameMap.moveTo("upward")); // Invalid direction
+        assertEquals(initialRoom, gameMap.getCurrentRoom()); // Location should remain the same
+    }
+
+    @Test
+    public void testMoveToNonExistentRoom() {
+        gameMap.addRoom("TestWorld", "Test Room", null, null, null, null);
+        gameMap.setLocation("TestWorld", "Test Room");
+        assertFalse(gameMap.moveTo("south")); // Assuming "south" from "Room1" does not exist
+        assertEquals("Test Room", gameMap.getCurrentRoom()); // Location should remain unchanged
+    }
+
+    @Test
+    public void testHealthDoesNotExceedMaxWhenUsingMedkit() {
+        player.takeDamage(20); // Health is now 80
+        player.addItem("medkit");
+        player.useItem("medkit"); // Health increases by 50 to 100 (max)
+        assertEquals(100, player.getHealth());
+        player.addItem("medkit");
+        player.useItem("medkit"); // Health should remain at 100
+        assertEquals(100, player.getHealth());
+    }
+
+    @Test
+    public void testAddNewWorldAndMoveBetweenWorlds() {
+        // Add a new world with rooms
+        gameMap.addRoom("NewWorld", "StartRoom", "SecondRoom", null, null, null);
+        gameMap.addRoom("NewWorld", "SecondRoom", null, "StartRoom", null, null);
+
+        // Move to the new world
+        gameMap.setLocation("NewWorld", "StartRoom");
+        assertEquals("NewWorld", gameMap.getCurrentWorld());
+        assertEquals("StartRoom", gameMap.getCurrentRoom());
+
+        // Move within the new world
+        assertTrue(gameMap.moveTo("north"));
+        assertEquals("SecondRoom", gameMap.getCurrentRoom());
+
+        // Move back to the original world
+        gameMap.setLocation("Acrius", "Room1");
+        assertEquals("Acrius", gameMap.getCurrentWorld());
+        assertEquals("Room1", gameMap.getCurrentRoom());
+    }
 }

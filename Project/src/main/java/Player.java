@@ -21,8 +21,13 @@ public class Player {
         inventory = new ArrayList<>();
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     // examines an item to the player's inventory.
     public void addItem(String item) {
+        if(item == null) return;
         inventory.add(item);
         System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
     }

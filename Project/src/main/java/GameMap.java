@@ -81,6 +81,13 @@ public class GameMap {
         return currentRoom;
     }
 
+    public Room getRoom(String world, String roomName) {
+        if (worldMaps.containsKey(world) && worldMaps.get(world).containsKey(roomName)) {
+            return worldMaps.get(world).get(roomName);
+        }
+        throw new IllegalArgumentException("Room not found in the specified world");
+    }  
+
     public String getConnectedRoom(String direction) {
         Room room = worldMaps.get(currentWorld).get(currentRoom);
         // System.out.println("Current world: " + currentWorld);
@@ -178,6 +185,11 @@ public class GameMap {
     }
 
     public boolean moveTo(String direction) {
+        if (player.isDead()) {
+            System.out.println("You cannot move because you are dead.");
+            return false;
+        }
+    
         String nextRoom = getConnectedRoom(direction);
         if (nextRoom == null || nextRoom.isEmpty()) {
             System.out.println("There is no room in that direction.");
@@ -185,10 +197,9 @@ public class GameMap {
         } else {
             updatePlayerPosition(direction);
             setLocation(currentWorld, nextRoom);
-            // System.out.println("You move " + direction + " to " + nextRoom + ".");
             return true;
         }
-    }
+    }    
 
     private void updatePlayerPosition(String direction) {
         Position pos = playerPositions.get(currentWorld);
