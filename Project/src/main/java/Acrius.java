@@ -274,7 +274,6 @@ public class Acrius {
     }
 
     public static void ironDoor(Scanner scanner) {
-        gameMap.addRoom("Acrius", "Iron Door", null, null, "Staircase into Darkness", null);
         String[] text = {
             "\nThe lever creaks loudly as you pull it down. Suddenly, torches along the walls ignite, lighting up the room.",
             "Ahead, you see an iron door. It's locked tight, with strange engravings of keys on the handle.",
