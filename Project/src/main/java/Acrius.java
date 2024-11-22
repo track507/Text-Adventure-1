@@ -110,7 +110,7 @@ public class Acrius {
                     break;
                 case "north":
                     // gameMap.moveTo("north");
-                    // darkCavern(scanner);
+                    // faintTunnel(scanner);
                     break;
                 case "back":
                     gameMap.moveTo("south");
@@ -159,9 +159,11 @@ public class Acrius {
                     }
                     command = scanner.nextLine();
                     break;
+                case "east":
                 case "back":
                     if (player.hasSearchedHiddenTemple) {
                         TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...", "i", "darkGrey"));
+                        command = scanner.nextLine();
                         break; // can no longer go back
                     }
                     gameMap.moveTo("east");
@@ -184,8 +186,8 @@ public class Acrius {
         String[] text = {
             "\nYou decipher the symbols and unlock a hidden passageway.",
             "The air is cool, and the walls seem to close in around you.",
-            "To your west, a narrow staircase spirals downward into the darkness, while to your east, a heavy door creaks open, revealing a tunnel bathed in faint, flickering light.",
-            "Do you descend the staircase or venture into the tunnel? (staircase/tunnel/back)"
+            "To your west, a narrow staircase spirals downward into the darkness, while to your north, a heavy door creaks open, revealing a dark cavern in faint, flickering light.",
+            "Do you descend the staircase or venture into the tunnel? (west/north/back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
@@ -197,13 +199,13 @@ public class Acrius {
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "staircase":
+                case "west":
                     gameMap.moveTo("west");
                     stairCaseIntoDarkness(scanner);
                     break;
-                case "tunnel":
-                    // gameMap.moveTo("north");
-                    // faintTunnel(scanner);
+                case "north":
+                    gameMap.moveTo("north");
+                    darkCavern(scanner);
                     break;
                 case "back":
                     gameMap.moveTo("east");
@@ -221,6 +223,59 @@ public class Acrius {
             }
         }
     }
+
+    public static void darkCavern(Scanner scanner) {
+        String[] text = {
+            "\nYou move north into the dark cavern. The walls are slick and shiny, reflecting faint glimmers of light.",
+            "The air feels damp and cold, and a low rumbling sound echoes from deeper within.",
+            "You see faint pathways leading west and north, while the way back south remains open.",
+            "To the west, you notice a faint glow emanating from a narrow passage.",
+            "To the north, the rumbling grows louder, as if something immense lies deeper in the cavern.",
+            "Where do you want to go? (west/north/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        String command = scanner.nextLine();
+        while (true) {
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    command = scanner.nextLine();
+                    break;
+                case "west":
+                    // gameMap.moveTo("west");
+                    // glowingPassage(scanner);
+                    break;
+                case "north":
+                    // gameMap.moveTo("north");
+                    // northernDepths(scanner); 
+                    break; 
+                case "sourth":
+                case "back":
+                    gameMap.moveTo("south");
+                    boatRide(scanner);
+                    break;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
+                default:
+                    System.out.println("Invalid command. Please try again.");
+                    command = scanner.nextLine();
+            }
+        }
+    }
+
+    // public static void northernDepths(Scanner scanner) {
+
+    // }
+
+    // public static void glowingPassage(Scanner scanner) {
+
+    // }
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
         String[] text = {

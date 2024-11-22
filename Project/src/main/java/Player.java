@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Player {
+    public static GameMap gameMap = StartAdventure.gameMap;
     private List<String> inventory;
     private Map<String, String> locations = new HashMap<>();
     private int health = 100;
@@ -118,7 +119,11 @@ public class Player {
 
     // Uses an item from the player's inventory.
     public boolean useItem(String item) {
-        if (hasItem(item)) {
+        if(item == "map" && hasItem("map")){
+            gameMap.displayMap();
+            return true;
+        }
+        else if (hasItem(item)) {
             // Create a method that parses the item and uses it.
             parseItem(item);
             inventory.remove(item);

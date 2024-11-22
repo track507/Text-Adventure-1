@@ -20,14 +20,17 @@ public class GameMap {
     public void initializeRooms() {
         // Left path leads to boat ride and explore cave, east goes back to start
         this.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
-        this.addRoom("Acrius", "Boat Ride", "Dark Cavern", "Left Path", null, "Hidden Temple");
+        this.addRoom("Acrius", "Boat Ride", "Faint Tunnel", "Left Path", null, "Hidden Temple");
         this.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
         this.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
-        this.addRoom("Acrius", "Hidden Passageway", "Faint Tunnel", null, "Hidden Temple", "Staircase Into Darkness");
+        this.addRoom("Acrius", "Hidden Passageway", "Dark Cavern", null, "Hidden Temple", "Staircase Into Darkness");
         this.addRoom("Acrius", "Staircase Into Darkness", null, "Hidden Passageway", null, "Iron Door");
         this.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
         this.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
-        
+        this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Glowing Passage", null, null);
+        // Add rooms connected to these rooms
+        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null);
+        this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", null, null);
     }
 
     public void addRoom(String world, String roomName, String north, String south, String east, String west) {

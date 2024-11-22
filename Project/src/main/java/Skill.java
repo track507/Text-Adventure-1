@@ -73,23 +73,23 @@ class Skills {
     }
 }
 
-public class Main {
-    public static void main(String[] args) {
-        Skills playerSkills = new Skills();
+// public class Attack {
+//     public static void main(String[] args) {
+//         Skills playerSkills = new Skills();
 
-        // List starting skills
-        playerSkills.listSkills();
+//         // List starting skills
+//         playerSkills.listSkills();
 
-        // Learn a new skill
-        playerSkills.learnSkill("Thrust", "A piercing attack aimed at the enemy's weak spot");
+//         // Learn a new skill
+//         playerSkills.learnSkill("Thrust", "A piercing attack aimed at the enemy's weak spot");
 
-        // List skills after learning a new one
-        playerSkills.listSkills();
+//         // List skills after learning a new one
+//         playerSkills.listSkills();
 
-        // Use a skill
-        playerSkills.useSkill("Swing");
+//         // Use a skill
+//         playerSkills.useSkill("Swing");
 
-        // Attempt to use a skill not learned yet
-        playerSkills.useSkill("Overhead");
-    }
-}
+//         // Attempt to use a skill not learned yet
+//         playerSkills.useSkill("Overhead");
+//     }
+// }
