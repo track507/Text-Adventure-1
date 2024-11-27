@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// Player made by Terrence
+// Modified by Chibuikem
+
 public class Player {
     public static GameMap gameMap = StartAdventure.gameMap;
     private List<String> inventory;

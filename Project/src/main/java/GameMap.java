@@ -1,6 +1,7 @@
 import java.util.*;
-
 import javax.swing.text.Position;
+
+// Map made by Terrence
 
 public class GameMap {
     private static Player player = StartAdventure.player;
@@ -18,19 +19,30 @@ public class GameMap {
     }
 
     public void initializeRooms() {
+
+        this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
+        this.addRoom("Start", "Left Path", null, null, "Start", null);
+        this.addRoom("Start", "Right Path", null, null, null, "Start");
+        this.setLocation("Start", "Start");
         // Left path leads to boat ride and explore cave, east goes back to start
         this.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
         this.addRoom("Acrius", "Boat Ride", "Faint Tunnel", "Left Path", null, "Hidden Temple");
         this.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
         this.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
         this.addRoom("Acrius", "Hidden Passageway", "Dark Cavern", null, "Hidden Temple", "Staircase Into Darkness");
-        this.addRoom("Acrius", "Staircase Into Darkness", null, "Hidden Passageway", null, "Iron Door");
+        this.addRoom("Acrius", "Staircase Into Darkness", null, null , "Hidden Passageway", "Iron Door");
         this.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
         this.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
-        this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Glowing Passage", null, null);
+        this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Hidden Passageway", null, "Glowing Passage");
         // Add rooms connected to these rooms
-        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null);
-        this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", null, null);
+        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null); // work on this 
+        this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", "Unknown Pathway", "Whispering Crevice");
+        // Rooms Northern depths added
+        this.addRoom("Acrius", "Whispering Crevice", null, null, "Northern Depths", null);
+        this.addRoom("Acrius", "Unknown Pathway", null, null, null, "Northern Depths");
+
+        // Chibuikems world
+        this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
     }
 
     public void addRoom(String world, String roomName, String north, String south, String east, String west) {

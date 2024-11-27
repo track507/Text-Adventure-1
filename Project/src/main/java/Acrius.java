@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+// Acrius made by Terrence
+
 public class Acrius {
     public static Player player = StartAdventure.player;
     public static GameMap gameMap = StartAdventure.gameMap;
@@ -38,7 +40,7 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -83,7 +85,7 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -123,7 +125,7 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -176,7 +178,7 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -218,7 +220,7 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -244,17 +246,17 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "west":
-                    // gameMap.moveTo("west");
-                    // glowingPassage(scanner);
+                    gameMap.moveTo("west");
+                    glowingPassage(scanner);
                     break;
                 case "north":
-                    // gameMap.moveTo("north");
-                    // northernDepths(scanner); 
+                    gameMap.moveTo("north");
+                    northernDepths(scanner); 
                     break; 
-                case "sourth":
+                case "south":
                 case "back":
                     gameMap.moveTo("south");
-                    boatRide(scanner);
+                    hiddenPassageway(scanner);
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
@@ -263,19 +265,119 @@ public class Acrius {
                     gameMap.displayMap();
                     command = scanner.nextLine();
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
     }
 
-    // public static void northernDepths(Scanner scanner) {
+    public static void northernDepths(Scanner scanner) {
+        String[] text = {
+            "\nYou venture deeper into the northern depths. The air grows colder, and faint vibrations pulse beneath your feet.",
+            "Ahead stands a towering monolith, its glowing runes pulsing in rhythm with the cavern's hum.",
+            "To the east, a narrow pathway leads deeper into the unknown. To the west, faint whispers emanate from a shadowy crevice.",
+            "What do you do? (approach/east/west/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
-    // }
+        String command = scanner.nextLine();
+        while(true) {
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    command = scanner.nextLine();
+                    break;
+                case "approach":
+                    unknownFigure(scanner);
+                    break;
+                case "east":
+                    // gameMap.moveTo("east");
+                    // unknownPathway(scanner);
+                    break;
+                case "west":
+                    // gameMap.moveTo("west");
+                    // whisperingCrevice(scanner);
+                    break;
+                case "back":
+                    gameMap.moveTo("south");
+                    darkCavern(scanner);
+                    break;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    command = scanner.nextLine();
+                case "map":
+                    gameMap.displayMap();
+                    command = scanner.nextLine();
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+                    command = scanner.nextLine();
+            }
+        }
+    }
 
-    // public static void glowingPassage(Scanner scanner) {
+    public static void unknownFigure(Scanner scanner) {
+        String[] text = {
+            "\nYou approach the towering monolith, its runes pulsing in rhythm with the cavern's hum.",
+            "A mysterious figure appears from behind it, its gaze fixed on you."
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        text = new String[] {
+            "Hello fellow traveler... It's been quite some time since someone came by.",
+            "I'm Acrius, the guardian of this place. I'm here to keep the place safe and secure.",
+            "But recently, I've gotten quite bored. Maybe you would like to play a game with me?",
+            "If you win, I'll give you some items that will help you on your adventure.",
+            "If you lose, I get to take something from you. Deal? (yes/no)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i", "bold", "red"));
+        long seed = System.nanoTime(); // Start timer to accumulate time spent in this room to get a random number
+    
+        String command = scanner.nextLine().toLowerCase();
+        while (true) {
+            long elapsedTime = System.nanoTime() - seed;
+            // Debug seeds
+            System.out.println("Seed: " + seed);
+            System.out.println("Elapsed time: " + elapsedTime);
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "yes":
+                    BlackJack game = new BlackJack();
+                    int result = game.play(scanner);
+    
+                    // Handle game result
+                    if (result == 1) {
+                        game.GiveItem(player);
+                    } else if (result == -1) {
+                        game.TakeItem(player);
+                    }
+    
+                    // Ask if the player wants to play again
+                    TextEngine.pt(Handler.applyStyle("Do you want to play again? (yes/no)", "i", "bold", "red"));
+                    command = scanner.nextLine().toLowerCase();
+                    if (command.equals("no")) {
+                        TextEngine.pt(Handler.applyStyle("You decided not to play anymore and went back to the Northern Depths.", "i", "darkgrey"));
+                        northernDepths(scanner);
+                        return;
+                    }
+                
+                    break;
+    
+                case "no":
+                    TextEngine.pt(Handler.applyStyle("You declined and went back to the Northern Depths.", "i", "darkgrey"));
+                    northernDepths(scanner);
+                    return;
+    
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+                    command = scanner.nextLine().toLowerCase();
+            }
+        }
+    }    
 
-    // }
+    public static void glowingPassage(Scanner scanner) {
+
+    }
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
         String[] text = {
@@ -310,7 +412,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 case "back":
-                    gameMap.moveTo("south");
+                    gameMap.moveTo("east");
                     hiddenPassageway(scanner);
                     break;
                 case "inventory":
@@ -322,7 +424,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
             }
         }
@@ -369,7 +471,7 @@ public class Acrius {
                         command = scanner.nextLine();
                         break;
                     default:
-                        System.out.println("Invalid command. Please try again.");
+                        TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                         command = scanner.nextLine();
                 }
             } else if (!player.hasItem("Ancient Key")) {
@@ -394,7 +496,7 @@ public class Acrius {
                         command = scanner.nextLine();
                         break;
                     default:
-                        System.out.println("Invalid command. Please try again.");
+                        TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                         command = scanner.nextLine();
                         break;
                 }
@@ -429,7 +531,7 @@ public class Acrius {
                     command = scanner.nextLine();
                     break;
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
                     command = scanner.nextLine();
                     break;
             }

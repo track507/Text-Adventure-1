@@ -1,5 +1,7 @@
 import java.util.List;
 
+// TextEngine made by Terrence
+
 public class TextEngine {
 
     public static void pt(String text, int delay) {

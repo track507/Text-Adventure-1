@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+// Test cases made by Terrence
+
 public class AdventureTest {
     private Player player;
     private GameMap gameMap;

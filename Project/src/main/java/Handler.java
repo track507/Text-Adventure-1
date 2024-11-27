@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+// Handler made by Terrence
+
 public class Handler {
 
     // ANSI beginning escape sequence
@@ -138,22 +140,13 @@ public class Handler {
 
         return styledString.toString();
     }
-
-    // Overloaded method to accept a string of styles rather than separate arguments.
-    public static String applyStyle(String string, String styles) {
-        // Split the styles string into an array using the comma as a delimiter
-        String[] styleArray = styles.split(",");
-        return applyStyle(string, styleArray); // Call the existing applyStyle with an array
-    }
-
+    
     public static List<String> applyStyle(String[] strings, String... styles) {
         List<String> styledStrings = new ArrayList<>();
-        
+    
         for (String str : strings) {
-            // Apply the styles to each string
-            String styledString = Handler.applyStyle(str, styles);
-            // Add the styled string to the list
-            styledStrings.add(styledString);
+            // Apply styles to each string and add to the list
+            styledStrings.add(Handler.applyStyle(str, styles));
         }
         return styledStrings;
     }

@@ -88,12 +88,6 @@ public class StartAdventure {
     // Start the adventure
     public static void startAdventure(Scanner scanner) {
 
-        gameMap.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
-        gameMap.addRoom("Start", "Left Path", null, null, "Start", null);
-        gameMap.addRoom("Start", "Right Path", null, null, null, "Start");
-        gameMap.addRoom("Diddy", "Straight Path", null, "Start", null, null);
-        gameMap.setLocation("Start", "Start");
-
         String[] text = {
                 "\nYou cautiously step forward. After a few minutes, you see an intersection.",
                 "Do you take the west path, the east path, or continue north? (west, east, or north)"
@@ -117,7 +111,6 @@ public class StartAdventure {
                     rightPath(scanner);
                     break;
                 case "north":
-                    gameMap.addRoom("Diddy", "Straight Path", null, "Start", null, null);
                     gameMap.setLocation("Diddy", "Straight Path");
                     Diddy.straightPath(scanner);
                     break;
