@@ -19,7 +19,19 @@ public class GameMap {
     }
 
     public void initializeRooms() {
-
+        // World, Room, North, South, East, West in this order.
+        // When you first add a room, you must also add each of the rooms it connects too.
+        // You can see the connecting rooms values to null so that you can change them later.
+        // e.g.
+        /*
+         * Add start world with start room with connected rooms.
+         * this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
+         ! Set each rooms values to null except for the room they lead back to.
+         * this.addRoom("Start", "Left Path", null, null, "Start", null);
+         * this.addRoom("Start", "Right Path", null, null, null, "Start");
+         * this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
+         ! Then change them later on when you make the methods to move between rooms.
+         */
         this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
         this.addRoom("Start", "Left Path", null, null, "Start", null);
         this.addRoom("Start", "Right Path", null, null, null, "Start");
