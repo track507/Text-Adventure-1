@@ -140,6 +140,17 @@ public class Handler {
 
         return styledString.toString();
     }
+
+    // Overloaded method to handle comma-separated styles
+    public static String applyStyle(String string, String styles) {
+        // Split the styles string by commas
+        String[] styleArray = styles.split(",");
+        for (int i = 0; i < styleArray.length; i++) {
+            styleArray[i] = styleArray[i].trim(); // Ensure no whitespace.
+        }
+        // Delegate to the original applyStyle method
+        return applyStyle(string, styleArray);
+    }
     
     public static List<String> applyStyle(String[] strings, String... styles) {
         List<String> styledStrings = new ArrayList<>();

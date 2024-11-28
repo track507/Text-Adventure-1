@@ -4,7 +4,8 @@ import java.util.List;
 
 public class TextEngine {
 
-    public static void pt(String text, int delay) {
+    // main method to print text.
+    public static void pt(String text, int delay, boolean newline) {
         for (char c : text.toCharArray()) {
             System.out.print(c);  // Print the current character without moving to the next line
             try {
@@ -15,24 +16,38 @@ public class TextEngine {
                 System.out.println("Interrupted: " + e.getMessage());
             }
         }
-        System.out.println();  // Move to the next line after printing the entire string
+        if (newline) {
+            System.out.println(); // Move to the next line if newline is true
+        }
     }
 
-    // Method to print text with a delay between characters
+    /*
+        By default newline is true unless specified otherwise
+        Default delay is set to 25 ms
+        This has several overloaded methods to handle different cases
+    */
+
+    public static void pt(String text, int delay) {
+        pt(text, delay, true); 
+    }
+
+    public static void pt(String text, boolean newline) {
+        pt(text, 25, newline);
+    }
+
     public static void pt(String text) {
-        // default delay of 25ms.
-        pt(text, 25);
+        pt(text, 25, true);
     }
 
     public static void pt(String[] text) {
         for (String line : text) {
-            pt(line); // Call the pt method that takes a single String
+            pt(line);
         }
     }
 
     public static void pt(List<String> text) {
         for (String line : text) {
-            pt(line); // Call the pt method that takes a single String
+            pt(line);
         }
     }
 }

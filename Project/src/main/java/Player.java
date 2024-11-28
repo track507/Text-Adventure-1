@@ -42,7 +42,7 @@ public class Player {
     public void addItem(String item) {
         if(item == null) return;
         inventory.add(item);
-        System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
+        TextEngine.pt(Handler.applyStyle("You have picked up: ", "i", "darkgrey") + Handler.applyStyle(item, "b", "yellow"));
     }
 
     public int getHealth() {
@@ -73,17 +73,17 @@ public class Player {
     // Reduce hunger by a specific amount (simulating hunger over time).
     public void reduceHunger(int amount) {
         hunger = Math.max(0, hunger - amount);
-        System.out.println("Your hunger has decreased to: " + hunger);
+        TextEngine.pt(Handler.applyStyle("Your hunger has decreased by " + amount + ". Your hunger is now: " + hunger + ".", "i", "darkgrey")); 
         if (isStarving()) {
             takeDamage(10); // Player takes damage when starving
-            System.out.println("You are starving and took 10 damage.");
+            TextEngine.pt(Handler.applyStyle("You are starving and took 10 damage.", "b", "red"));
         }
     }
 
     // Increase hunger when eating food (but not beyond the max of 100).
     public void eatFood() {
         hunger = Math.min(hunger + 20, 100);
-        System.out.println("You ate some food. Your hunger is now: " + hunger);
+        TextEngine.pt(Handler.applyStyle("You ate some food. Your hunger is now: " + hunger, "i", "darkgrey"));
     }
 
     // Check if the player is starving (hunger at 0).
@@ -106,16 +106,16 @@ public class Player {
         switch (item) {
             case "medkit":
                 health = Math.min(health + 50, 100);
-                System.out.println("\033[3;90mYou have used a medkit. Your health is now: " + health + "\033[0m");
+                TextEngine.pt(Handler.applyStyle("You have used a medkit. Your health is now: " + health, "i", "darkgrey"));
                 break;
             case "ancient key":
                 break;
             case "food":
                 hunger = Math.min(hunger + 20, 100);
-                System.out.println("\033[3;90mYou have eaten some food. Your hunger is now: " + hunger + "\033[0m");
+                eatFood();
                 break;
             default:
-                System.out.println("\033[3;90mThat item does not exist. Please try again.\033[0m");
+                TextEngine.pt(Handler.applyStyle("That item does not exist. Please try again.", "i", "darkgrey"));
                 break;
         }
     }
@@ -132,10 +132,10 @@ public class Player {
             inventory.remove(item);
             return true;
         } else if (!hasItem(item)) {
-            System.out.println("Item not found in inventory.");
+            TextEngine.pt(Handler.applyStyle("That item does not exist. Please try again.", "i", "darkgrey"));
             return false;
         } else {
-            System.out.println("Error Occurred.");
+            TextEngine.pt(Handler.applyStyle("An error occurred. Please try again.", "b", "red"));
             return false;
         }
     }
@@ -148,7 +148,7 @@ public class Player {
     // Removes all items from the inventory.
     public void clearInventory() {
         inventory.clear();
-        System.out.println("Your inventory has been cleared.");
+        TextEngine.pt(Handler.applyStyle("Your inventory has been cleared.", "b", "yellow"));
     }
 
     // Returns the list of items in the player's inventory.
@@ -172,10 +172,6 @@ public class Player {
 
         return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
     }
-
-    // public void showMap() {
-
-    // }
 
     // Returns a string representation of the Player object, including the
     // inventory.
