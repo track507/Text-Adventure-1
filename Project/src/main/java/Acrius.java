@@ -94,7 +94,6 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine().toLowerCase();
         while (true) {
             String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
@@ -530,7 +529,7 @@ public class Acrius {
                 case "south":
                     //gameMap.moveTo("south");
                     // slopingDarkness(scanner); 
-                    return
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
                     break;
