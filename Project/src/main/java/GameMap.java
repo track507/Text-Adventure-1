@@ -11,26 +11,33 @@ public class GameMap {
     private Map<String, char[][]> mapDisplays;
     private Map<String, Position> playerPositions;
 
+    // add RandomEvent instance created by chibuikem
+    private RandomEvent randomEventGenerator;
+
     public GameMap() {
         worldMaps = new HashMap<>();
         mapDisplays = new HashMap<>();
         playerPositions = new HashMap<>();
+        randomEventGenerator = new RandomEvent();// chibuikem was here
         initializeRooms();
     }
 
     public void initializeRooms() {
         // World, Room, North, South, East, West in this order.
-        // When you first add a room, you must also add each of the rooms it connects too.
-        // You can see the connecting rooms values to null so that you can change them later.
+        // When you first add a room, you must also add each of the rooms it connects
+        // too.
+        // You can see the connecting rooms values to null so that you can change them
+        // later.
         // e.g.
         /*
          * Add start world with start room with connected rooms.
-         * this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
-         ! Set each rooms values to null except for the room they lead back to.
+         * this.addRoom("Start", "Start", "Straight Path", null, "Right Path",
+         * "Left Path");
+         * ! Set each rooms values to null except for the room they lead back to.
          * this.addRoom("Start", "Left Path", null, null, "Start", null);
          * this.addRoom("Start", "Right Path", null, null, null, "Start");
          * this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
-         ! Then change them later on when you make the methods to move between rooms.
+         * ! Then change them later on when you make the methods to move between rooms.
          */
         this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
         this.addRoom("Start", "Left Path", null, null, "Start", null);
@@ -42,12 +49,12 @@ public class GameMap {
         this.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
         this.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
         this.addRoom("Acrius", "Hidden Passageway", "Dark Cavern", null, "Hidden Temple", "Staircase Into Darkness");
-        this.addRoom("Acrius", "Staircase Into Darkness", null, null , "Hidden Passageway", "Iron Door");
+        this.addRoom("Acrius", "Staircase Into Darkness", null, null, "Hidden Passageway", "Iron Door");
         this.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
         this.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
         this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Hidden Passageway", null, "Glowing Passage");
         // Add rooms connected to these rooms
-        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null); // work on this 
+        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null); // work on this
         this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", "Unknown Pathway", "Whispering Crevice");
         // Rooms Northern depths added
         this.addRoom("Acrius", "Whispering Crevice", null, null, "Northern Depths", null);
@@ -55,6 +62,15 @@ public class GameMap {
 
         // Chibuikems world
         this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
+        this.addRoom("Diddy", "Mysterious Cave", "Hidden Treasure", "Right Path", null, null);
+        // New Town rooms
+        this.addRoom("Diddy", "Town", "Town Square", null, "Mysterious Cave", null); // Town's main area
+        this.addRoom("Diddy", "Town Square", "Market", "Town", "Town Hall", "Town Entrance"); // Town square connects to
+                                                                                              // market, town hall, and
+                                                                                              // entrance
+        this.addRoom("Diddy", "Market", null, "Town Square", null, null); // Market area
+        this.addRoom("Diddy", "Town Hall", null, "Town Square", null, null); // Town hall area
+        this.addRoom("Diddy", "Town Entrance", null, "Town Square", null, null); // Exit to the town's outskirts or map
     }
 
     public void addRoom(String world, String roomName, String north, String south, String east, String west) {
@@ -100,6 +116,12 @@ public class GameMap {
         }
     }
 
+    // chibuikem was here
+    public void generateRandomEvent() {
+        String event = randomEventGenerator.generateRandomEvent(currentWorld, currentRoom);
+        System.out.println("Random Event: " + event);
+    }
+
     public String getCurrentWorld() {
         return currentWorld;
     }
@@ -113,7 +135,7 @@ public class GameMap {
             return worldMaps.get(world).get(roomName);
         }
         throw new IllegalArgumentException("Room not found in the specified world");
-    }  
+    }
 
     public String getConnectedRoom(String direction) {
         Room room = worldMaps.get(currentWorld).get(currentRoom);
@@ -216,7 +238,7 @@ public class GameMap {
             System.out.println("You cannot move because you are dead.");
             return false;
         }
-    
+
         String nextRoom = getConnectedRoom(direction);
         if (nextRoom == null || nextRoom.isEmpty()) {
             System.out.println("There is no room in that direction.");
@@ -226,7 +248,7 @@ public class GameMap {
             setLocation(currentWorld, nextRoom);
             return true;
         }
-    }    
+    }
 
     private void updatePlayerPosition(String direction) {
         Position pos = playerPositions.get(currentWorld);

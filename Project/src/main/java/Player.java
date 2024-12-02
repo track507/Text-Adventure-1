@@ -40,7 +40,8 @@ public class Player {
 
     // examines an item to the player's inventory.
     public void addItem(String item) {
-        if(item == null) return;
+        if (item == null)
+            return;
         inventory.add(item);
         System.out.println("\033[1;33mYou have picked up: \033[0m\033[3;90m" + item + "\033[0m");
     }
@@ -122,11 +123,10 @@ public class Player {
 
     // Uses an item from the player's inventory.
     public boolean useItem(String item) {
-        if(item == "map" && hasItem("map")){
+        if (item == "map" && hasItem("map")) {
             gameMap.displayMap();
             return true;
-        }
-        else if (hasItem(item)) {
+        } else if (hasItem(item)) {
             // Create a method that parses the item and uses it.
             parseItem(item);
             inventory.remove(item);
@@ -182,5 +182,9 @@ public class Player {
     @Override
     public String toString() {
         return "Player Inventory: " + inventory.toString();
+    }
+
+    public void showSkills() {
+        System.out.println(skills.showSkills()); // Show the player's skills
     }
 }
