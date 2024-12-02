@@ -53,12 +53,21 @@ public class GameMap {
         this.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
         this.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
         this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Hidden Passageway", null, "Glowing Passage");
-        // Add rooms connected to these rooms
-        this.addRoom("Acrius", "Glowing Passage", null, null, "Dark Cavern", null); // work on this
+        this.addRoom("Acrius", "Glowing Passage", null, "Unlocked Passageway", "Dark Cavern", null);
         this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", "Unknown Pathway", "Whispering Crevice");
-        // Rooms Northern depths added
         this.addRoom("Acrius", "Whispering Crevice", null, null, "Northern Depths", null);
         this.addRoom("Acrius", "Unknown Pathway", null, null, null, "Northern Depths");
+        this.addRoom("Acrius", "Unlocked Passageway", "Glowing Passage", "Sloping Darkness", "Flowing Water Room",
+                "Rumbling Chamber");
+        this.addRoom("Acrius", "Flowing Water Room", "Crystal Pool", null, "Mystic Cavern", "Unlocked Passageway");
+        this.addRoom("Acrius", "Crystal Pool", null, "Flowing Water Room", null, null);
+        this.addRoom("Acrius", "Mystic Cavern", null, null, null, "Flowing Water Room");
+        this.addRoom("Acrius", "Sloping Darkness", "Unlocked Passageway", null, "Luminous Chamber", "Shadowed Alcove");
+        this.addRoom("Acrius", "Shadowed Alcove", null, null, "Sloping Darkness", null);
+        this.addRoom("Acrius", "Luminous Chamber", null, null, null, "Sloping Darkness");
+        this.addRoom("Acrius", "Rumbling Chamber", "Echoing Hall", "Collapsed Tunnel", "Unlocked Passageway", null);
+        this.addRoom("Acrius", "Echoing Hall", null, "Rumbling Chamber", null, null);
+        this.addRoom("Acrius", "Collapsed Tunnel", "Rumbling Chamber", null, null, null);
 
         // Chibuikems world
         this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
@@ -97,12 +106,12 @@ public class GameMap {
     private int getWorldSize(String world) {
         switch (world) {
             case "Acrius":
-                return 9;
+                return 11;
             case "Diddy":
             case "Lanky":
-                return 7;
+                return 9;
             default:
-                return 3;
+                return 7;
         }
     }
 
@@ -193,11 +202,11 @@ public class GameMap {
     }
 
     public void displayMap() {
-        if (!player.hasItem("map")) {
-            System.out.println("You don't have a map.");
-            return;
-        }
-        System.out.println("Current location: " + currentWorld + " - " + currentRoom);
+        // if (!player.hasItem("map")) {
+        // TextEngine.pt(Handler.applyStyle("You don't have a map.", "d", "red"));
+        // return;
+        // }
+        TextEngine.pt(Handler.applyStyle("Current location: " + currentWorld + " - " + currentRoom, "d"));
 
         char[][] mapDisplay = mapDisplays.get(currentWorld);
         int size = mapDisplay.length;
@@ -223,25 +232,26 @@ public class GameMap {
         // Print the map
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.print("[" + mapDisplay[i][j] + "]");
+                TextEngine.pt(Handler.applyStyle("[" + mapDisplay[i][j] + "]", "d"), 1, false);
+                // System.out.print(Handler.applyStyle("[" + mapDisplay[i][j] + "]", "d"));
             }
             System.out.println();
         }
 
         // Print connected rooms
-        System.out.println("Connected rooms:");
+        TextEngine.pt(Handler.applyStyle("Connected rooms:", "i", "darkgrey"));
         currentRoomObj.printConnections();
     }
 
     public boolean moveTo(String direction) {
         if (player.isDead()) {
-            System.out.println("You cannot move because you are dead.");
+            TextEngine.pt(Handler.applyStyle("You cannot move because you are dead.", "b", "red"));
             return false;
         }
 
         String nextRoom = getConnectedRoom(direction);
         if (nextRoom == null || nextRoom.isEmpty()) {
-            System.out.println("There is no room in that direction.");
+            TextEngine.pt(Handler.applyStyle("There is no room in that direction.", "i", "darkgrey"));
             return false;
         } else {
             updatePlayerPosition(direction);
@@ -297,13 +307,15 @@ public class GameMap {
 
         void printConnections() {
             if (north != null)
-                System.out.println("North: " + north);
+                TextEngine
+                        .pt(Handler.applyStyle("North: ", "i", "darkgrey") + Handler.applyStyle(north, "b", "yellow"));
             if (south != null)
-                System.out.println("South: " + south);
+                TextEngine
+                        .pt(Handler.applyStyle("South: ", "i", "darkgrey") + Handler.applyStyle(south, "b", "yellow"));
             if (east != null)
-                System.out.println("East: " + east);
+                TextEngine.pt(Handler.applyStyle("East:  ", "i", "darkgrey") + Handler.applyStyle(east, "b", "yellow"));
             if (west != null)
-                System.out.println("West: " + west);
+                TextEngine.pt(Handler.applyStyle("West:  ", "i", "darkgrey") + Handler.applyStyle(west, "b", "yellow"));
         }
     }
 

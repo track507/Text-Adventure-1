@@ -12,13 +12,12 @@ public class Acrius {
         String text = "\nYou chose the west path. You see a large cave with a wide riverbank. A boat is tied to the shore.\nDo you north towards the boat or west to explore the cave further on foot? (north/west/back)";
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "north":
                     gameMap.moveTo("north");
@@ -35,13 +34,12 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -54,13 +52,12 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "search":
                     if (!player.hasSearchedCave) {
@@ -72,7 +69,7 @@ public class Acrius {
                     } else {
                         System.out.println("You've already searched this room. You can't find anything else.\n");
                     }
-                    command = scanner.nextLine();
+                    command = scanner.nextLine().toLowerCase();
                     break;
                 case "back":
                     gameMap.moveTo("east");
@@ -80,13 +77,12 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -98,13 +94,12 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "west":
                     gameMap.moveTo("west");
@@ -120,13 +115,12 @@ public class Acrius {
                     break;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -139,47 +133,43 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "decipher":
                     gameMap.moveTo("west");
                     hiddenPassageway(scanner);
-                    break;
+                    return;
                 case "search":
                     if (!player.hasSearchedHiddenTemple) {
-                        System.out.println("You search the temple and find a map. You can now track your progress. But the cave starts to collapse. You barely escape!");
+                        TextEngine.pt(Handler.applyStyle("You search the temple and find a map. You can now track your progress.", "i", "darkGrey") + Handler.applyStyle(" But the cave starts to collapse. You barely escape!", "i", "red"), 10);
                         player.addItem("map");
                         player.hasSearchedHiddenTemple = true;
                     } else {
-                        System.out.println("You've already searched this area. You can't find anything else.");
+                        TextEngine.pt(Handler.applyStyle("You've already searched this area. You can't find anything else.", "i", "darkGrey"));
                     }
-                    command = scanner.nextLine();
                     break;
                 case "east":
                 case "back":
                     if (player.hasSearchedHiddenTemple) {
-                        TextEngine.pt(Handler.applyStyle("\nYou can't go back. The debris is blocking your path...", "i", "darkGrey"));
-                        command = scanner.nextLine();
-                        break; // can no longer go back
+                        TextEngine.pt(Handler.applyStyle("You can't go back. The debris is blocking your path...", "i", "darkGrey"));
+                        break; // Can no longer go back
                     }
                     gameMap.moveTo("east");
                     boatRide(scanner);
-                    break;
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -193,35 +183,33 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "west":
                     gameMap.moveTo("west");
                     stairCaseIntoDarkness(scanner);
-                    break;
+                    return;
                 case "north":
                     gameMap.moveTo("north");
                     darkCavern(scanner);
-                    break;
+                    return;
                 case "back":
                     gameMap.moveTo("east");
                     hiddenTemple(scanner);
-                    break;
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -237,36 +225,34 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "west":
                     gameMap.moveTo("west");
                     glowingPassage(scanner);
-                    break;
+                    return;
                 case "north":
                     gameMap.moveTo("north");
-                    northernDepths(scanner); 
-                    break; 
+                    northernDepths(scanner);
+                    return;
                 case "south":
                 case "back":
                     gameMap.moveTo("south");
                     hiddenPassageway(scanner);
-                    break;
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -280,38 +266,36 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
-        while(true) {
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "approach":
                     unknownFigure(scanner);
-                    break;
+                    return; 
                 case "east":
-                    // gameMap.moveTo("east");
-                    // unknownPathway(scanner);
-                    break;
+                    gameMap.moveTo("east");
+                    unknownPathway(scanner);
+                    return; 
                 case "west":
-                    // gameMap.moveTo("west");
-                    // whisperingCrevice(scanner);
-                    break;
+                    gameMap.moveTo("west");
+                    whisperingCrevice(scanner);
+                    return; 
                 case "back":
                     gameMap.moveTo("south");
                     darkCavern(scanner);
-                    break;
+                    return; 
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
+                    break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -330,17 +314,17 @@ public class Acrius {
             "If you win, I'll give you some items that will help you on your adventure.",
             "If you lose, I get to take something from you. Deal? (yes/no)"
         };
-        TextEngine.pt(Handler.applyStyle(text, "i", "bold", "red"));
+        TextEngine.pt(Handler.applyStyle(text, "i", "b", "red"));
         long seed = System.nanoTime(); // Start timer to accumulate time spent in this room to get a random number
     
-        String command = scanner.nextLine().toLowerCase();
         while (true) {
             long elapsedTime = System.nanoTime() - seed;
-            // Debug seeds
-            System.out.println("Seed: " + seed);
-            System.out.println("Elapsed time: " + elapsedTime);
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
                 case "yes":
                     BlackJack game = new BlackJack();
                     int result = game.play(scanner);
@@ -353,30 +337,209 @@ public class Acrius {
                     }
     
                     // Ask if the player wants to play again
-                    TextEngine.pt(Handler.applyStyle("Do you want to play again? (yes/no)", "i", "bold", "red"));
+                    TextEngine.pt(Handler.applyStyle("Do you want to play again? (yes/no)", "i", "b", "red"));
                     command = scanner.nextLine().toLowerCase();
                     if (command.equals("no")) {
                         TextEngine.pt(Handler.applyStyle("You decided not to play anymore and went back to the Northern Depths.", "i", "darkgrey"));
                         northernDepths(scanner);
                         return;
                     }
-                
                     break;
-    
                 case "no":
                     TextEngine.pt(Handler.applyStyle("You declined and went back to the Northern Depths.", "i", "darkgrey"));
                     northernDepths(scanner);
                     return;
-    
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine().toLowerCase();
             }
         }
     }    
 
-    public static void glowingPassage(Scanner scanner) {
+    public static void whisperingCrevice(Scanner scanner) {
+        String[] text = {
+            "\nYou step cautiously into the shadowy crevice, the whispers growing louder with each step.",
+            "The sound seems to emanate from faintly glowing stones scattered on the ground.",
+            "The air here is thick and humid, making it hard to breathe.",
+            "What do you do? (search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    TextEngine.pt(Handler.applyStyle("You search the area carefully, avoiding the sharp rocks.", "i", "darkgrey"));
+                    TextEngine.pt(Handler.applyStyle("You find a mysterious glowing stone! It radiates warmth despite the cold air.", "i", "darkgrey"));
+                    player.addItem("Glowing Stone");
+                    break;
+                case "back":
+                    gameMap.moveTo("east");
+                    northernDepths(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void unknownPathway(Scanner scanner) {
+        String[] text = {
+            "\nYou walk down the narrow pathway. The walls seem to close in around you, and the sound of dripping water echoes eerily.",
+            "Strange markings cover the walls, telling a story you cannot decipher.",
+            "As you progress, you see a pile of bones and debris ahead.",
+            "What do you do? (search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    TextEngine.pt(Handler.applyStyle("You sift through the pile of bones and debris.", "i", "darkgrey"));
+                    TextEngine.pt(Handler.applyStyle("Among the remains, you find a rusted dagger. It might still be useful in the right hands.", "i", "darkgrey"));
+                    player.addItem("Rusted Dagger");
+                    break;
+                case "back":
+                    gameMap.moveTo("west");
+                    northernDepths(scanner);
+                    return; 
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void glowingPassage(Scanner scanner) {
+        String[] text = {
+            "\nYou arrive at a glowing passage, its walls shimmering faintly with an ethereal light.",
+            "At the center of the passage, you see a small circular indentation in the wall, glowing faintly.",
+            "It looks like something could fit into it to unlock the way forward."
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            if (player.hasItem("Glowing Stone")) {
+                TextEngine.pt(Handler.applyStyle("Place the Glowing Stone into the indentation? (yes/no/back)", "i", "darkgrey"));
+                String command = scanner.nextLine().toLowerCase();
+                String[] parts = Handler.parseCommand(command);
+                switch (parts[0]) {
+                    case "use":
+                    case "yes":
+                        TextEngine.pt(Handler.applyStyle("You place the Glowing Stone into the indentation.", "i", "darkgrey"));
+                        TextEngine.pt(Handler.applyStyle("The walls tremble, and a doorway slowly reveals itself, granting you access to the passage beyond.", "i", "darkgrey"));
+                        player.useItem("Glowing Stone");
+                        gameMap.moveTo("south");
+                        unlockedPassage(scanner);
+                        return;
+                    case "no":
+                        TextEngine.pt(Handler.applyStyle("You decide not to use the Glowing Stone.", "i", "darkgrey"));
+                        break;
+                    case "back":
+                        gameMap.moveTo("east");
+                        northernDepths(scanner);
+                        return;
+                    case "inventory":
+                        System.out.println(player.showInventory());
+                        break;
+                    case "map":
+                        gameMap.displayMap();
+                        break;
+                    default:
+                        TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+                        break;
+                }
+            } else {
+                TextEngine.pt(Handler.applyStyle("You don't have the Glowing Stone. Without it, the passage remains sealed. (back)", "i", "darkgrey"));
+                String command = scanner.nextLine().toLowerCase();
+                String[] parts = Handler.parseCommand(command);
+                switch (parts[0]) {
+                    case "use":
+                        player.useItem(parts[1]);
+                        break;
+                    case "back":
+                        gameMap.moveTo("east");
+                        northernDepths(scanner);
+                        return;
+                    case "inventory":
+                        System.out.println(player.showInventory());
+                        break;
+                    case "map":
+                        gameMap.displayMap();
+                        break;
+                    default:
+                        TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void unlockedPassage(Scanner scanner) {
+        String[] text = {
+            "\nYou step through the newly unlocked passage. The air feels warmer here, and the glow from the walls begins to fade.",
+            "The room opens into three different paths:",
+            "To the east, you hear the faint sound of running water.",
+            "To the west, a deep rumbling echoes through the walls.",
+            "To the south, the path slopes downward into darkness.",
+            "Which direction do you choose? (east/west/south/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "east":
+                    //gameMap.moveTo("east");
+                    // flowingWaterRoom(scanner); 
+                    return;
+                case "west":
+                    //gameMap.moveTo("west");
+                    // rumblingChamber(scanner); 
+                    return;
+                case "south":
+                    //gameMap.moveTo("south");
+                    // slopingDarkness(scanner); 
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
     }
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
@@ -388,44 +551,40 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "pull":
                     gameMap.moveTo("west");
-                    ironDoor(scanner);
-                    break;
+                    ironDoor(scanner); // Implement this method
+                    return;
                 case "search":
                     if (!player.hasSearchedStairCaseIntoDarkness) {
-                        System.out.println("You search the dark room and find a small key. You pocket it for later use.");
-                        System.out.println("You also find a 'Torch' which you light, illuminating the staircase. (pull/back)");
+                        TextEngine.pt(Handler.applyStyle("You search the dark room and find a small key. You pocket it for later use.", "i", "darkgrey"));
+                        TextEngine.pt(Handler.applyStyle("You also find a 'Torch' which you light, illuminating the staircase.", "i", "darkgrey"));
                         player.addItem("Ancient Key");
+                        player.addItem("Torch");
                         player.hasSearchedStairCaseIntoDarkness = true;
                     } else {
-                        System.out.println("You've already searched this room. You can't find anything else. (pull/back)");
+                        TextEngine.pt(Handler.applyStyle("You've already searched this room. You can't find anything else. (pull/back)", "i", "darkgrey"));
                     }
-                    command = scanner.nextLine();
                     break;
                 case "back":
                     gameMap.moveTo("east");
-                    hiddenPassageway(scanner);
-                    break;
+                    hiddenPassageway(scanner); // Implement this method
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
                     break;
                 case "map":
                     gameMap.displayMap();
-                    command = scanner.nextLine();
                     break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
             }
         }
     }
@@ -438,71 +597,54 @@ public class Acrius {
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
 
-        String command;
         while (true) {
             if (player.hasItem("Ancient Key")) {
-                System.out.println("\n\033[3;90mTry the ancient key? (yes/no/back)\033[0m");
-                command = scanner.nextLine();
+                TextEngine.pt(Handler.applyStyle("Try the ancient key? (yes/no/back)", "i", "darkgrey"));
+                String command = scanner.nextLine().toLowerCase();
                 String[] parts = Handler.parseCommand(command);
                 switch (parts[0]) {
-                    case "back":
-                        gameMap.moveTo("east");
-                        stairCaseIntoDarkness(scanner);
-                        break;
                     case "yes":
                         gameMap.moveTo("west");
                         darkRoom(scanner);
-                        break;
+                        return;
                     case "no":
-                        System.out.println("You decide not to use the key.");
-                        ironDoor(scanner);
-                        command = scanner.nextLine();
+                        TextEngine.pt(Handler.applyStyle("You decide not to use the key.", "i", "darkgrey"));
                         break;
-                    case "use":
-                        player.useItem(parts[1]);
-                        command = scanner.nextLine();
-                        break;
+                    case "back":
+                        gameMap.moveTo("east");
+                        stairCaseIntoDarkness(scanner);
+                        return;
                     case "inventory":
                         System.out.println(player.showInventory());
-                        command = scanner.nextLine();
                         break;
                     case "map":
                         gameMap.displayMap();
-                        command = scanner.nextLine();
                         break;
                     default:
                         TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                        command = scanner.nextLine();
                 }
-            } else if (!player.hasItem("Ancient Key")) {
-                System.out.println("You don't have the key. You can't open the door. (back)");
-                command = scanner.nextLine();
+            } else {
+                TextEngine.pt(Handler.applyStyle("You don't have the key. You can't open the door. (back)", "i", "darkgrey"));
+                String command = scanner.nextLine().toLowerCase();
                 String[] parts = Handler.parseCommand(command);
                 switch (parts[0]) {
                     case "back":
                         gameMap.moveTo("east");
                         stairCaseIntoDarkness(scanner);
-                        break;
-                    case "use":
-                        player.useItem(parts[1]);
-                        command = scanner.nextLine();
-                        break;
+                        return;
                     case "inventory":
                         System.out.println(player.showInventory());
-                        command = scanner.nextLine();
                         break;
                     case "map":
                         gameMap.displayMap();
-                        command = scanner.nextLine();
                         break;
                     default:
                         TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                        command = scanner.nextLine();
-                        break;
                 }
             }
         }
     }
+
 
     public static void darkRoom(Scanner scanner) {
         String[] text = {
@@ -511,30 +653,28 @@ public class Acrius {
             "Where do you want to go now? (back)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
+
         player.addItem("medkit");
         player.addItem("food");
-        String command = scanner.nextLine();
 
         while (true) {
+            String command = scanner.nextLine().toLowerCase();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
-                    command = scanner.nextLine();
                     break;
                 case "back":
                     gameMap.moveTo("east");
                     ironDoor(scanner);
-                    break;
+                    return;
                 case "inventory":
                     System.out.println(player.showInventory());
-                    command = scanner.nextLine();
                     break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
-                    command = scanner.nextLine();
-                    break;
             }
         }
     }
+
 }

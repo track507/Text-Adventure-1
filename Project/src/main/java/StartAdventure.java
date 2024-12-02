@@ -90,7 +90,7 @@ public class StartAdventure {
 
         String[] text = {
                 "\nYou cautiously step forward. After a few minutes, you see an intersection.",
-                "Do you take the west path, the east path, or continue north? (west, east, or north)"
+                "Do you take the west path, the east path, or continue north? (west/east/north)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
         String command = scanner.nextLine();

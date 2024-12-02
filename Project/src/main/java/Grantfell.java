@@ -92,7 +92,7 @@ public class Grantfell {
                     attemptToMove();
                     break;
                 default:
-                    System.out.println("Invalid command. Please try again.");
+                    System.out.println("Invalid command. Please try again. ");
             }
 
             command = scanner.nextLine().toLowerCase();

@@ -86,7 +86,7 @@ public class BlackJack {
                 dealCardToPlayer(playerDeck);
                 TextEngine.pt(Handler.applyStyle("Your cards: " + playerDeck + " (Total: " + getTotal(playerDeck) + ")", "i", "darkgrey"));
                 if (getTotal(playerDeck) > 21) {
-                    TextEngine.pt(Handler.applyStyle("You busted", "bold", "red"));
+                    TextEngine.pt(Handler.applyStyle("You busted", "b", "red"));
                     return -1; // Player loses
                 }
             } else if (choice.equals("s")) {
@@ -113,19 +113,19 @@ public class BlackJack {
         int dealerTotal = getTotal(dealerDeck);
 
         if (playerTotal > 21) {
-            TextEngine.pt(Handler.applyStyle("You lost! Your total exceeded 21.", "bold", "red"));
+            TextEngine.pt(Handler.applyStyle("You lost! Your total exceeded 21.", "b", "red"));
             return -1;
         } else if (dealerTotal > 21) {
-            TextEngine.pt(Handler.applyStyle("You won! Dealer's total exceeded 21.", "bold", "green"));
+            TextEngine.pt(Handler.applyStyle("You won! Dealer's total exceeded 21.", "b", "green"));
             return 1;
         } else if (playerTotal == dealerTotal) {
             System.out.println("It's a tie...");
             return 0;
         } else if (playerTotal > dealerTotal) {
-            TextEngine.pt(Handler.applyStyle("You won! Your total is higher.", "bold", "green"));
+            TextEngine.pt(Handler.applyStyle("You won! Your total is higher.", "b", "green"));
             return 1;
         } else {
-            TextEngine.pt(Handler.applyStyle("You lost! Dealer's total is higher.", "bold", "red"));
+            TextEngine.pt(Handler.applyStyle("You lost! Dealer's total is higher.", "b", "red"));
             return -1;
         }
     }
@@ -161,7 +161,7 @@ public class BlackJack {
         int value = getCardValue(card);
         cardDeck.add(value);
 
-        TextEngine.pt(Handler.applyStyle("You are dealt: ", "i", "darkgrey") + Handler.applyStyle(card, "bold", "yellow"));
+        TextEngine.pt(Handler.applyStyle("You are dealt: ", "i", "darkgrey") + Handler.applyStyle(card, "b", "yellow"));
     }
 
     private void dealCardToDealer(List<Integer> cardDeck) {
@@ -174,7 +174,7 @@ public class BlackJack {
         int value = getCardValue(card);
         cardDeck.add(value);
 
-        TextEngine.pt(Handler.applyStyle("Acrius is dealt: ", "i", "darkgrey") + Handler.applyStyle(card, "bold", "red"));
+        TextEngine.pt(Handler.applyStyle("Acrius is dealt: ", "i", "darkgrey") + Handler.applyStyle(card, "b", "red"));
     }    
 
     // Deal a face-down card to the dealer
@@ -203,7 +203,7 @@ public class BlackJack {
     
         // Remove the item at the random index
         String removedItem = inventory.remove(randomIndex);
-        TextEngine.pt(Handler.applyStyle("Acrius has taken: ", "i", "darkgrey") + Handler.applyStyle(removedItem, "bold", "yellow"));
+        TextEngine.pt(Handler.applyStyle("Acrius has taken: ", "i", "darkgrey") + Handler.applyStyle(removedItem, "b", "yellow"));
     }
     
     public static void GiveItem(Player player) {
@@ -217,7 +217,7 @@ public class BlackJack {
     
         // Add the item to the player's inventory
         inventory.add(newItem);
-        TextEngine.pt(Handler.applyStyle("Acrius has given you: ", "i", "darkgrey") + Handler.applyStyle(newItem, "bold", "yellow"));
+        TextEngine.pt(Handler.applyStyle("Acrius has given you: ", "i", "darkgrey") + Handler.applyStyle(newItem, "b", "yellow"));
     }
 
     public void resetGame() {
