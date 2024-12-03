@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.logging.Handler;
+
 import javax.swing.text.Position;
 
 // Map made by Terrence
@@ -73,6 +75,10 @@ public class GameMap {
                 .put(roomName, new Room(roomName, north, south, east, west));
 
         initializeMapDisplay(world);
+    }
+
+    public Map<String, Map<String, Room>> getWorldMaps() {
+        return worldMaps;
     }
 
     private void initializeMapDisplay(String world) {
@@ -258,7 +264,7 @@ public class GameMap {
         }
     }
 
-    private static class Room {
+    public static class Room {
         String name;
         String north, south, east, west;
 

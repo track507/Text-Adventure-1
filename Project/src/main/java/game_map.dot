@@ -1,0 +1,70 @@
+digraph G {
+    rankdir=LR;
+    node [shape=rectangle];
+    subgraph cluster_Acrius {
+        label="Acrius";
+        "Explore Cave" -> "Left Path" [label="East"];
+        "Whispering Crevice" -> "Northern Depths" [label="East"];
+        "Dark Room" -> "Iron Door" [label="East"];
+        "Flowing Water Room" -> "Crystal Pool" [label="North"];
+        "Flowing Water Room" -> "Mystic Cavern" [label="East"];
+        "Flowing Water Room" -> "Unlocked Passageway" [label="West"];
+        "Unlocked Passageway" -> "Glowing Passage" [label="North"];
+        "Unlocked Passageway" -> "Sloping Darkness" [label="South"];
+        "Unlocked Passageway" -> "Flowing Water Room" [label="East"];
+        "Unlocked Passageway" -> "Rumbling Chamber" [label="West"];
+        "Sloping Darkness" -> "Unlocked Passageway" [label="North"];
+        "Sloping Darkness" -> "Luminous Chamber" [label="East"];
+        "Sloping Darkness" -> "Shadowed Alcove" [label="West"];
+        "Crystal Pool" -> "Flowing Water Room" [label="South"];
+        "Boat Ride" -> "Faint Tunnel" [label="North"];
+        "Boat Ride" -> "Left Path" [label="South"];
+        "Boat Ride" -> "Hidden Temple" [label="West"];
+        "Mysterious Cavern" -> "Crystal Hollow" [label="South"];
+        "Mysterious Cavern" -> "Faint Tunnel" [label="West"];
+        "Mystic Cavern" -> "Flowing Water Room" [label="West"];
+        "Echoing Hall" -> "Rumbling Chamber" [label="South"];
+        "Shadowed Alcove" -> "Sloping Darkness" [label="East"];
+        "Rumbling Chamber" -> "Echoing Hall" [label="North"];
+        "Rumbling Chamber" -> "Collapsed Tunnel" [label="South"];
+        "Rumbling Chamber" -> "Unlocked Passageway" [label="East"];
+        "Hidden Temple" -> "Boat Ride" [label="East"];
+        "Hidden Temple" -> "Hidden Passageway" [label="West"];
+        "Left Path" -> "Boat Ride" [label="North"];
+        "Left Path" -> "Start" [label="East"];
+        "Left Path" -> "Explore Cave" [label="West"];
+        "Crystal Hollow" -> "Mysterious Cavern" [label="North"];
+        "Staircase Into Darkness" -> "Hidden Passageway" [label="East"];
+        "Staircase Into Darkness" -> "Iron Door" [label="West"];
+        "Dark Cavern" -> "Northern Depths" [label="North"];
+        "Dark Cavern" -> "Hidden Passageway" [label="South"];
+        "Dark Cavern" -> "Glowing Passage" [label="West"];
+        "Collapsed Tunnel" -> "Rumbling Chamber" [label="North"];
+        "Hidden Passageway" -> "Dark Cavern" [label="North"];
+        "Hidden Passageway" -> "Hidden Temple" [label="East"];
+        "Hidden Passageway" -> "Staircase Into Darkness" [label="West"];
+        "Unknown Pathway" -> "Northern Depths" [label="West"];
+        "Iron Door" -> "Staircase Into Darkness" [label="East"];
+        "Iron Door" -> "Dark Room" [label="West"];
+        "Faint Tunnel" -> "Boat Ride" [label="South"];
+        "Faint Tunnel" -> "Mysterious Cavern" [label="East"];
+        "Northern Depths" -> "Dark Cavern" [label="South"];
+        "Northern Depths" -> "Unknown Pathway" [label="East"];
+        "Northern Depths" -> "Whispering Crevice" [label="West"];
+        "Luminous Chamber" -> "Sloping Darkness" [label="West"];
+        "Glowing Passage" -> "Unlocked Passageway" [label="South"];
+        "Glowing Passage" -> "Dark Cavern" [label="East"];
+    }
+    subgraph cluster_Start {
+        label="Start";
+        "Left Path" -> "Start" [label="East"];
+        "Start" -> "Straight Path" [label="North"];
+        "Start" -> "Right Path" [label="East"];
+        "Start" -> "Left Path" [label="West"];
+        "Right Path" -> "Start" [label="West"];
+    }
+    subgraph cluster_Diddy {
+        label="Diddy";
+        "Straight Path" -> "Start" [label="South"];
+    }
+}

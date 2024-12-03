@@ -18,6 +18,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "north":
                     gameMap.moveTo("north");
                     boatRide(scanner);
@@ -57,6 +60,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "search":
                     if (!player.hasSearchedCave) {
@@ -100,6 +106,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "west":
                     gameMap.moveTo("west");
                     hiddenTemple(scanner);
@@ -142,6 +151,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "back":
                 case "south":
                     gameMap.moveTo("south");
@@ -178,6 +190,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "search":
                     if (!player.hasSearchedCave) {
@@ -225,6 +240,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "search":
                     if (!player.hasSearchedCave) {
                         TextEngine.pt(Handler.applyStyle("You carefully search the hollow and find some rare items!", "i", "darkgrey"));
@@ -266,6 +284,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "decipher":
                     gameMap.moveTo("west");
@@ -317,6 +338,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "west":
                     gameMap.moveTo("west");
                     stairCaseIntoDarkness(scanner);
@@ -359,6 +383,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "west":
                     gameMap.moveTo("west");
                     glowingPassage(scanner);
@@ -399,6 +426,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "approach":
                     unknownFigure(scanner);
@@ -452,6 +482,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "yes":
                     BlackJack game = new BlackJack();
                     int result = game.play(scanner);
@@ -504,6 +537,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "search":
                     TextEngine.pt(Handler.applyStyle("You search the area carefully, avoiding the sharp rocks.", "i", "darkgrey"));
                     TextEngine.pt(Handler.applyStyle("You find a mysterious glowing stone! It radiates warmth despite the cold air.", "i", "darkgrey"));
@@ -540,6 +576,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "search":
                     TextEngine.pt(Handler.applyStyle("You sift through the pile of bones and debris.", "i", "darkgrey"));
@@ -645,6 +684,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "east":
                     gameMap.moveTo("east");
                     flowingWaterRoom(scanner); 
@@ -689,6 +731,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "north":
                     gameMap.moveTo("north");
                     crystalPool(scanner);
@@ -729,6 +774,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "back":
                 case "south":
                     gameMap.moveTo("south");
@@ -762,6 +810,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "west":
                     gameMap.moveTo("west");
                     flowingWaterRoom(scanner);
@@ -794,6 +845,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "north":
                     gameMap.moveTo("north");
@@ -838,6 +892,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "search":
                     if (!hasSearched) {
                         TextEngine.pt(Handler.applyStyle("You search the room and find a sturdy shield and a small pouch of gold coins.", "i", "darkgrey"));
@@ -870,7 +927,7 @@ public class Acrius {
             "\nYou step cautiously into the Collapsed Tunnel. The air is thick with dust, and the ground is uneven.",
             "Amidst the rubble, you spot a satchel and a gleaming bottle partially buried under rocks.",
             "You can search the room or head back north to the Rumbling Chamber.",
-            "What do you do? (search/north)"
+            "What do you do? (search/north/clear)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
     
@@ -883,6 +940,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "search":
                     if (!hasSearched) {
                         TextEngine.pt(Handler.applyStyle("You search the rubble and find a health potion and a satchel of dried food.", "i", "darkgrey"));
@@ -893,6 +953,10 @@ public class Acrius {
                         TextEngine.pt(Handler.applyStyle("You've already searched this room. There's nothing else to find.", "i", "darkgrey"));
                     }
                     break;
+                case "clear":
+                    gameMap.setLocation("Acrius", "Hidden Temple");
+                    hiddenTemple(scanner);
+                    return;
                 case "north":
                     gameMap.moveTo("north");
                     rumblingChamber(scanner); 
@@ -925,6 +989,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "back":
                 case "north":
@@ -967,6 +1034,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "back":
                 case "west":
                     gameMap.moveTo("west");
@@ -1000,6 +1070,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "back":
                 case "east":
                     gameMap.moveTo("east");
@@ -1032,6 +1105,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "pull":
                     gameMap.moveTo("west");
@@ -1138,6 +1214,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "back":
                     gameMap.moveTo("east");
