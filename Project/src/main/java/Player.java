@@ -209,10 +209,6 @@ public class Player {
         return false;
     }
 
-    public long trackTime() {
-
-    }
-
     // Checks if the player has an item in their inventory.
     public boolean hasItem(String item) {
         return inventory.contains(item);

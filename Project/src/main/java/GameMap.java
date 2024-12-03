@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.logging.Handler;
-
 import javax.swing.text.Position;
 
 // Map made by Terrence
