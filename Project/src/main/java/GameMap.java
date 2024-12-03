@@ -39,6 +39,9 @@ public class GameMap {
         // Left path leads to boat ride and explore cave, east goes back to start
         this.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
         this.addRoom("Acrius", "Boat Ride", "Faint Tunnel", "Left Path", null, "Hidden Temple");
+        this.addRoom("Acrius", "Faint Tunnel", null, "Boat Ride", "Mysterious Cavern", null);
+        this.addRoom("Acrius", "Mysterious Cavern", null, "Crystal Hollow", null, "Faint Tunnel");
+        this.addRoom("Acrius", "Crystal Hollow", "Mysterious Cavern", null, null, null);
         this.addRoom("Acrius", "Explore Cave", null, null, "Left Path", null);
         this.addRoom("Acrius", "Hidden Temple", null, null, "Boat Ride", "Hidden Passageway");
         this.addRoom("Acrius", "Hidden Passageway", "Dark Cavern", null, "Hidden Temple", "Staircase Into Darkness");

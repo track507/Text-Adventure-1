@@ -31,33 +31,39 @@ public class AdventureTest {
     @Test
     public void testRemoveItem() {
         player.addItem("Healing Potion");
-        assertTrue(player.useItem("Healing Potion"));
-        assertFalse(player.getInventory().contains("Healing Potion"));
-        assertEquals(0, player.getInventorySize());
+        assertTrue(player.useItem("Healing Potion")); // Should successfully use the item
+        assertFalse(player.getInventory().contains("Healing Potion")); // Item should be removed
+        assertEquals(0, player.getInventorySize()); // Inventory should now be empty
     }
 
     @Test
     public void testRemoveNonExistentItem() {
         player.addItem("Shield");
         assertFalse(player.useItem("Sword")); // Sword was never added
-        assertEquals(1, player.getInventorySize());
+        assertEquals(1, player.getInventorySize()); // Inventory size should remain 1
     }
 
     @Test
     public void testClearInventory() {
         player.addItem("Mysterious Stone");
-        assertEquals(1, player.getInventorySize());
-        assertTrue(player.getInventory().contains("Mysterious Stone"));
+        player.addItem("Healing Potion");
         player.clearInventory();
-        assertEquals(0, player.getInventorySize());
+        assertEquals(0, player.getInventorySize()); // Inventory should be empty
+        assertFalse(player.getInventory().contains("Mysterious Stone"));
+        assertFalse(player.getInventory().contains("Healing Potion"));
     }
 
     @Test
-    public void testShowInventory() {
-        player.addItem("Healing Potion");
-        assertEquals(1, player.getInventorySize());
-        assertTrue(player.getInventory().contains("Healing Potion"));
-        String expectedInventory = "\nYour inventory: [Healing Potion]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
+    public void testShowInventoryWithQuantities() {
+        player.addItem("Health Potion");
+        player.addItem("Health Potion");
+        player.addItem("Map");
+
+        String expectedInventory = "\nYour inventory:\n" +
+            " - 2x Health Potion(s)\n" +
+            " - 1x Map(s)\n" +
+            "\033[3;90mTo use an item, type 'use <item>'.\033[0m\n";
+
         assertEquals(expectedInventory, player.showInventory());
     }
 
@@ -66,11 +72,14 @@ public class AdventureTest {
         player.addItem("Mysterious Stone");
         player.addItem("Mysterious Stone");
         assertEquals(2, player.getInventorySize());
+        assertEquals("\nYour inventory:\n" +
+            " - 2x Mysterious Stone(s)\n" +
+            "\033[3;90mTo use an item, type 'use <item>'.\033[0m\n", player.showInventory());
     }
 
     @Test
     public void testRemoveFromEmptyInventory() {
-        assertFalse(player.useItem("Shield"));
+        assertFalse(player.useItem("Shield")); // Inventory is empty
         assertEquals(0, player.getInventorySize());
     }
 
@@ -78,21 +87,86 @@ public class AdventureTest {
     public void testAddSpecialCharacterItem() {
         player.addItem("Special@Item!");
         assertTrue(player.getInventory().contains("Special@Item!"));
+        assertEquals(1, player.getInventorySize());
     }
 
     @Test
     public void testAddEmptyStringItem() {
         player.addItem("");
-        assertTrue(player.getInventory().contains(""));
+        assertTrue(player.getInventory().contains("")); // Empty string can be added
+        assertEquals(1, player.getInventorySize());
     }
 
     @Test
     public void testMultipleAddRemove() {
         player.addItem("Item1");
         player.addItem("Item2");
+        assertEquals(2, player.getInventorySize()); // Confirm both items were added
+
+        System.out.println(player.showInventory()); // Show inventory contents
+        System.out.println(player.getInventory());  // Print raw inventory list
+
+        assertFalse(player.useItem("Item1")); 
         assertEquals(2, player.getInventorySize());
-        player.useItem("Item1");
-        assertEquals(1, player.getInventorySize());
+        assertTrue(player.getInventory().contains("Item1")); 
+
+        assertFalse(player.useItem("Item2"));
+        assertEquals(2, player.getInventorySize());
+        assertTrue(player.getInventory().contains("Item2"));
+    }
+
+    @Test
+    public void testUseItemWithDuplicateCounts() {
+        player.addItem("Health Potion");
+        player.addItem("Health Potion");
+
+        assertEquals(2, player.getInventorySize());
+
+        player.useItem("Health Potion"); // Use one potion
+        assertEquals(1, player.getInventorySize()); // Count should decrease to 1
+        assertTrue(player.getInventory().contains("Health Potion")); // Health Potion should still be in inventory
+    }
+
+    @Test
+    public void testAddNullItem() {
+        player.addItem(null); // Null should not be added
+        assertEquals(0, player.getInventorySize());
+    }
+
+    @Test
+    public void testInventorySizeAfterClearingDuplicates() {
+        player.addItem("Health Potion");
+        player.addItem("Health Potion");
+        player.clearInventory(); // Clears all items
+        assertEquals(0, player.getInventorySize());
+        assertFalse(player.getInventory().contains("Health Potion"));
+    }
+
+    @Test
+    public void testUseDynamicHealingPotion() {
+        player.addItem("Healing Potion +20");
+        player.useItem("Healing Potion +20");
+        assertEquals(100, player.getHealth()); // Assuming full health
+
+        player.takeDamage(50);
+        player.addItem("Greater Healing Potion +70");
+        player.useItem("Greater Healing Potion +70");
+        assertEquals(100, player.getHealth()); // Health maxes at 100
+    }
+
+    @Test
+    public void testUseInvalidItem() {
+        player.addItem("Mystic Orb");
+        assertFalse(player.useItem("Mystic Orb"));
+        assertEquals(1, player.getInventorySize()); // Item should remain unused
+    }
+
+    @Test
+    public void testUseFoodItem() {
+        player.reduceHunger(50); // Hunger is now 50
+        player.addItem("Food Ration");
+        player.useItem("Food Ration");
+        assertEquals(70, player.getHunger());
     }
 
     @Test

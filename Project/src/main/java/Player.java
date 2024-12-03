@@ -1,5 +1,3 @@
-
-// package Player would fix some issues
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +7,6 @@ import java.util.Map;
 // Modified by Chibuikem
 
 public class Player {
-    public static GameMap gameMap = StartAdventure.gameMap;
     private List<String> inventory;
     private Map<String, String> locations = new HashMap<>();
     private int health = 100;
@@ -102,42 +99,66 @@ public class Player {
         }
     }
 
-    public void parseItem(String item) {
-        switch (item) {
-            case "medkit":
-                health = Math.min(health + 50, 100);
-                TextEngine.pt(Handler.applyStyle("You have used a medkit. Your health is now: " + health, "i", "darkgrey"));
-                break;
-            case "ancient key":
-                break;
-            case "food":
-                hunger = Math.min(hunger + 20, 100);
-                eatFood();
-                break;
-            default:
-                TextEngine.pt(Handler.applyStyle("That item does not exist. Please try again.", "i", "darkgrey"));
-                break;
+    private int extractValueFromItem(String item, String type) {
+        // Match a pattern like "healing potion +70"
+        String pattern = "(?i)" + type + " \\+(\\d+)";
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile(pattern).matcher(item);
+    
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group(1)); // Extract the numeric value
         }
+    
+        // Default value if no numeric value is found
+        return type.equalsIgnoreCase("healing potion") ? 20 : 10;
+    }
+
+    public boolean parseItem(String item) {
+        // Check for specific key items first
+        if (item.equalsIgnoreCase("ancient key")) {
+            return true; // Keys are not consumed after use
+        }
+        // Match patterns for healing items
+        else if (item.matches("(?i).*healing potion.*|.*health potion.*")) { // Case-insensitive match
+            int healingAmount = item.matches("(?i).*(\\+\\d+).*") 
+                ? extractValueFromItem(item, "healing potion") // Extract value if present
+                : 20; // Default to +20 if no value is specified
+            health = Math.min(health + healingAmount, 100);
+            TextEngine.pt(Handler.applyStyle("You used: " + item + ". Your health is now: " + health, "i", "darkgrey"));
+            return true;
+        }
+        // Match patterns for medkits
+        else if (item.matches("(?i).*medkit.*")) {
+            health = Math.min(health + 50, 100);
+            TextEngine.pt(Handler.applyStyle("You used: " + item + ". Your health is now: " + health, "i", "darkgrey"));
+            return true;
+        }
+        // Match patterns for hunger items
+        else if (item.matches("(?i).*food.*")) {
+            eatFood();
+            return true;
+        }
+        // Default case for unknown items
+        else {
+            TextEngine.pt(Handler.applyStyle("That item does not exist or cannot be used. Please try again.", "i", "darkgrey"));
+        }
+        return false;
     }
 
     // Uses an item from the player's inventory.
     public boolean useItem(String item) {
-        if(item == "map" && hasItem("map")){
-            gameMap.displayMap();
-            return true;
-        }
-        else if (hasItem(item)) {
-            // Create a method that parses the item and uses it.
-            parseItem(item);
-            inventory.remove(item);
-            return true;
-        } else if (!hasItem(item)) {
-            TextEngine.pt(Handler.applyStyle("That item does not exist. Please try again.", "i", "darkgrey"));
-            return false;
-        } else {
-            TextEngine.pt(Handler.applyStyle("An error occurred. Please try again.", "b", "red"));
+        if (item == null || item.isEmpty()) {
+            TextEngine.pt(Handler.applyStyle("You must specify an item to use. Please try again.", "i", "darkgrey"));
             return false;
         }
+
+        // Use equalsIgnoreCase to handle case sensitivity
+        for (String invItem : inventory) {
+            if (invItem.equalsIgnoreCase(item) && parseItem(invItem)) {
+                inventory.remove(invItem); // Remove the item from the inventory
+                return true;
+            }
+        }
+        return false;
     }
 
     // Checks if the player has an item in their inventory.
@@ -161,16 +182,29 @@ public class Player {
         return inventory.size();
     }
 
-    // Returns a string representation of the player's inventory.
     public String showInventory() {
         if (inventory.isEmpty()) {
             return "\033[3;90mYour inventory is empty.\033[0m";
         }
 
-        // Join the inventory items with ", " and avoid extra space at the end
-        String formattedInventory = String.join(", ", inventory);
+        // Create a map to count the occurrences of each item
+        Map<String, Integer> itemCounts = new HashMap<>();
+        for (String item : inventory) {
+            itemCounts.put(item, itemCounts.getOrDefault(item, 0) + 1);
+        }
 
-        return "\nYour inventory: [" + formattedInventory + "]\n\033[3;90mTo use an item, type '<item>'.\033[0m\n";
+        // Build the formatted inventory string
+        StringBuilder formattedInventory = new StringBuilder("\nYour inventory:\n");
+        for (Map.Entry<String, Integer> entry : itemCounts.entrySet()) {
+            int count = entry.getValue();
+            String itemName = entry.getKey();
+            formattedInventory.append(String.format(" - %dx %s(s)\n", count, itemName));
+        }
+
+        // Add instructions on how to use items
+        formattedInventory.append("\033[3;90mTo use an item, type 'use <item>'.\033[0m\n");
+
+        return formattedInventory.toString();
     }
 
     // Returns a string representation of the Player object, including the

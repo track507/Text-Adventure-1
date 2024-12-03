@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 // Acrius made by Terrence
 
 public class Acrius {
@@ -106,8 +105,8 @@ public class Acrius {
                     hiddenTemple(scanner);
                     break;
                 case "north":
-                    // gameMap.moveTo("north");
-                    // faintTunnel(scanner);
+                    gameMap.moveTo("north");
+                    faintTunnel(scanner);
                     break;
                 case "back":
                     gameMap.moveTo("south");
@@ -124,6 +123,134 @@ public class Acrius {
             }
         }
     }
+
+    public static void faintTunnel(Scanner scanner) {
+        String[] text = {
+            "\nYou enter the Faint Tunnel, a narrow and dimly lit passage.",
+            "The air here is damp and carries the faint scent of saltwater.",
+            "The walls are lined with moss, and you hear the distant sound of dripping water echoing through the tunnel.",
+            "To the south, the tunnel opens into the Boat Ride area.",
+            "To the east, you see a faint glow leading to the Mysterious Cavern.",
+            "Where do you want to go? (south/east/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "back":
+                case "south":
+                    gameMap.moveTo("south");
+                    boatRide(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    mysteriousCavern(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+
+    public static void mysteriousCavern(Scanner scanner) {
+        String[] text = {
+            "\nYou step into the Mysterious Cavern. The air is thick with the scent of damp moss, and faintly glowing crystals illuminate the walls.",
+            "Scattered on the ground, you see signs of past adventurers—broken tools, discarded backpacks, and old campfires.",
+            "Do you want to search the cavern, head south to the Crystal Hollow, or return to the Faint Tunnel? (search/south/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    if (!player.hasSearchedCave) {
+                        TextEngine.pt(Handler.applyStyle("You search the cavern and find some useful items!", "i", "darkgrey"));
+                        player.addItem("Small Torch");
+                        player.addItem("Silver Coins");
+                        player.hasSearchedCave = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("You've already searched this area. You can't find anything else.", "i", "darkgrey"));
+                    }
+                    break;
+                case "south":
+                    gameMap.moveTo("south");
+                    crystalHollow(scanner);
+                    return;
+                case "west":
+                case "back":
+                    gameMap.moveTo("west");
+                    faintTunnel(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void crystalHollow(Scanner scanner) {
+        String[] text = {
+            "\nYou descend into the Crystal Hollow, a breathtaking chamber filled with glittering crystals of various hues.",
+            "The air is cool and damp, and the sound of dripping water echoes throughout.",
+            "You notice something shimmering among the crystals. Do you want to search the area or return to the Mysterious Cavern? (search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    if (!player.hasSearchedCave) {
+                        TextEngine.pt(Handler.applyStyle("You carefully search the hollow and find some rare items!", "i", "darkgrey"));
+                        player.addItem("Crystal Shard");
+                        player.addItem("Gold Coins");
+                        player.hasSearchedCave = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("You've already searched this area. There's nothing else to find.", "i", "darkgrey"));
+                    }
+                    break;
+                case "north":
+                case "back":
+                    gameMap.moveTo("north");
+                    mysteriousCavern(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }    
 
     public static void hiddenTemple(Scanner scanner) {
         String[] text = {
@@ -519,16 +646,21 @@ public class Acrius {
                     player.useItem(parts[1]);
                     break;
                 case "east":
-                    //gameMap.moveTo("east");
-                    // flowingWaterRoom(scanner); 
+                    gameMap.moveTo("east");
+                    flowingWaterRoom(scanner); 
                     return;
                 case "west":
-                    //gameMap.moveTo("west");
-                    // rumblingChamber(scanner); 
+                    gameMap.moveTo("west");
+                    rumblingChamber(scanner); 
                     return;
                 case "south":
-                    //gameMap.moveTo("south");
-                    // slopingDarkness(scanner); 
+                    gameMap.moveTo("south");
+                    slopingDarkness(scanner); 
+                    return;
+                case "back":
+                case "north":
+                    gameMap.moveTo("north");
+                    unlockedPassage(scanner);
                     return;
                 case "inventory":
                     System.out.println(player.showInventory());
@@ -541,6 +673,349 @@ public class Acrius {
             }
         }
     }
+
+    public static void flowingWaterRoom(Scanner scanner) {
+        String[] text = {
+            "\nYou step into the Flowing Water Room. The sound of rushing water echoes around you, and you see a small stream cutting through the center of the room.",
+            "The air feels cool and damp. You notice a narrow tunnel to the north, and to the west, the way leads back to the Unlocked Passageway.",
+            "Where do you want to go? (north/east/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "north":
+                    gameMap.moveTo("north");
+                    crystalPool(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    mysticCavern(scanner);
+                    return;
+                case "back":
+                    gameMap.moveTo("west");
+                    unlockedPassage(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void crystalPool(Scanner scanner) {
+        String[] text = {
+            "\nYou arrive at the Crystal Pool. The water shimmers with an ethereal glow, and the room is eerily quiet.",
+            "The air is cool, and you feel a strange sense of calm.",
+            "The only exit is to the south, leading back to the Flowing Water Room.",
+            "What do you do? (back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "back":
+                case "south":
+                    gameMap.moveTo("south");
+                    flowingWaterRoom(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }    
+
+    public static void mysticCavern(Scanner scanner) {
+        String[] text = {
+            "\nYou enter the Mystic Cavern. Strange symbols are carved into the walls, and faint whispers seem to echo around you.",
+            "The atmosphere feels heavy, as if the room itself is alive.",
+            "The only exit is to the west, leading back to the Flowing Water Room.",
+            "What do you do? (bakc)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "west":
+                    gameMap.moveTo("west");
+                    flowingWaterRoom(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }   
+    
+    public static void rumblingChamber(Scanner scanner) {
+        String[] text = {
+            "\nYou enter the Rumbling Chamber. The ground beneath your feet vibrates with a low, constant rumble, as if the earth itself is alive.",
+            "The chamber is vast and dimly lit, with jagged walls casting eerie shadows.",
+            "To the north, a narrow path leads to the Echoing Hall. To the south, rubble marks the entrance to the Collapsed Tunnel.",
+            "To the east, you can return to the Unlocked Passageway.",
+            "Where do you want to go? (north/south/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "north":
+                    gameMap.moveTo("north");
+                    echoingHall(scanner); 
+                    return;
+                case "south":
+                    gameMap.moveTo("south");
+                    collapsedTunnel(scanner); 
+                    return;
+                case "back":
+                case "east":
+                    gameMap.moveTo("east");
+                    unlockedPassage(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+    
+    public static void echoingHall(Scanner scanner) {
+        String[] text = {
+            "\nYou enter the Echoing Hall. The sound of your footsteps reverberates endlessly, creating an eerie atmosphere.",
+            "Dust covers the floor, and you spot a chest partially buried under debris. A faint glimmer catches your eye.",
+            "You can search the room or head back south to the Rumbling Chamber.",
+            "What do you do? (search/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        boolean hasSearched = false;
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    if (!hasSearched) {
+                        TextEngine.pt(Handler.applyStyle("You search the room and find a sturdy shield and a small pouch of gold coins.", "i", "darkgrey"));
+                        player.addItem("Sturdy Shield");
+                        player.addItem("Gold Coins");
+                        hasSearched = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("You've already searched this room. There's nothing else to find.", "i", "darkgrey"));
+                    }
+                    break;
+                case "back":
+                case "south":
+                    gameMap.moveTo("south");
+                    rumblingChamber(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void collapsedTunnel(Scanner scanner) {
+        String[] text = {
+            "\nYou step cautiously into the Collapsed Tunnel. The air is thick with dust, and the ground is uneven.",
+            "Amidst the rubble, you spot a satchel and a gleaming bottle partially buried under rocks.",
+            "You can search the room or head back north to the Rumbling Chamber.",
+            "What do you do? (search/north)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        boolean hasSearched = false;
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "search":
+                    if (!hasSearched) {
+                        TextEngine.pt(Handler.applyStyle("You search the rubble and find a health potion and a satchel of dried food.", "i", "darkgrey"));
+                        player.addItem("Health Potion");
+                        player.addItem("Dried Food");
+                        hasSearched = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("You've already searched this room. There's nothing else to find.", "i", "darkgrey"));
+                    }
+                    break;
+                case "north":
+                    gameMap.moveTo("north");
+                    rumblingChamber(scanner); 
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void slopingDarkness(Scanner scanner) {
+        String[] text = {
+            "\nYou find yourself in the Sloping Darkness. The pathway slopes downward, and the air grows colder with every step.",
+            "The faint sound of dripping water echoes through the chamber, and the walls are rough to the touch.",
+            "To the north lies the Unlocked Passageway. To the east, you see a faint glow emanating from a narrow opening.",
+            "To the west, shadows deepen into an ominous alcove.",
+            "Where do you want to go? (east/west/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "back":
+                case "north":
+                    gameMap.moveTo("north");
+                    unlockedPassage(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    luminousChamber(scanner);
+                    return;
+                case "west":
+                    gameMap.moveTo("west");
+                    shadowedAlcove(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }    
+
+    public static void luminousChamber(Scanner scanner) {
+        String[] text = {
+            "\nYou step into the Luminous Chamber. The walls glow faintly with a bioluminescent moss, casting an otherworldly light.",
+            "The air here is warm and slightly humid, making the chamber feel oddly alive.",
+            "The only exit is to the west, leading back to the Sloping Darkness.",
+            "What do you do? (back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "back":
+                case "west":
+                    gameMap.moveTo("west");
+                    slopingDarkness(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }    
+
+    public static void shadowedAlcove(Scanner scanner) {
+        String[] text = {
+            "\nYou step into the Shadowed Alcove. The darkness here feels almost tangible, broken only by faint streaks of light from cracks in the walls.",
+            "The air is cool and silent, amplifying the sense of isolation.",
+            "The only exit is to the east, leading back to the Sloping Darkness.",
+            "What do you do? (back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+    
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "back":
+                case "east":
+                    gameMap.moveTo("east");
+                    slopingDarkness(scanner);
+                    return;
+                case "inventory":
+                    System.out.println(player.showInventory());
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }    
 
     public static void stairCaseIntoDarkness(Scanner scanner) {
         String[] text = {
@@ -560,7 +1035,7 @@ public class Acrius {
                     break;
                 case "pull":
                     gameMap.moveTo("west");
-                    ironDoor(scanner); // Implement this method
+                    ironDoor(scanner); 
                     return;
                 case "search":
                     if (!player.hasSearchedStairCaseIntoDarkness) {
@@ -575,7 +1050,7 @@ public class Acrius {
                     break;
                 case "back":
                     gameMap.moveTo("east");
-                    hiddenPassageway(scanner); // Implement this method
+                    hiddenPassageway(scanner); 
                     return;
                 case "inventory":
                     System.out.println(player.showInventory());
