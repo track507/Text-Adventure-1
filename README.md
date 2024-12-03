@@ -24,10 +24,10 @@ If you are pulling from the repo and running the project, please cd into the Pro
 `back`
 - Takes you to the previous room.
 
-## Work In Progress (WIP)
+`help`
+- Displays all available commands
 
-- **Add a shop system**
-- **Adding more rooms**
-- **Creating a better way to display map**
-- **Developing a combat system**
-- **Modifying inventory to display item quantities and correct formatting**
+### Generating Graphviz
+- Compile GraphvizGeneratorjava in Project/src/main/java
+- Run GraphvizGenerator.java
+- Run `dot -Tpng game_map.dot -o game_map.png`

@@ -1,4 +1,16 @@
-/.vscode
+# Ignore .class files
+*.class
+
+# Ignore build outputs
 /Project/target
+
+# Ignore macOS-specific files
 .DS_Store
+
+# Ignore Visual Studio Code settings
+/.vscode
+
+# Example specific files
 [Aa]dventure.java
+[Gg]raphvizGenerator.class
+GraphvizGenerator$Room.class
