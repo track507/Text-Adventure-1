@@ -230,6 +230,7 @@ public class Player {
         return inventory.size();
     }
 
+    // Method returning a string
     public String showInventory() {
         if (inventory.isEmpty()) {
             return "\033[3;90mYour inventory is empty.\033[0m";
@@ -241,7 +242,6 @@ public class Player {
             itemCounts.put(item, itemCounts.getOrDefault(item, 0) + 1);
         }
 
-        // Build the formatted inventory string
         StringBuilder formattedInventory = new StringBuilder("\nYour inventory:\n");
         for (Map.Entry<String, Integer> entry : itemCounts.entrySet()) {
             int count = entry.getValue();
@@ -249,10 +249,15 @@ public class Player {
             formattedInventory.append(String.format(" - %dx %s(s)\n", count, itemName));
         }
 
-        // Add instructions on how to use items
         formattedInventory.append("\033[3;90mTo use an item, type 'use <item>'.\033[0m\n");
 
         return formattedInventory.toString();
+    }
+
+    // Void method that prints the inventory, accepting a parameter
+    public void showInventory(boolean print) {
+        String inventoryString = showInventory(); // Reuse the string-returning method
+        TextEngine.pt(inventoryString);
     }
 
     // Returns a string representation of the Player object, including the

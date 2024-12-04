@@ -32,7 +32,7 @@ public class Diddy {
                     StartAdventure.startAdventure(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     command = scanner.nextLine();
                     break;
                 case "explore":

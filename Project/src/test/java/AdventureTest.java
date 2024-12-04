@@ -12,6 +12,7 @@ public class AdventureTest {
     public void initialize() {
         player = new Player();
         gameMap = new GameMap();
+        TextEngine.setSkipDelay(true);
         
         gameMap.addRoom("Acrius", "Room1", "Room2", "Room3", "Room4", null);
         gameMap.addRoom("Acrius", "Room2", null, "Room1", null, null);

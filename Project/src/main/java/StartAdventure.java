@@ -58,7 +58,7 @@ public class StartAdventure {
                 case "exit":
                     exitGame();
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory();
                     command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
@@ -115,7 +115,7 @@ public class StartAdventure {
                     Diddy.straightPath(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory();
                     command = scanner.nextLine();
                     break;
                 case "exit":
@@ -152,7 +152,7 @@ public class StartAdventure {
                     // upperChamber(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory();
                     command = scanner.nextLine();
                     break;
                 case "exit":

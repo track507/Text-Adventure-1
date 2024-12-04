@@ -35,7 +35,7 @@ public class Acrius {
                     StartAdventure.startAdventure(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -81,7 +81,7 @@ public class Acrius {
                     leftPath(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -122,7 +122,7 @@ public class Acrius {
                     leftPath(scanner);
                     break;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -164,7 +164,7 @@ public class Acrius {
                     mysteriousCavern(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -214,7 +214,7 @@ public class Acrius {
                     faintTunnel(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -259,7 +259,7 @@ public class Acrius {
                     mysteriousCavern(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -311,7 +311,7 @@ public class Acrius {
                     boatRide(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -354,7 +354,7 @@ public class Acrius {
                     hiddenTemple(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -400,7 +400,7 @@ public class Acrius {
                     hiddenPassageway(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -446,7 +446,7 @@ public class Acrius {
                     darkCavern(scanner);
                     return; 
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -510,7 +510,7 @@ public class Acrius {
                     northernDepths(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -550,7 +550,7 @@ public class Acrius {
                     northernDepths(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -590,7 +590,7 @@ public class Acrius {
                     northernDepths(scanner);
                     return; 
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -631,7 +631,7 @@ public class Acrius {
                         northernDepths(scanner);
                         return;
                     case "inventory":
-                        System.out.println(player.showInventory());
+                        player.showInventory(true);
                         break;
                     case "map":
                         gameMap.displayMap();
@@ -653,7 +653,7 @@ public class Acrius {
                         northernDepths(scanner);
                         return;
                     case "inventory":
-                        System.out.println(player.showInventory());
+                        player.showInventory(true);
                         break;
                     case "map":
                         gameMap.displayMap();
@@ -705,7 +705,7 @@ public class Acrius {
                     unlockedPassage(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -747,7 +747,7 @@ public class Acrius {
                     unlockedPassage(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -783,7 +783,7 @@ public class Acrius {
                     flowingWaterRoom(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -818,7 +818,7 @@ public class Acrius {
                     flowingWaterRoom(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -863,7 +863,7 @@ public class Acrius {
                     unlockedPassage(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -911,7 +911,7 @@ public class Acrius {
                     rumblingChamber(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -962,7 +962,7 @@ public class Acrius {
                     rumblingChamber(scanner); 
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -1007,7 +1007,7 @@ public class Acrius {
                     shadowedAlcove(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -1043,7 +1043,7 @@ public class Acrius {
                     slopingDarkness(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -1079,7 +1079,7 @@ public class Acrius {
                     slopingDarkness(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -1129,7 +1129,7 @@ public class Acrius {
                     hiddenPassageway(scanner); 
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 case "map":
                     gameMap.displayMap();
@@ -1166,7 +1166,7 @@ public class Acrius {
                         stairCaseIntoDarkness(scanner);
                         return;
                     case "inventory":
-                        System.out.println(player.showInventory());
+                        player.showInventory(true);
                         break;
                     case "map":
                         gameMap.displayMap();
@@ -1184,7 +1184,7 @@ public class Acrius {
                         stairCaseIntoDarkness(scanner);
                         return;
                     case "inventory":
-                        System.out.println(player.showInventory());
+                        player.showInventory(true);
                         break;
                     case "map":
                         gameMap.displayMap();
@@ -1223,7 +1223,7 @@ public class Acrius {
                     ironDoor(scanner);
                     return;
                 case "inventory":
-                    System.out.println(player.showInventory());
+                    player.showInventory(true);
                     break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));

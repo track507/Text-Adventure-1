@@ -4,16 +4,25 @@ import java.util.List;
 
 public class TextEngine {
 
-    // main method to print text.
+    // Flag to control whether delays are skipped (default is false)
+    private static boolean skipDelay = false;
+
+    // Method to set the skipDelay flag
+    public static void setSkipDelay(boolean skip) {
+        skipDelay = skip;
+    }
+
+    // Main method to print text
     public static void pt(String text, int delay, boolean newline) {
         for (char c : text.toCharArray()) {
             System.out.print(c);  // Print the current character without moving to the next line
-            try {
-                Thread.sleep(delay); // Pause for 250 milliseconds (0.25 seconds)
-            } catch (InterruptedException e) {
-                // Handle the interruption during sleep (if any)
-                Thread.currentThread().interrupt();
-                System.out.println("Interrupted: " + e.getMessage());
+            if (!skipDelay) {     // Apply delay only if skipDelay is false
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.out.println("Interrupted: " + e.getMessage());
+                }
             }
         }
         if (newline) {
@@ -21,14 +30,9 @@ public class TextEngine {
         }
     }
 
-    /*
-        By default newline is true unless specified otherwise
-        Default delay is set to 25 ms
-        This has several overloaded methods to handle different cases
-    */
-
+    // Overloaded methods (same as before)
     public static void pt(String text, int delay) {
-        pt(text, delay, true); 
+        pt(text, delay, true);
     }
 
     public static void pt(String text, boolean newline) {
