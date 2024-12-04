@@ -81,6 +81,19 @@ public class GraphvizGenerator {
         this.addRoom("Acrius", "Echoing Hall", null, "Rumbling Chamber", null, null);
         this.addRoom("Acrius", "Collapsed Tunnel", "Rumbling Chamber", null, null, null);
   
+        this.addRoom("Grantfell", "Central Spire", "Subterranean Transit Network", "Industrial Sector", "Glass Gardens", "Obsidian Nexus");
+        this.addRoom("Grantfell", "Glass Gardens", null, "Central Spire", "Overgrown Atrium", null);
+        this.addRoom("Grantfell", "Overgrown Atrium", null, "Glass Gardens", null, "Hidden Biotech Lab");
+        this.addRoom("Grantfell", "Hidden Biotech Lab", null, "Overgrown Atrium", null, null);
+        this.addRoom("Grantfell", "Obsidian Nexus", "Sundial Plaza", null, "Central Spire", null);
+        this.addRoom("Grantfell", "Sundial Plaza", null, "Obsidian Nexus", null, null);
+        this.addRoom("Grantfell", "Subterranean Transit Network", "Aqua Tunnels", "Cryo Vaults", null, null);
+        this.addRoom("Grantfell", "Aqua Tunnels", null, "Subterranean Transit Network", null, null);
+        this.addRoom("Grantfell", "Cryo Vaults", null, "Subterranean Transit Network", null, null);
+        this.addRoom("Grantfell", "Skybridge Ruins", null, "Central Spire", null, null);
+    
+        // Add connections for any new paths between rooms
+        this.addRoom("Grantfell", "Central Spire", "Obsidian Nexus", null, "Skybridge Ruins", "Glass Gardens");
         // Chibuikems world
         this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
     }

@@ -1,5 +1,6 @@
-import java.util.*;
-import javax.swing.text.Position;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 // Map made by Terrence
 
@@ -17,6 +18,7 @@ public class GameMap {
         playerPositions = new HashMap<>();
         initializeRooms();
     }
+    
 
     public void initializeRooms() {
         // World, Room, North, South, East, West in this order.
@@ -66,6 +68,17 @@ public class GameMap {
         this.addRoom("Acrius", "Rumbling Chamber", "Echoing Hall", "Collapsed Tunnel", "Unlocked Passageway", null);
         this.addRoom("Acrius", "Echoing Hall", null, "Rumbling Chamber", null, null);
         this.addRoom("Acrius", "Collapsed Tunnel", "Rumbling Chamber", null, null, null);
+
+        this.addRoom("Grantfell", "Central Spire", "Subterranean Transit Network", "Industrial Sector", "Glass Gardens", "Obsidian Nexus");
+        this.addRoom("Grantfell", "Glass Gardens", null, "Central Spire", "Overgrown Atrium", null);
+        this.addRoom("Grantfell", "Overgrown Atrium", null, "Glass Gardens", null, "Hidden Biotech Lab");
+        this.addRoom("Grantfell", "Hidden Biotech Lab", null, "Overgrown Atrium", null, null);
+        this.addRoom("Grantfell", "Obsidian Nexus", "Sundial Plaza", null, "Central Spire", null);
+        this.addRoom("Grantfell", "Sundial Plaza", null, "Obsidian Nexus", null, null);
+        this.addRoom("Grantfell", "Subterranean Transit Network", "Aqua Tunnels", "Cryo Vaults", null, null);
+        this.addRoom("Grantfell", "Aqua Tunnels", null, "Subterranean Transit Network", null, null);
+        this.addRoom("Grantfell", "Cryo Vaults", null, "Subterranean Transit Network", null, null);
+        this.addRoom("Grantfell", "Skybridge Ruins", null, "Central Spire", null, null);
   
         // Chibuikems world
         this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
@@ -117,7 +130,6 @@ public class GameMap {
             throw new IllegalArgumentException("Invalid world or room");
         }
     }
-
     public String getCurrentWorld() {
         return currentWorld;
     }
@@ -142,6 +154,10 @@ public class GameMap {
         // System.out.println(room.getConnection(direction));
         // System.out.println();
         return room.getConnection(direction);
+    }
+    public String getCurrentLocation() {
+        // Combine the world and room names into a single string
+        return currentWorld + " - " + currentRoom;
     }
 
     public String displayMapAsString() {
@@ -312,4 +328,5 @@ public class GameMap {
             this.y = y;
         }
     }
+    
 }
