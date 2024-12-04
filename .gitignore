@@ -10,6 +10,9 @@
 # Ignore Visual Studio Code settings
 /.vscode
 
+Project/src/main/java/game_map.png
+Project/src/main/java/game_map.dot
+
 # Example specific files
 [Aa]dventure.java
 [Gg]raphvizGenerator.class

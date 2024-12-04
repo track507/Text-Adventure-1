@@ -80,7 +80,6 @@ public class Acrius {
                     } else {
                         System.out.println("You've already searched this room. You can't find anything else.\n");
                     }
-                    command = scanner.nextLine().toLowerCase();
                     break;
                 case "back":
                     gameMap.moveTo("east");
