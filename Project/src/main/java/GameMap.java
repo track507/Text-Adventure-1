@@ -34,9 +34,9 @@ public class GameMap {
          * this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
          ! Then change them later on when you make the methods to move between rooms.
          */
-        this.addRoom("Start", "Start", "Straight Path", null, "Right Path", "Left Path");
+        this.addRoom("Start", "Start", "Straight Path", null, "Central Spire", "Left Path");
         this.addRoom("Start", "Left Path", null, null, "Start", null);
-        this.addRoom("Start", "Right Path", null, null, null, "Start");
+        this.addRoom("Start", "Central Spire", null, null, null, "Start");
         this.setLocation("Start", "Start");
         // Left path leads to boat ride and explore cave, east goes back to start
         this.addRoom("Acrius", "Left Path", "Boat Ride", null, "Start", "Explore Cave");
@@ -69,17 +69,17 @@ public class GameMap {
         this.addRoom("Acrius", "Echoing Hall", null, "Rumbling Chamber", null, null);
         this.addRoom("Acrius", "Collapsed Tunnel", "Rumbling Chamber", null, null, null);
 
-        this.addRoom("Grantfell", "Central Spire", "Subterranean Transit Network", "Industrial Sector", "Glass Gardens", "Obsidian Nexus");
-        this.addRoom("Grantfell", "Glass Gardens", null, "Central Spire", "Overgrown Atrium", null);
-        this.addRoom("Grantfell", "Overgrown Atrium", null, "Glass Gardens", null, "Hidden Biotech Lab");
-        this.addRoom("Grantfell", "Hidden Biotech Lab", null, "Overgrown Atrium", null, null);
-        this.addRoom("Grantfell", "Obsidian Nexus", "Sundial Plaza", null, "Central Spire", null);
-        this.addRoom("Grantfell", "Sundial Plaza", null, "Obsidian Nexus", null, null);
-        this.addRoom("Grantfell", "Subterranean Transit Network", "Aqua Tunnels", "Cryo Vaults", null, null);
-        this.addRoom("Grantfell", "Aqua Tunnels", null, "Subterranean Transit Network", null, null);
-        this.addRoom("Grantfell", "Cryo Vaults", null, "Subterranean Transit Network", null, null);
+        this.addRoom("Grantfell", "Central Spire", "Skybridge Ruins", "Industrial Sector", "Glass Gardens", "Obsidian Nexus");
+        this.addRoom("Grantfell", "Glass Gardens", null, null, "Overgrown Atrium", "Central Spire");
+        this.addRoom("Grantfell", "Obsidian Nexus", "Central Spire", "Sundial Plaza", null, null);
         this.addRoom("Grantfell", "Skybridge Ruins", null, "Central Spire", null, null);
-  
+        this.addRoom("Grantfell", "Overgrown Atrium", null, null, "Hidden Biotech Lab", "Glass Gardens");
+        this.addRoom("Grantfell", "Hidden Biotech Lab", null, null, null, "Overgrown Atrium");
+        this.addRoom("Grantfell", "Sundial Plaza", "Obsidian Nexus", null, "Crystal Fountain", "Market Square");
+        this.addRoom("Grantfell", "Crystal Fountain", null, null, null, "Sundial Plaza");
+        this.addRoom("Grantfell", "Market Square", null, null, "Sundial Plaza", null);
+        this.addRoom("Grantfell", "Industrial Sector", "Central Spire", null, null, null);
+
         // Chibuikems world
         this.addRoom("Diddy", "Straight Path", null, "Start", null, null);
     }

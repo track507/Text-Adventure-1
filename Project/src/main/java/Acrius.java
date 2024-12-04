@@ -18,6 +18,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -60,6 +63,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -106,6 +112,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -151,6 +160,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -190,6 +202,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -240,6 +255,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -284,6 +302,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -338,6 +359,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -383,6 +407,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -426,6 +453,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -482,6 +512,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -536,6 +569,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -575,6 +611,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -683,6 +722,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -730,6 +772,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -773,6 +818,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -809,6 +857,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -844,6 +895,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -890,6 +944,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -938,6 +995,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -989,6 +1049,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -1033,6 +1096,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -1069,6 +1135,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -1104,6 +1173,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -1214,6 +1286,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -1251,6 +1326,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();
@@ -1298,6 +1376,9 @@ public class Acrius {
                 case "use":
                     player.useItem(parts[1]);
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
                 case "time":
                     player.getCurrentTime();
                     break;
@@ -1343,6 +1424,9 @@ public class Acrius {
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
                     break;
                 case "time":
                     player.getCurrentTime();

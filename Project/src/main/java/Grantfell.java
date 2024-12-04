@@ -1,219 +1,401 @@
 import java.util.Scanner;
 
 public class Grantfell {
-    public static Player player = new Player();
-    public static GameMap gameMap = new GameMap();
+    public static Player player = StartAdventure.player;
+    public static GameMap gameMap = StartAdventure.gameMap;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Grantfell, the Forgotten Metropolis.");
-        startAdventure(scanner);
-    }
+    public static void centralSpire(Scanner scanner) {
+        gameMap.setLocation("Grantfell", "Central Spire");
+        String text = "\nYou arrive at the Central Spire, the heart of Grantfell's forgotten grandeur.\n" +
+                "Options: [explore/inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
-
-    public static void startAdventure(Scanner scanner) {
-        gameMap.setLocation("Grantfell", "Central Spire"); // Initial location
-        System.out.println("You arrive at the Central Spire, the heart of Grantfell’s forgotten grandeur.");
-    
         while (true) {
-            // Get the current location from the GameMap
-            String currentLocation = gameMap.getCurrentLocation(); // This line calls the getCurrentLocation method
-            System.out.println("You are currently at: " + currentLocation); // Display current location
-    
-            System.out.println("Options: [explore] [map] [inventory] [quit]");
             String command = scanner.nextLine().toLowerCase();
-    
-            switch (command) {
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
                 case "explore":
-                    exploreLocation(scanner);
+                    exploreCentralSpire(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
                     break;
-    
                 case "map":
                     gameMap.displayMap();
                     break;
-    
-                case "inventory":
-                    player.showInventory();
+                case "use":
+                    player.useItem(parts[1]);
                     break;
-    
-                case "quit":
-                    System.out.println("Thank you for exploring Grantfell.");
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "back":
+                    StartAdventure.startAdventure(scanner);
                     return;
-    
                 default:
-                    System.out.println("Invalid command. Try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
             }
         }
     }
-    
 
-    private static void exploreLocation(Scanner scanner) {
-        String currentLocation = gameMap.getCurrentLocation();
-        switch (currentLocation) {
-            case "Central Spire":
-                centralSpire(scanner);
-                break;
+    public static void exploreCentralSpire(Scanner scanner) {
+        String text = "\nThe Central Spire towers above, a monument to lost technology.\n" +
+                "Options: [east] Glass Gardens, [west] Obsidian Nexus, [north] Skybridge Ruins, [south] Industrial Sector, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
-            case "Obsidian Nexus":
-                obsidianNexus(scanner);
-                break;
-
-            case "Aqua Tunnels":
-                aquaTunnels(scanner);
-                break;
-
-            case "Cryo Vaults":
-                cryoVaults(scanner);
-                break;
-
-            case "Skybridge Ruins":
-                skybridgeRuins(scanner);
-                break;
-
-            default:
-                System.out.println("There’s nothing here yet.");
-        }
-    }
-
-    // Central Spire
-    public static void centralSpire(Scanner scanner) {
-        System.out.println("The Central Spire towers above, a monument to lost technology.");
-        System.out.println("Options: [north] Subterranean Transit Network, [east] Glass Gardens, [west] Memory Vaults, [south] Industrial Sector, [underground] Obsidian Nexus, [up] Skybridge Ruins, [back]");
         while (true) {
             String command = scanner.nextLine().toLowerCase();
-            switch (command) {
-                case "north":
-                    gameMap.moveTo("Subterranean Transit Network");
-                    subterraneanTransitNetwork(scanner);
-                    return;
+            String[] parts = Handler.parseCommand(command);
 
+            switch (parts[0]) {
                 case "east":
-                    gameMap.moveTo("Glass Gardens");
+                    gameMap.moveTo("east");
                     glassGardens(scanner);
                     return;
-
                 case "west":
-                    gameMap.moveTo("Memory Vaults");
-                    memoryVaults(scanner);
-                    return;
-
-                case "south":
-                    gameMap.moveTo("Industrial Sector");
-                    industrialSector(scanner);
-                    return;
-
-                case "underground":
-                    gameMap.moveTo("Obsidian Nexus");
+                    gameMap.moveTo("west");
                     obsidianNexus(scanner);
                     return;
-
-                case "up":
-                    gameMap.moveTo("Skybridge Ruins");
+                case "north":
+                    gameMap.moveTo("north");
                     skybridgeRuins(scanner);
                     return;
-
-                case "back":
-                    return;
-
-                default:
-                    System.out.println("Invalid direction. Try again.");
-            }
-        }
-    }
-
-    // Obsidian Nexus
-    public static void obsidianNexus(Scanner scanner) {
-        System.out.println("You descend into the Obsidian Nexus, where glowing black crystals pulse faintly with energy.");
-        System.out.println("Options: [up] Central Spire, [east] Sundial Plaza, [back]");
-        while (true) {
-            String command = scanner.nextLine().toLowerCase();
-            switch (command) {
-                case "up":
-                    gameMap.moveTo("Central Spire");
-                    centralSpire(scanner);
-                    return;
-
-                case "east":
-                    System.out.println("Sundial Plaza is not yet accessible.");
-                    break;
-
-                case "back":
-                    return;
-
-                default:
-                    System.out.println("Invalid command. Try again.");
-            }
-        }
-    }
-
-    // Aqua Tunnels
-    public static void aquaTunnels(Scanner scanner) {
-        System.out.println("The Aqua Tunnels are submerged and illuminated by bioluminescent fish.");
-        System.out.println("Options: [south] Subterranean Transit Network, [back]");
-        while (true) {
-            String command = scanner.nextLine().toLowerCase();
-            switch (command) {
                 case "south":
-                    gameMap.moveTo("Subterranean Transit Network");
-                    subterraneanTransitNetwork(scanner);
-                    return;
-
-                case "back":
-                    return;
-
-                default:
-                    System.out.println("Invalid command. Try again.");
-            }
-        }
-    }
-
-    // Cryo Vaults
-    public static void cryoVaults(Scanner scanner) {
-        System.out.println("You enter the Cryo Vaults, a frozen storage facility filled with bioengineering experiments.");
-        System.out.println("Options: [north] Industrial Sector, [back]");
-        while (true) {
-            String command = scanner.nextLine().toLowerCase();
-            switch (command) {
-                case "north":
-                    gameMap.moveTo("Industrial Sector");
+                    gameMap.moveTo("south");
                     industrialSector(scanner);
                     return;
-
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
                 case "back":
-                    return;
-
-                default:
-                    System.out.println("Invalid command. Try again.");
-            }
-        }
-    }
-
-    // Skybridge Ruins
-    public static void skybridgeRuins(Scanner scanner) {
-        System.out.println("You climb to the Skybridge Ruins, where collapsed walkways stretch over the city.");
-        System.out.println("Options: [down] Central Spire, [back]");
-        while (true) {
-            String command = scanner.nextLine().toLowerCase();
-            switch (command) {
-                case "down":
-                    gameMap.moveTo("Central Spire");
                     centralSpire(scanner);
                     return;
-
-                case "back":
-                    return;
-
                 default:
-                    System.out.println("Invalid command. Try again.");
+                    TextEngine.pt(Handler.applyStyle("Invalid direction. Please try again.", "i", "red"));
             }
         }
     }
 
-    
+    public static void glassGardens(Scanner scanner) {
+        String text = "\nThe Glass Gardens shimmer with vibrant colors as sunlight streams through.\n" +
+                "Options: [west] Central Spire, [east] Overgrown Atrium, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
 
-    // Placeholder methods for existing rooms
-    public static void subterraneanTransitNetwork(Scanner scanner) { /* Placeholder */ }
-    public static void glassGardens(Scanner scanner) { /* Placeholder */ }
-    public static void memoryVaults(Scanner scanner) { /* Placeholder */ }
-    public static void industrialSector(Scanner scanner) { /* Placeholder */ }
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "back":
+                case "west":
+                    gameMap.moveTo("west");
+                    exploreCentralSpire(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    overgrownAtrium(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void obsidianNexus(Scanner scanner) {
+        String text = "\nThe Obsidian Nexus is dark, with glowing black crystals illuminating faint energy.\n" +
+                "Options: [east] Central Spire, [south] Sundial Plaza, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "back":
+                case "east":
+                    gameMap.moveTo("east");
+                    exploreCentralSpire(scanner);
+                    return;
+                case "south":
+                    gameMap.moveTo("south");
+                    sundialPlaza(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void overgrownAtrium(Scanner scanner) {
+        String text = "\nThe Overgrown Atrium is filled with vines and ancient remnants of technology.\n" +
+                "Options: [west] Glass Gardens, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "back":
+                case "west":
+                    gameMap.moveTo("west");
+                    glassGardens(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void skybridgeRuins(Scanner scanner) {
+        String text = "\nThe Skybridge Ruins stretch across the skyline, offering a breathtaking view.\n" +
+                "Options: [south] Central Spire, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "back":
+                case "south":
+                    gameMap.moveTo("south");
+                    exploreCentralSpire(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void industrialSector(Scanner scanner) {
+        String text = "\nThe Industrial Sector hums with the remnants of machinery long forgotten.\n" +
+                "Options: [north] Central Spire, [inventory/map/use/time/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "back":
+                case "north":
+                    gameMap.moveTo("north");
+                    exploreCentralSpire(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void sundialPlaza(Scanner scanner) {
+        String text = "\nThe Sundial Plaza glows faintly, a peaceful center of the forgotten metropolis.\n" +
+                "Options: [north] Obsidian Nexus, [east] Crystal Fountain, [west] Market Square, [inventory/map/use/time/help/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "north":
+                    gameMap.moveTo("north");
+                    obsidianNexus(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    crystalFountain(scanner);
+                    return;
+                case "west":
+                    gameMap.moveTo("west");
+                    marketSquare(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "back":
+                    centralSpire(scanner);
+                    return;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void crystalFountain(Scanner scanner) {
+        String text = "\nThe Crystal Fountain sparkles with refracted light, casting rainbows across the plaza.\n" +
+                "Options: [west] Sundial Plaza, [inventory/map/use/time/help/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "back":
+                case "west":
+                    sundialPlaza(scanner);
+                    gameMap.moveTo("west");
+                    return;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void marketSquare(Scanner scanner) {
+        String text = "\nThe Market Square is a bustling hub of trade, even in the city's forgotten state.\n" +
+                "Options: [east] Sundial Plaza, [inventory/map/use/time/help/back]";
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+
+            switch (parts[0]) {
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "back":
+                case "east":
+                    sundialPlaza(scanner);
+                    gameMap.moveTo("east");
+                    return;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
 }

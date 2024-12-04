@@ -78,13 +78,6 @@ public class StartAdventure {
         System.exit(0);
     };
 
-    /// private static void exitwhisper() {
-    // string[] exitwhisper = {
-    // "\n whisper:We shall meet again in your next life."
-    // };
-    // TextEngine.pt(Handler.applyStyle(exitwhisper, "i", "d"));
-    // };
-
     // Start the adventure
     public static void startAdventure(Scanner scanner) {
 
@@ -132,8 +125,8 @@ public class StartAdventure {
     public static void rightPath(Scanner scanner) {
         String[] text = {
                 "\nThe right path takes you through a narrow tunnel. It widens into a large chamber filled with old mining equipment.",
-                "You see a broken elevator that descends further underground and a ladder leading upward.",
-                "Do you take the elevator or the ladder? (elevator/ladder)"
+                "You see a broken elevator that descends further underground",
+                "Do you take the elevator or the ladder? (elevator)"
         };
 
         TextEngine.pt(Handler.applyStyle(text, "i"));
@@ -146,10 +139,7 @@ public class StartAdventure {
                     command = scanner.nextLine();
                     break;
                 case "elevator":
-                    // brokenElevator(scanner);
-                    break;
-                case "ladder":
-                    // upperChamber(scanner);
+                    Grantfell.centralSpire(scanner);
                     break;
                 case "inventory":
                     player.showInventory();

@@ -65,53 +65,33 @@ digraph G {
         label="Start";
         "Left Path" -> "Start" [label="East"];
         "Start" -> "Straight Path" [label="North"];
-        "Start" -> "Right Path" [label="East"];
+        "Start" -> "Central Spire" [label="East"];
         "Start" -> "Left Path" [label="West"];
-        "Right Path" -> "Start" [label="West"];
+        "Central Spire" -> "Start" [label="West"];
     }
     subgraph cluster_Diddy {
         label="Diddy";
         "Straight Path" -> "Start" [label="South"];
     }
-    digraph G {
-    rankdir=LR;
-    node [shape=rectangle];
     subgraph cluster_Grantfell {
         label="Grantfell";
-
-        // Core Zone: Central Spire
-        "Central Spire" -> "Glass Gardens" [label="East"];
-        "Central Spire" -> "Memory Vaults" [label="West"];
-        "Central Spire" -> "Subterranean Transit Network" [label="North"];
-        "Central Spire" -> "Industrial Sector" [label="South"];
-
-        // Glass Gardens Zone
-        "Glass Gardens" -> "Central Spire" [label="West"];
-        "Glass Gardens" -> "Overgrown Atrium" [label="East"];
-        "Overgrown Atrium" -> "Central Spire" [label="West"];
-
-        // Memory Vaults Zone
-        "Memory Vaults" -> "Central Spire" [label="East"];
-        "Memory Vaults" -> "Encrypted Archive" [label="West"];
-        "Encrypted Archive" -> "Memory Vaults" [label="East"];
-
-        // Subterranean Transit Network Zone
-        "Subterranean Transit Network" -> "Central Spire" [label="South"];
-        "Subterranean Transit Network" -> "BRO-K4N Hub" [label="North"];
-        "BRO-K4N Hub" -> "Subterranean Transit Network" [label="South"];
-        "BRO-K4N Hub" -> "Collapsed Tunnel" [label="West"];
-        "Collapsed Tunnel" -> "Subterranean Transit Network" [label="East"];
-
-        // Industrial Sector Zone
+        "Obsidian Nexus" -> "Central Spire" [label="North"];
+        "Obsidian Nexus" -> "Sundial Plaza" [label="South"];
+        "Sundial Plaza" -> "Obsidian Nexus" [label="North"];
+        "Sundial Plaza" -> "Crystal Fountain" [label="East"];
+        "Sundial Plaza" -> "Market Square" [label="West"];
+        "Market Square" -> "Sundial Plaza" [label="East"];
+        "Skybridge Ruins" -> "Central Spire" [label="South"];
+        "Crystal Fountain" -> "Sundial Plaza" [label="West"];
+        "Hidden Biotech Lab" -> "Overgrown Atrium" [label="West"];
         "Industrial Sector" -> "Central Spire" [label="North"];
-        "Industrial Sector" -> "Rusted Machine Hall" [label="East"];
-        "Rusted Machine Hall" -> "Industrial Sector" [label="West"];
+        "Glass Gardens" -> "Overgrown Atrium" [label="East"];
+        "Glass Gardens" -> "Central Spire" [label="West"];
+        "Central Spire" -> "Skybridge Ruins" [label="North"];
+        "Central Spire" -> "Industrial Sector" [label="South"];
+        "Central Spire" -> "Glass Gardens" [label="East"];
+        "Central Spire" -> "Obsidian Nexus" [label="West"];
+        "Overgrown Atrium" -> "Hidden Biotech Lab" [label="East"];
+        "Overgrown Atrium" -> "Glass Gardens" [label="West"];
     }
-
-    // Optional Hidden Areas
-    "Glass Gardens" -> "Hidden Biotech Lab" [label="Secret Path"];
-    "Memory Vaults" -> "AI Core" [label="Unlock with Key"];
-    "BRO-K4N Hub" -> "Underground Power Plant" [label="South"];
-}
-
 }
