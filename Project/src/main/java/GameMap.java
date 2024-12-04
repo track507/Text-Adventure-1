@@ -47,7 +47,10 @@ public class GameMap {
         this.addRoom("Acrius", "Hidden Passageway", "Dark Cavern", null, "Hidden Temple", "Staircase Into Darkness");
         this.addRoom("Acrius", "Staircase Into Darkness", null, null , "Hidden Passageway", "Iron Door");
         this.addRoom("Acrius", "Iron Door", null, null, "Staircase Into Darkness", "Dark Room");
-        this.addRoom("Acrius", "Dark Room", null, null, "Iron Door", null);
+        this.addRoom("Acrius", "Dark Room", "Frozen Abyss", null, "Iron Door", null);
+        this.addRoom("Acrius", "Frozen Abyss", "Icy Chamber", "Dark Room", "Frozen Shrine", null);
+        this.addRoom("Acrius", "Frozen Shrine", null, null, null, "Frozen Abyss");
+        this.addRoom("Acrius", "Icy Chamber", null, "Frozen Abyss", null, null);
         this.addRoom("Acrius", "Dark Cavern", "Northern Depths", "Hidden Passageway", null, "Glowing Passage");
         this.addRoom("Acrius", "Glowing Passage", null, "Unlocked Passageway", "Dark Cavern", null);
         this.addRoom("Acrius", "Northern Depths", null, "Dark Cavern", "Unknown Pathway", "Whispering Crevice");

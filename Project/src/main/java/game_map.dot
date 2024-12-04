@@ -5,6 +5,8 @@ digraph G {
         label="Acrius";
         "Explore Cave" -> "Left Path" [label="East"];
         "Whispering Crevice" -> "Northern Depths" [label="East"];
+        "Icy Chamber" -> "Frozen Abyss" [label="South"];
+        "Dark Room" -> "Frozen Abyss" [label="North"];
         "Dark Room" -> "Iron Door" [label="East"];
         "Flowing Water Room" -> "Crystal Pool" [label="North"];
         "Flowing Water Room" -> "Mystic Cavern" [label="East"];
@@ -23,6 +25,9 @@ digraph G {
         "Mysterious Cavern" -> "Crystal Hollow" [label="South"];
         "Mysterious Cavern" -> "Faint Tunnel" [label="West"];
         "Mystic Cavern" -> "Flowing Water Room" [label="West"];
+        "Frozen Abyss" -> "Icy Chamber" [label="North"];
+        "Frozen Abyss" -> "Dark Room" [label="South"];
+        "Frozen Abyss" -> "Frozen Shrine" [label="East"];
         "Echoing Hall" -> "Rumbling Chamber" [label="South"];
         "Shadowed Alcove" -> "Sloping Darkness" [label="East"];
         "Rumbling Chamber" -> "Echoing Hall" [label="North"];
@@ -43,6 +48,7 @@ digraph G {
         "Hidden Passageway" -> "Dark Cavern" [label="North"];
         "Hidden Passageway" -> "Hidden Temple" [label="East"];
         "Hidden Passageway" -> "Staircase Into Darkness" [label="West"];
+        "Frozen Shrine" -> "Frozen Abyss" [label="West"];
         "Unknown Pathway" -> "Northern Depths" [label="West"];
         "Iron Door" -> "Staircase Into Darkness" [label="East"];
         "Iron Door" -> "Dark Room" [label="West"];

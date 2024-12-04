@@ -498,7 +498,6 @@ public class Acrius {
     
                     // Ask if the player wants to play again
                     TextEngine.pt(Handler.applyStyle("Do you want to play again? (yes/no)", "i", "b", "red"));
-                    command = scanner.nextLine().toLowerCase();
                     if (command.equals("no")) {
                         TextEngine.pt(Handler.applyStyle("You decided not to play anymore and went back to the Northern Depths.", "i", "darkgrey"));
                         northernDepths(scanner);
@@ -1218,6 +1217,10 @@ public class Acrius {
                 case "time":
                     player.getCurrentTime();
                     break;
+                case "north":
+                    gameMap.moveTo("north");
+                    frozenAbyss(scanner);
+                    return;
                 case "back":
                     gameMap.moveTo("east");
                     ironDoor(scanner);
@@ -1225,10 +1228,147 @@ public class Acrius {
                 case "inventory":
                     player.showInventory(true);
                     break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
                 default:
                     TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
             }
         }
     }
 
+    public static void frozenAbyss(Scanner scanner) {
+        String[] text = {
+            "\nYou step into the Frozen Abyss, a cavern where frost clings to the walls and a chilling wind howls through the air.",
+            "The ground beneath your feet is slippery with ice, and faint blue light reflects off icicles hanging from above.",
+            "You notice three paths ahead: one leading deeper into the abyss, another to the east toward a faint glow, and one that appears to circle back. (north/east/back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "north":
+                    gameMap.moveTo("north");
+                    icyChamber(scanner);
+                    return;
+                case "east":
+                    gameMap.moveTo("east");
+                    frozenShrine(scanner);
+                    return;
+                case "back":
+                    gameMap.moveTo("south");
+                    darkRoom(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+
+    public static void frozenShrine(Scanner scanner) {
+        String[] text = {
+            "\nYou turn east and arrive at the Frozen Shrine, a small, serene chamber.",
+            "The air feels colder here, and a faint, otherworldly glow emanates from a frozen altar at the center of the room.",
+            "The altar holds an intricate ice sculpture that seems to shift slightly as you stare at it.",
+            "There are no paths leading further from here. You can only go back. (back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        boolean hasTakenItem = false;
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "search":
+                    if (!hasTakenItem) {
+                        TextEngine.pt(Handler.applyStyle("You search the altar and find a 'Frozen Amulet'. It feels unnaturally warm to the touch.", "i", "darkgrey"));
+                        player.addItem("Frozen Amulet");
+                        hasTakenItem = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("The altar is now empty. There's nothing else to find here.", "i", "darkgrey"));
+                    }
+                    break;
+                case "back":
+                    gameMap.moveTo("west");
+                    frozenAbyss(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
+
+    public static void icyChamber(Scanner scanner) {
+        String[] text = {
+            "\nYou venture deeper into the Frozen Abyss and arrive at the Icy Chamber.",
+            "The air here is frigid, and frost covers every surface, shimmering like diamonds in the faint light.",
+            "In the center of the room, you notice an ice pedestal holding a strange artifact encased in solid ice.",
+            "There are no paths leading further from here. You can only go back. (back)"
+        };
+        TextEngine.pt(Handler.applyStyle(text, "i"));
+
+        boolean hasTakenArtifact = false;
+
+        while (true) {
+            String command = scanner.nextLine().toLowerCase();
+            String[] parts = Handler.parseCommand(command);
+            switch (parts[0]) {
+                case "use":
+                    player.useItem(parts[1]);
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "search":
+                    if (!hasTakenArtifact) {
+                        TextEngine.pt(Handler.applyStyle("You break the ice and retrieve the artifact: an 'Ice Crystal'.", "i", "darkgrey"));
+                        player.addItem("Ice Crystal");
+                        hasTakenArtifact = true;
+                    } else {
+                        TextEngine.pt(Handler.applyStyle("There's nothing else to find here.", "i", "darkgrey"));
+                    }
+                    break;
+                case "back":
+                    gameMap.moveTo("south");
+                    frozenAbyss(scanner);
+                    return;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                default:
+                    TextEngine.pt(Handler.applyStyle("Invalid command. Please try again.", "i", "red"));
+            }
+        }
+    }
 }

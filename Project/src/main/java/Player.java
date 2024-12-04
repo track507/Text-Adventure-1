@@ -162,7 +162,7 @@ public class Player {
 
     public boolean parseItem(String item) {
         // Check for specific key items first
-        if (item.equalsIgnoreCase("ancient key")) {
+        if (item.equalsIgnoreCase("ancient key") || item.equalsIgnoreCase("glowing stone")) {
             return true; // Keys are not consumed after use
         }
         // Match patterns for healing items
