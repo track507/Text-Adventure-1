@@ -44,25 +44,33 @@ public class StartAdventure {
             TextEngine.pt(Handler.applyStyle(text[i], "i"));
         }
 
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
                 case "proceed":
                     startAdventure(scanner);
                     break;
                 case "exit":
                     exitGame();
-                case "inventory":
-                    player.showInventory();
-                    command = scanner.nextLine();
                 default:
                     System.out.println("Invalid command. Please try again.");
-                    command = scanner.nextLine();
             }
         }
     }
@@ -86,14 +94,27 @@ public class StartAdventure {
                 "Do you take the west path, the east path, or continue north? (west/east/north)"
         };
         TextEngine.pt(Handler.applyStyle(text, "i"));
-        String command = scanner.nextLine();
+
 
         while (true) {
+            String command = scanner.nextLine();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
+                    break;
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
+                    break;
+                case "inventory":
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
                     break;
                 case "west":
                     gameMap.moveTo("west");
@@ -107,16 +128,11 @@ public class StartAdventure {
                     gameMap.setLocation("Diddy", "Straight Path");
                     Diddy.straightPath(scanner);
                     break;
-                case "inventory":
-                    player.showInventory();
-                    command = scanner.nextLine();
-                    break;
                 case "exit":
                     exitGame();
                     break;
                 default:
                     System.out.println("Invalid command. Please try again.");
-                    command = scanner.nextLine();
             }
         }
     }
@@ -130,20 +146,28 @@ public class StartAdventure {
         };
 
         TextEngine.pt(Handler.applyStyle(text, "i"));
-        String command = scanner.nextLine();
         while (true) {
+            String command = scanner.nextLine();
             String[] parts = Handler.parseCommand(command);
             switch (parts[0]) {
                 case "use":
                     player.useItem(parts[1]);
                     command = scanner.nextLine();
                     break;
-                case "elevator":
-                    Grantfell.centralSpire(scanner);
+                case "help":
+                    player.getHelp();
+                    break;
+                case "time":
+                    player.getCurrentTime();
                     break;
                 case "inventory":
-                    player.showInventory();
-                    command = scanner.nextLine();
+                    player.showInventory(true);
+                    break;
+                case "map":
+                    gameMap.displayMap();
+                    break;
+                case "elevator":
+                    Grantfell.centralSpire(scanner);
                     break;
                 case "exit":
                     exitGame();
