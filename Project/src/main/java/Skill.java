@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+// Made by Chibuikem
 
 class Skill {
     private String name;
